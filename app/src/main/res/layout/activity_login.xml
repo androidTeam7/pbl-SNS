@@ -15,7 +15,8 @@
         android:layout_marginEnd="56dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Name"
+        android:paddingLeft="15dp"
+        android:text="이메일"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -27,15 +28,48 @@
         android:layout_marginTop="16dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Name"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName"
-        tools:layout_editor_absoluteX="55dp" />
+        android:paddingLeft="15dp"
+        android:text="비밀번호"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName" />
 
     <Button
         android:id="@+id/button"
         android:layout_width="300dp"
         android:layout_height="50dp"
-        android:text="Button"
-        tools:layout_editor_absoluteX="55dp"
-        tools:layout_editor_absoluteY="361dp" />
+        android:layout_marginTop="24dp"
+        android:backgroundTint="@color/snsBlue"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:text="로그인"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName2" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:text="이미 계정이 있으신가요?"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="24dp"
+        android:padding="2dp"
+        android:paddingStart="2dp"
+        android:paddingTop="2dp"
+        android:paddingRight="2dp"
+        android:paddingBottom="2dp"
+        android:text="로그인"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView" />
 </androidx.constraintlayout.widget.ConstraintLayout>
