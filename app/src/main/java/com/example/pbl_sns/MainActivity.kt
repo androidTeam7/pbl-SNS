@@ -1,5 +1,6 @@
 package com.example.pbl_sns
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.pbl_sns.databinding.ActivityMainBinding
@@ -17,7 +18,12 @@ class MainActivity : AppCompatActivity() {
         val binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-      
+        if(Firebase.auth.currentUser == null) {
+            startActivity(
+                Intent(this, LoginActivity::class.java))
+            finish()
+        }
+
         bottomNavigationView = binding.bottomNavigationView
 
         supportFragmentManager.beginTransaction().add(R.id.mainFrame, HomeFragment())
