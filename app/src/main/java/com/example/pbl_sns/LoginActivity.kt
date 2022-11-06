@@ -23,9 +23,9 @@ class LoginActivity : AppCompatActivity() {
         }
 
         binding.goSignUp.setOnClickListener {
-            startAcitivity(
+            startActivity(
+                Intent(this, SignupActivity::class.java))
 
-            )
         }
     }
 
