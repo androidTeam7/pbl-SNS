@@ -2,8 +2,11 @@ package com.example.pbl_sns
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.example.pbl_sns.databinding.ActivityMainBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationBarView
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 class MainActivity : AppCompatActivity() {
 
@@ -11,9 +14,11 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        val binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        bottomNavigationView = findViewById(R.id.bottomNavigationView)
+      
+        bottomNavigationView = binding.bottomNavigationView
 
         supportFragmentManager.beginTransaction().add(R.id.mainFrame, HomeFragment())
             .commit()
