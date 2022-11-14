@@ -1,7 +1,8 @@
-package com.example.pbl_sns
+package com.example.pbl_sns.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.pbl_sns.R
 
 class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

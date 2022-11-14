@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/tv_id"
+            android:layout_width="wrap_content"
+            android:layout_height="25dp"
+            android:layout_marginStart="23dp"
+            android:layout_marginTop="21dp"
+            android:fontFamily="@font/nanumsquare_aceb"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:id="@+id/btn_setting"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginEnd="15dp"
+            android:background="@color/white"
+            android:scaleType="fitXY"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tv_id"
+            app:srcCompat="@drawable/setting" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/img_profile"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="25dp"
+            android:src="@drawable/user"
+            app:civ_border_overlay="true"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_id" />
+
+        <Button
+            android:id="@+id/btn_post"
+            android:layout_width="80dp"
+            android:layout_height="100dp"
+            android:layout_marginEnd="3dp"
+            android:background="@color/transparent"
+            android:fontFamily="@font/nanumsquare_acr"
+            android:paddingTop="15dp"
+            android:text="게시물"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="@+id/img_profile"
+            app:layout_constraintEnd_toStartOf="@+id/btn_follower"
+            app:layout_constraintTop_toTopOf="@+id/img_profile" />
+
+        <TextView
+            android:id="@+id/tv_post"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:fontFamily="@font/nanumsquare_acb"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="@+id/btn_post"
+            app:layout_constraintStart_toStartOf="@+id/btn_post"
+            app:layout_constraintTop_toTopOf="@+id/btn_post" />
+
+        <Button
+            android:id="@+id/btn_follower"
+            android:layout_width="80dp"
+            android:layout_height="100dp"
+            android:layout_marginEnd="3dp"
+            android:background="@color/transparent"
+            android:fontFamily="@font/nanumsquare_acr"
+            android:paddingTop="15dp"
+            android:text="팔로워"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="@+id/img_profile"
+            app:layout_constraintEnd_toStartOf="@+id/btn_following"
+            app:layout_constraintTop_toTopOf="@+id/img_profile" />
+
+        <TextView
+            android:id="@+id/tv_follower"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:fontFamily="@font/nanumsquare_acb"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="@+id/btn_follower"
+            app:layout_constraintStart_toStartOf="@+id/btn_follower"
+            app:layout_constraintTop_toTopOf="@+id/btn_follower" />
+
+        <Button
+            android:id="@+id/btn_following"
+            android:layout_width="80dp"
+            android:layout_height="100dp"
+            android:layout_marginEnd="8dp"
+            android:background="@color/transparent"
+            android:fontFamily="@font/nanumsquare_acr"
+            android:paddingTop="15dp"
+            android:text="팔로잉"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="@+id/img_profile"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/img_profile" />
+
+        <TextView
+            android:id="@+id/tv_following"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:fontFamily="@font/nanumsquare_acb"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="@+id/btn_following"
+            app:layout_constraintStart_toStartOf="@+id/btn_following"
+            app:layout_constraintTop_toTopOf="@+id/btn_following" />
+
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:fontFamily="@font/nanumsquare_acb"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="@+id/img_profile"
+            app:layout_constraintTop_toBottomOf="@+id/img_profile" />
+
+        <TextView
+            android:id="@+id/tv_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:fontFamily="@font/nanumsquare_acr"
+            android:textSize="12sp"
+            android:visibility="visible"
+            app:layout_constraintStart_toStartOf="@+id/tv_name"
+            app:layout_constraintTop_toBottomOf="@+id/tv_name" />
+
+        <Button
+            android:id="@+id/btn_edit_profile"
+            android:layout_width="380dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="22dp"
+            android:layout_marginEnd="15dp"
+            android:background="@drawable/radius8_solid"
+            android:backgroundTint="@color/mainGray"
+            android:fontFamily="@font/nanumsquare_acr"
+            android:text="프로필 편집"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_info" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="45dp"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_edit_profile">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="0dp"
+                android:layout_marginTop="45dp"
+                android:adjustViewBounds="true"
+                app:spanCount="3"
+                tools:listitem="@layout/item_post" />
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

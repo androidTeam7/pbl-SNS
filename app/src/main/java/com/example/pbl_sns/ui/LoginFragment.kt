@@ -1,19 +1,41 @@
-package com.example.pbl_sns
+package com.example.pbl_sns.ui
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
-import com.example.pbl_sns.databinding.ActivityLoginBinding
+import com.example.pbl_sns.MyApplication
+import com.example.pbl_sns.R
+import com.example.pbl_sns.base.BaseFragment
+import com.example.pbl_sns.databinding.FragmentLoginBinding
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
-class LoginActivity : AppCompatActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        val binding = ActivityLoginBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login) {
+    private lateinit var auth: FirebaseAuth
+
+    override fun initStartView() {
+        super.initStartView()
+
+        auth = Firebase.auth
+
+        //로그인 되어있는지 확인
+        val currentUser = auth.currentUser
+        if(currentUser != null) {
+            navController.navigate(R.id.action_loginFragment_to_homeFragment)
+        }
+    }
+
+    override fun initDataBinding() {
+        super.initDataBinding()
+
+        (activity as MainActivity).setBottomNavSetting("none")
+    }
+
+    override fun initAfterBinding() {
+        super.initAfterBinding()
 
         binding.buttonLogin.setOnClickListener {     // 로그인 버튼 클릭했을 때
             val userEmail = binding.editTextId.text.toString()   // ID EditText의 문자열을 userEmail에 저장
@@ -22,22 +44,21 @@ class LoginActivity : AppCompatActivity() {
         }
 
         binding.goSignUp.setOnClickListener {    // 가입하기 텍스트를 클릭했을 경우
-            startActivity(
-                Intent(this, SignupActivity::class.java))   // SignupActivity로 이동
+            navController.navigate(R.id.action_loginFragment_to_signupFragment)
         }
     }
 
     // 매개변수로 받은 userEmail과 password를 통해 로그인을 시도하는 함수
     private fun doLogin(userEmail: String, password: String) {
         Firebase.auth.signInWithEmailAndPassword(userEmail, password)   // userEmail과 password로 로그인 시도
-            .addOnCompleteListener(this) {
+            .addOnCompleteListener {
                 if(it.isSuccessful) {  // 로그인 성공했을 경우(Firebase의 Users에 계정이 존재할 경우)
-                    startActivity(
-                        Intent(this, MainActivity::class.java))  // MainActivity로 이동
-                    finish()  // 현재 Activity 화면 지우기
+                    MyApplication.prefs.removeAll()
+                    MyApplication.prefs.setString("email", userEmail)
+                    navController.navigate(R.id.action_loginFragment_to_homeFragment)
                 } else {   // 로그인 실패했을 경우(Firebase의 Users에 계정이 존재하지 않을 경우)
                     Log.w("LoginAcitivy", "signInWIthEmail", it.exception)  // Log에 에러 입력
-                    Toast.makeText(this, "Login failed.", Toast.LENGTH_SHORT).show()  // Login failed 스낵바 띄우기
+                    Toast.makeText(context, "Login failed.", Toast.LENGTH_SHORT).show()  // Login failed 스낵바 띄우기
                 }
             }
     }

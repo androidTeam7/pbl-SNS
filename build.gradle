@@ -1,4 +1,9 @@
 buildscript {
+    ext{
+        lifecycle_version = "2.3.1"
+        nav_version = "2.4.2"
+    }
+
     repositories {
         // Make sure that you have the following two repositories
         google()  // Google's Maven repository
@@ -7,7 +12,7 @@ buildscript {
     }
     dependencies {
         // Add the dependency for the Google services Gradle plugin
-        classpath 'com.google.gms:google-services:4.3.13'
+        classpath 'com.google.gms:google-services:4.3.14'
 
     }
 }
