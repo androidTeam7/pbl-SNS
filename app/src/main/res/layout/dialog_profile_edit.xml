@@ -5,7 +5,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:background="@drawable/radius13_solid">
 
         <TextView
@@ -17,8 +17,8 @@
             android:textColor="@color/black"
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="@+id/btn_close_edit"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btn_complete_edit"
+            app:layout_constraintStart_toEndOf="@+id/btn_close_edit"
             app:layout_constraintTop_toTopOf="@+id/btn_close_edit" />
 
         <ImageButton
@@ -128,6 +128,7 @@
             android:layout_width="350dp"
             android:layout_height="40dp"
             android:layout_marginTop="25dp"
+            android:layout_marginBottom="200dp"
             android:background="@drawable/bottom_line"
             android:ems="10"
             android:fontFamily="@font/nanumsquare_acr"
@@ -135,6 +136,7 @@
             android:inputType="textPersonName"
             android:paddingLeft="15dp"
             android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/edit_tv_name_profile"
             app:layout_constraintStart_toStartOf="@+id/edit_tv_name_profile"
             app:layout_constraintTop_toBottomOf="@+id/edit_tv_id_profile" />

@@ -2,6 +2,9 @@ package com.example.pbl_sns.ui
 
 import android.util.Log
 import android.widget.Toast
+import androidx.core.os.bundleOf
+import androidx.fragment.app.setFragmentResult
+import androidx.fragment.app.setFragmentResultListener
 import androidx.lifecycle.ViewModelProvider
 import com.example.pbl_sns.MyApplication
 import com.example.pbl_sns.R
@@ -16,7 +19,7 @@ import com.google.firebase.ktx.Firebase
 
 class ProfileEditDialog:BaseDialogFragment<DialogProfileEditBinding>(R.layout.dialog_profile_edit) {
     private val db = Firebase.firestore
-    private lateinit var dataOrigin: Privacy
+    private var result : Privacy = Privacy()
     private lateinit var editItId:String
     private lateinit var editItImage:String
     private lateinit var editItInfo:String
@@ -25,16 +28,14 @@ class ProfileEditDialog:BaseDialogFragment<DialogProfileEditBinding>(R.layout.di
     private var emptyIs:String = ""
 
     private val viewModel by lazy {
-        ViewModelProvider(this)[UserViewModel::class.java]
+        ViewModelProvider(requireParentFragment())[UserViewModel::class.java]
     }
 
     override fun initDataBinding() {
         super.initDataBinding()
 
         viewModel.getUserData()
-
         viewModel.userLiveData.observe(viewLifecycleOwner) {
-            dataOrigin = it
             binding.editTvIdProfile.setText(it.id)
             editItImage = it.image
             binding.editTvInfoProfile.setText(it.info)
@@ -61,13 +62,20 @@ class ProfileEditDialog:BaseDialogFragment<DialogProfileEditBinding>(R.layout.di
                     "info" to editItInfo,
                     "name" to editItName,
                 )
-
+                var dataToPrivacy:Privacy = Privacy()
+                dataToPrivacy.id = data["id"].toString()
+                dataToPrivacy.image = data["image"].toString()
+                dataToPrivacy.info = data["info"].toString()
+                dataToPrivacy.name = data["name"].toString()
                 Log.d("dataa", data.toString())
 
                 db.collection("users").document(MyApplication.prefs.getString("email", "null"))
                     .update("privacy", data)
 
                 Log.d("lifee", "Dialog")
+
+                viewModel.setUserData(dataToPrivacy)
+                setFragmentResult("editPrivacy", bundleOf("resultPrivacy" to isEdit))
                 dismiss()
 
             } else{
