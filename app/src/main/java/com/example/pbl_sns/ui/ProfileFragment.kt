@@ -3,6 +3,7 @@ package com.example.pbl_sns.ui
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import androidx.fragment.app.setFragmentResult
 import androidx.fragment.app.setFragmentResultListener
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
@@ -17,6 +18,8 @@ import com.example.pbl_sns.viewmodel.UserViewModel
 class ProfileFragment: BaseFragment<FragmentProfileBinding>(R.layout.fragment_profile) {
     private var result : Boolean = false
     lateinit var profileAdapter: ProfileAdapter
+    private var following:String = ""
+    private var follower:String = ""
 
     private val viewModel by lazy {
         ViewModelProvider(this)[UserViewModel::class.java]
@@ -62,7 +65,16 @@ class ProfileFragment: BaseFragment<FragmentProfileBinding>(R.layout.fragment_pr
             result = bundle.get("resultPrivacy") as Boolean
             viewModel.getUserData()
         }
+        // 로그아웃
+        setFragmentResultListener("requestLogout") { _, bundle ->
+            val isLogout:Boolean = bundle.get("resultLogout") as Boolean
+            if(isLogout)
+                navController.navigate(R.id.action_profileFragment_to_loginFragment)
+        }
 
+        binding.btnSettingProfile.setOnClickListener {
+            LogoutDialog().show(parentFragmentManager,"LogoutDialog")
+        }
         binding.btnEditProfile.setOnClickListener {
             ProfileEditDialog().show(parentFragmentManager, "ProfileEditDialog")
         }

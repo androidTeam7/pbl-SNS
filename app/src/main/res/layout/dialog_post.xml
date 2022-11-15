@@ -29,21 +29,13 @@
             app:srcCompat="@drawable/close" />
 
         <TextView
-            android:id="@+id/tv_title_post_dialog"
+            android:id="@+id/tv_content_post_dialog"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="20dp"
             android:text="TextView"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/img_post_dialog" />
 
-        <TextView
-            android:id="@+id/tv_content_post_dialog"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:text="TextView"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_title_post_dialog" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

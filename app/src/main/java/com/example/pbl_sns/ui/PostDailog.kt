@@ -11,7 +11,6 @@ class PostDailog(post:Post): BaseDialogFragment<DialogPostBinding>(R.layout.dial
     override fun initDataBinding() {
         super.initDataBinding()
 
-        binding.tvTitlePostDialog.text = mPost.title
         binding.tvContentPostDialog.text = mPost.content
     }
     override fun initAfterBinding() {
