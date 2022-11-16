@@ -45,6 +45,11 @@
         android:name="com.example.pbl_sns.ui.SearchFragment"
         android:label="SearchFragment"
         tools:layout="@layout/fragment_search"/>
+    <fragment
+        android:id="@+id/postingFragment"
+        android:name="com.example.pbl_sns.ui.PostingFragment"
+        android:label="PostingFragment"
+        tools:layout="@layout/fragment_posting" />
     <dialog
         android:id="@+id/logoutDialog"
         android:name="com.example.pbl_sns.ui.LogoutDialog"
