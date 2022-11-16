@@ -30,10 +30,6 @@ class LogoutDialog :BaseDialogFragment<DialogLogoutBinding>(R.layout.dialog_logo
 
         binding.btnLogout.setOnClickListener {
             isLogout = true
-            //로그아웃
-            auth.signOut()
-            // 저장된 prefs 삭제
-            MyApplication.prefs.removeAll()
 
             setFragmentResult("requestLogout", bundleOf("resultLogout" to isLogout))
             dismiss()

@@ -15,6 +15,7 @@ import com.example.pbl_sns.model.Post
 import com.example.pbl_sns.model.Privacy
 import com.example.pbl_sns.model.User
 import com.example.pbl_sns.viewmodel.UserViewModel
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
@@ -23,6 +24,7 @@ class ProfileFragment: BaseFragment<FragmentProfileBinding>(R.layout.fragment_pr
     lateinit var profileAdapter: ProfileAdapter
     private var following:String = ""
     private var follower:String = ""
+    private lateinit var auth: FirebaseAuth
 
     private val viewModel by lazy {
         ViewModelProvider(this)[UserViewModel::class.java]
@@ -33,6 +35,8 @@ class ProfileFragment: BaseFragment<FragmentProfileBinding>(R.layout.fragment_pr
         Log.d("lifee", "FragInit")
 
         (activity as MainActivity).setBottomNavSetting("")
+
+        auth=Firebase.auth
 
         profileAdapter = ProfileAdapter(ArrayList())
         initPostArray()
@@ -74,7 +78,7 @@ class ProfileFragment: BaseFragment<FragmentProfileBinding>(R.layout.fragment_pr
         setFragmentResultListener("requestLogout") { _, bundle ->
             val isLogout:Boolean = bundle.get("resultLogout") as Boolean
             if(isLogout){
-                Firebase.auth.signOut()
+                auth.signOut()
                 prefs.removeAll()
                 navController.navigate(R.id.action_profileFragment_to_loginFragment)
             }

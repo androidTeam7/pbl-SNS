@@ -18,17 +18,19 @@ class UserRepository {
     fun getData(): LiveData<Privacy> {
         val db = Firebase.firestore
         val mutableData = MutableLiveData<Privacy>()
-        val user = prefs.getString("email","null")
+        val user = prefs.getString("email","-1")
 
-        db.collection("users").document(user).get()
-            .addOnSuccessListener { documentSnapshot ->
-                val data = documentSnapshot.toObject<User>()
-                Log.d("userRepoo", data.toString())
-                mutableData.value = data!!.privacy
-            }
-            .addOnFailureListener { exception ->
-                Log.d(ContentValues.TAG, "get failed with ", exception)
-            }
+        if(user != "-1"){
+            db.collection("users").document(user).get()
+                .addOnSuccessListener { documentSnapshot ->
+                    val data = documentSnapshot.toObject<User>()
+                    Log.d("userRepoo", data.toString())
+                    mutableData.value = data!!.privacy
+                }
+                .addOnFailureListener { exception ->
+                    Log.d(ContentValues.TAG, "get failed with ", exception)
+                }
+        }
 
         return mutableData
     }
@@ -38,16 +40,17 @@ class UserRepository {
         val mutableData = MutableLiveData<ArrayList<Post>>()
         val user = prefs.getString("email","null")
 
-        db.collection("users").document(user).get()
-            .addOnSuccessListener { documentSnapshot ->
-                val data = documentSnapshot.toObject<User>()
-                Log.d("userRepoo", data.toString())
-                mutableData.value = data!!.postArray
-            }
-            .addOnFailureListener { exception ->
-                Log.d(ContentValues.TAG, "get failed with ", exception)
-            }
-
+        if(user != "-1"){
+            db.collection("users").document(user).get()
+                .addOnSuccessListener { documentSnapshot ->
+                    val data = documentSnapshot.toObject<User>()
+                    Log.d("userRepoo", data.toString())
+                    mutableData.value = data!!.postArray
+                }
+                .addOnFailureListener { exception ->
+                    Log.d(ContentValues.TAG, "get failed with ", exception)
+                }
+        }
         return mutableData
     }
 }

@@ -28,12 +28,8 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
 
         //로그인 되어있는지 확인
         val currentUser = auth.currentUser
-        if(currentUser != null) {
-            if(prefs.getString("email","-1") != "-1")
-                navController.navigate(R.id.action_loginFragment_to_homeFragment)
-            else{
-                auth.signOut()
-            }
+        if(currentUser != null && prefs.getString("email","null") != "null") {
+            navController.navigate(R.id.action_loginFragment_to_homeFragment)
         }
     }
 
@@ -41,6 +37,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
         super.initDataBinding()
 
         (activity as MainActivity).setBottomNavSetting("none")
+        prefs.removeAll()
     }
 
     override fun initAfterBinding() {
@@ -62,7 +59,6 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
         Firebase.auth.signInWithEmailAndPassword(userEmail, password)   // userEmail과 password로 로그인 시도
             .addOnCompleteListener {
                 if(it.isSuccessful) {  // 로그인 성공했을 경우(Firebase의 Users에 계정이 존재할 경우)
-                    prefs.removeAll()
                     prefs.setString("email", userEmail)
                     setUserId(userEmail)
                     navController.navigate(R.id.action_loginFragment_to_homeFragment)

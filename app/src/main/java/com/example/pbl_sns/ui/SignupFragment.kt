@@ -2,9 +2,11 @@ package com.example.pbl_sns.ui
 
 import android.util.Patterns
 import android.widget.Toast
+import com.example.pbl_sns.MyApplication.Companion.prefs
 import com.example.pbl_sns.R
 import com.example.pbl_sns.base.BaseFragment
 import com.example.pbl_sns.databinding.FragmentSignupBinding
+import com.example.pbl_sns.model.Privacy
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FieldValue
@@ -83,32 +85,38 @@ class SignupFragment : BaseFragment<FragmentSignupBinding>(R.layout.fragment_sig
                 auth.createUserWithEmailAndPassword(email, password)
                     .addOnCompleteListener { task ->
                         if (task.isSuccessful) {
-                            Toast.makeText(context, "회원가입 완료. ${name}님 환영합니다.", Toast.LENGTH_LONG).show()
 
                             //firestore에 유저정보 저장
                             val data = hashMapOf(
                                 "email" to email,
+                                "id" to id,
+                                "privacy" to Privacy()
+                            )
+
+                            val privacyData = hashMapOf(
+                                "image" to "",
                                 "name" to name,
                                 "id" to id,
                                 "info" to ""
                             )
 
-                            db.collection("users").document(email)
-                                .update("privacy", FieldValue.arrayUnion(data)).addOnSuccessListener {
-                                    navController.navigate(R.id.action_signupFragment_to_loginFragment)
-                                }.addOnFailureListener(){
-                                    Toast.makeText(context, "데이터 확인 필요",Toast.LENGTH_LONG)
-                                }
+                            db.collection("users").document(email).set(data).addOnSuccessListener {
+                                db.collection("users").document(email)
+                                    .update("privacy", privacyData).addOnSuccessListener {
+                                        Toast.makeText(context, "회원가입 완료. ${name}님 환영합니다.", Toast.LENGTH_LONG).show()
+                                        navController.navigate(R.id.action_signupFragment_to_loginFragment)
+                                    }.addOnFailureListener(){
+                                        Toast.makeText(context, "데이터 확인 필요",Toast.LENGTH_LONG)
+                                    }
+                            }.addOnFailureListener{
+                                Toast.makeText(context, "이메일 데이터 확인 필요",Toast.LENGTH_LONG)
+                            }
 
                         } else {
                             Toast.makeText(context, "회원가입 실패", Toast.LENGTH_LONG).show()
                         }
                     }
             }
-        }
-
-        binding.btnBack.setOnClickListener {
-            navController.navigate(R.id.action_signupFragment_to_loginFragment)
         }
     }
 }
