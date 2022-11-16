@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/xkqeh/AndroidStudioProjects/Android2_A/pblSNS/app/src/main/res/drawable-mdpi/bottom_line_blue.xml" value="0.1985" />
+        <entry key="..\:/Users/xkqeh/AndroidStudioProjects/Android2_A/pblSNS/app/src/main/res/drawable-mdpi/radius13.xml" value="0.1985" />
+        <entry key="..\:/Users/xkqeh/AndroidStudioProjects/Android2_A/pblSNS/app/src/main/res/drawable-v24/input_border_round.xml" value="0.1955" />
+        <entry key="..\:/Users/xkqeh/AndroidStudioProjects/Android2_A/pblSNS/app/src/main/res/drawable/dialog_profile_edit.xml" value="0.1985" />
+        <entry key="..\:/Users/xkqeh/AndroidStudioProjects/Android2_A/pblSNS/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1955" />
+        <entry key="..\:/Users/xkqeh/AndroidStudioProjects/Android2_A/pblSNS/app/src/main/res/drawable/menu_selector_color.xml" value="0.1955" />
+        <entry key="..\:/Users/xkqeh/AndroidStudioProjects/Android2_A/pblSNS/app/src/main/res/drawable/raidus8_.xml" value="0.1955" />
+        <entry key="..\:/Users/xkqeh/AndroidStudioProjects/Android2_A/pblSNS/app/src/main/res/drawable/round_account_circle_24.xml" value="0.1955" />
+        <entry key="..\:/Users/xkqeh/AndroidStudioProjects/Android2_A/pblSNS/app/src/main/res/drawable/round_home_24.xml" value="0.1955" />
+        <entry key="..\:/Users/xkqeh/AndroidStudioProjects/Android2_A/pblSNS/app/src/main/res/drawable/round_search_24.xml" value="0.1955" />
+        <entry key="..\:/Users/xkqeh/AndroidStudioProjects/Android2_A/pblSNS/app/src/main/res/drawable/text_cursor.xml" value="0.1955" />
+        <entry key="..\:/Users/xkqeh/AndroidStudioProjects/Android2_A/pblSNS/app/src/main/res/font/nanumsquare_acb.xml" value="0.36203703703703705" />
+        <entry key="..\:/Users/xkqeh/AndroidStudioProjects/Android2_A/pblSNS/app/src/main/res/layout/activity_login.xml" value="0.33177083333333335" />
+        <entry key="..\:/Users/xkqeh/AndroidStudioProjects/Android2_A/pblSNS/app/src/main/res/layout/activity_main.xml" value="0.33177083333333335" />
+        <entry key="..\:/Users/xkqeh/AndroidStudioProjects/Android2_A/pblSNS/app/src/main/res/layout/activity_signup.xml" value="0.33177083333333335" />
+        <entry key="..\:/Users/xkqeh/AndroidStudioProjects/Android2_A/pblSNS/app/src/main/res/layout/activity_splash.xml" value="0.33177083333333335" />
+        <entry key="..\:/Users/xkqeh/AndroidStudioProjects/Android2_A/pblSNS/app/src/main/res/layout/dialog_logout.xml" value="0.33" />
+        <entry key="..\:/Users/xkqeh/AndroidStudioProjects/Android2_A/pblSNS/app/src/main/res/layout/dialog_post.xml" value="0.33" />
+        <entry key="..\:/Users/xkqeh/AndroidStudioProjects/Android2_A/pblSNS/app/src/main/res/layout/dialog_profile_edit.xml" value="0.3734800231615518" />
+        <entry key="..\:/Users/xkqeh/AndroidStudioProjects/Android2_A/pblSNS/app/src/main/res/layout/dilaog_logout.xml" value="0.33489583333333334" />
+        <entry key="..\:/Users/xkqeh/AndroidStudioProjects/Android2_A/pblSNS/app/src/main/res/layout/fragment_home.xml" value="0.33177083333333335" />
+        <entry key="..\:/Users/xkqeh/AndroidStudioProjects/Android2_A/pblSNS/app/src/main/res/layout/fragment_login.xml" value="0.25" />
+        <entry key="..\:/Users/xkqeh/AndroidStudioProjects/Android2_A/pblSNS/app/src/main/res/layout/fragment_profile.xml" value="0.33" />
+        <entry key="..\:/Users/xkqeh/AndroidStudioProjects/Android2_A/pblSNS/app/src/main/res/layout/fragment_search.xml" value="0.3307291666666667" />
+        <entry key="..\:/Users/xkqeh/AndroidStudioProjects/Android2_A/pblSNS/app/src/main/res/layout/fragment_signup.xml" value="0.33177083333333335" />
+        <entry key="..\:/Users/xkqeh/AndroidStudioProjects/Android2_A/pblSNS/app/src/main/res/layout/item_post.xml" value="1.1" />
+        <entry key="..\:/Users/xkqeh/AndroidStudioProjects/Android2_A/pblSNS/app/src/main/res/layout/signup_item.xml" value="0.3307291666666667" />
+        <entry key="..\:/Users/xkqeh/AndroidStudioProjects/Android2_A/pblSNS/app/src/main/res/menu/nav_menu.xml" value="0.33177083333333335" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>

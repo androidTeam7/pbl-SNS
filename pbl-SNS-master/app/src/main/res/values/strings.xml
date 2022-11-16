@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">pbl-SNS</string>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- fragmemt_profile -->
+
+    <!-- dialog logout -->
+    <string name="isLogoutMsg">Hello World에서\n로그아웃하시겠어요?</string>
+
+</resources>
