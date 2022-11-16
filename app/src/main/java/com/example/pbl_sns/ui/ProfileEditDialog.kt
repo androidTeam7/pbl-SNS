@@ -7,6 +7,7 @@ import androidx.fragment.app.setFragmentResult
 import androidx.fragment.app.setFragmentResultListener
 import androidx.lifecycle.ViewModelProvider
 import com.example.pbl_sns.MyApplication
+import com.example.pbl_sns.MyApplication.Companion.prefs
 import com.example.pbl_sns.R
 import com.example.pbl_sns.base.BaseDialogFragment
 import com.example.pbl_sns.databinding.DialogProfileEditBinding
@@ -69,10 +70,16 @@ class ProfileEditDialog:BaseDialogFragment<DialogProfileEditBinding>(R.layout.di
                 dataToPrivacy.name = data["name"].toString()
                 Log.d("dataa", data.toString())
 
+                // id 수정
+                db.collection("users").document(MyApplication.prefs.getString("email", "null"))
+                    .update("id", data["id"])
+
+                // private 필드 수정
                 db.collection("users").document(MyApplication.prefs.getString("email", "null"))
                     .update("privacy", data)
 
-                Log.d("lifee", "Dialog")
+                prefs.removeAll()
+                prefs.setString("id", data["id"]!!)
 
                 viewModel.setUserData(dataToPrivacy)
                 setFragmentResult("editPrivacy", bundleOf("resultPrivacy" to isEdit))

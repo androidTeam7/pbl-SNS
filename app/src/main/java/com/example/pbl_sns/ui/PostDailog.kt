@@ -1,5 +1,6 @@
 package com.example.pbl_sns.ui
 
+import com.example.pbl_sns.MyApplication.Companion.prefs
 import com.example.pbl_sns.R
 import com.example.pbl_sns.base.BaseDialogFragment
 import com.example.pbl_sns.databinding.DialogPostBinding
@@ -11,6 +12,7 @@ class PostDailog(post:Post): BaseDialogFragment<DialogPostBinding>(R.layout.dial
     override fun initDataBinding() {
         super.initDataBinding()
 
+        binding.tvIdPostDialog.text = prefs.getString("id","-1")
         binding.tvContentPostDialog.text = mPost.content
     }
     override fun initAfterBinding() {

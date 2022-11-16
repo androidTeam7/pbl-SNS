@@ -7,6 +7,7 @@ import androidx.fragment.app.setFragmentResult
 import androidx.fragment.app.setFragmentResultListener
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
+import com.example.pbl_sns.MyApplication.Companion.prefs
 import com.example.pbl_sns.R
 import com.example.pbl_sns.base.BaseFragment
 import com.example.pbl_sns.databinding.FragmentProfileBinding
@@ -14,6 +15,8 @@ import com.example.pbl_sns.model.Post
 import com.example.pbl_sns.model.Privacy
 import com.example.pbl_sns.model.User
 import com.example.pbl_sns.viewmodel.UserViewModel
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 class ProfileFragment: BaseFragment<FragmentProfileBinding>(R.layout.fragment_profile) {
     private var result : Boolean = false
@@ -32,7 +35,8 @@ class ProfileFragment: BaseFragment<FragmentProfileBinding>(R.layout.fragment_pr
         (activity as MainActivity).setBottomNavSetting("")
 
         profileAdapter = ProfileAdapter(ArrayList())
-        binding.postRecyclerviewProfile.adapter = profileAdapter
+        initPostArray()
+        //binding.postRecyclerviewProfile.adapter = profileAdapter
 
         viewModel.getUserData()
         viewModel.userLiveData.observe(viewLifecycleOwner) {
@@ -51,6 +55,7 @@ class ProfileFragment: BaseFragment<FragmentProfileBinding>(R.layout.fragment_pr
         viewModel.getUserPost()
         viewModel.userLivePostData.observe(viewLifecycleOwner){
             val itemList:ArrayList<Post> = it
+            binding.tvPost.text = itemList.size.toString()
             profileAdapter.itemList = itemList
         }
     }
@@ -68,8 +73,11 @@ class ProfileFragment: BaseFragment<FragmentProfileBinding>(R.layout.fragment_pr
         // 로그아웃
         setFragmentResultListener("requestLogout") { _, bundle ->
             val isLogout:Boolean = bundle.get("resultLogout") as Boolean
-            if(isLogout)
+            if(isLogout){
+                Firebase.auth.signOut()
+                prefs.removeAll()
                 navController.navigate(R.id.action_profileFragment_to_loginFragment)
+            }
         }
 
         binding.btnSettingProfile.setOnClickListener {

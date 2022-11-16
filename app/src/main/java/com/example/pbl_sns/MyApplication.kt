@@ -10,5 +10,6 @@ class MyApplication: Application() {
     override fun onCreate() {
         prefs = MySharedPreferences(applicationContext)
         super.onCreate()
+        MyApplication.prefs.removeAll()
     }
 }

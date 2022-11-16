@@ -10,24 +10,36 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layout_recipe"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@color/white">
 
         <ImageButton
             android:id="@+id/img_post_profile"
-            android:layout_width="135dp"
-            android:layout_height="135dp"
-            android:background="@color/mainGray"
+            android:layout_width="130dp"
+            android:layout_height="130dp"
+            android:background="@color/mainLightGray"
             android:scaleType="center"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:srcCompat="@tools:sample/avatars" />
+            tools:srcCompat="@drawable/loading" />
+
+        <View
+            android:id="@+id/view_between"
+            android:layout_width="3dp"
+            android:layout_height="0dp"
+            android:background="@color/white"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="@+id/img_post_profile"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/img_post_profile"
+            app:layout_constraintTop_toTopOf="@+id/img_post_profile" />
 
         <View
             android:id="@+id/view"
             android:layout_width="0dp"
             android:layout_height="3dp"
+            android:background="@color/white"
             app:layout_constraintEnd_toEndOf="@+id/img_post_profile"
             app:layout_constraintStart_toStartOf="@+id/img_post_profile"
             app:layout_constraintTop_toBottomOf="@+id/img_post_profile" />

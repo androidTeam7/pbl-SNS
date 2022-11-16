@@ -1,6 +1,7 @@
 package com.example.pbl_sns.ui
 
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,6 +26,7 @@ class ProfileAdapter(itemList: List<Post>)
     inner class ViewHolder(itemViewBinding: ItemPostBinding)
         :RecyclerView.ViewHolder(itemViewBinding.root){
         val img = itemViewBinding.imgPostProfile
+        val betweenSpace = itemViewBinding.viewBetween
     }
 
     override fun onCreateViewHolder(
@@ -42,9 +44,15 @@ class ProfileAdapter(itemList: List<Post>)
 
     override fun onBindViewHolder(holder: ProfileAdapter.ViewHolder, position: Int) {
         if(itemList[position].image.isEmpty())
-            holder.img.setImageResource(R.drawable.close)
+            holder.img.setImageResource(R.drawable.loading)
         else
             holder.img.setImageResource(itemList[position].image.toInt())
+
+        if((position+1)%3 == 0)
+            holder.betweenSpace.visibility = View.GONE
+        else
+            holder.betweenSpace.visibility = View.VISIBLE
+
 
         // (1) 리스트 내 항목 클릭 시 onClick() 호출
         holder.img.setOnClickListener {

@@ -10,6 +10,8 @@
 
     <color name="snsBlue">#3E588F</color>
     <color name="cursorColor">#153462</color>
+    <color name="mainLightGray">#F5F5F5</color>
     <color name="mainGray">#E6E6E6</color>
+    <color name="mainDarkGray">#DADADA</color>
     <color name="transparent">#00E6E6E6</color>
 </resources>

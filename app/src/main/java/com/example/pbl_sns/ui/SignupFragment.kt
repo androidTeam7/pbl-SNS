@@ -1,9 +1,7 @@
 package com.example.pbl_sns.ui
 
-import android.os.Bundle
 import android.util.Patterns
 import android.widget.Toast
-import com.example.pbl_sns.MyApplication
 import com.example.pbl_sns.R
 import com.example.pbl_sns.base.BaseFragment
 import com.example.pbl_sns.databinding.FragmentSignupBinding
@@ -37,9 +35,9 @@ class SignupFragment : BaseFragment<FragmentSignupBinding>(R.layout.fragment_sig
         }
 
         binding.btnSignup.setOnClickListener {
-            var isGoToJoin = true
-            var EmptyCheck = true
-            val EmptyString  = emptyList<String>().toMutableList()
+            var isPossibleSignup = true
+            var isEmpty = true
+            val empty  = emptyList<String>().toMutableList()
 
             val email = binding.editTvEmail.text.toString()
             val name = binding.editTvName.text.toString()
@@ -50,39 +48,42 @@ class SignupFragment : BaseFragment<FragmentSignupBinding>(R.layout.fragment_sig
 
             // 유효성 검사
             if(email.isEmpty())
-                EmptyString.add("이메일")
+                empty.add("이메일")
             if(name.isEmpty())
-                EmptyString.add("이름")
+                empty.add("이름")
             if(id.isEmpty())
-                EmptyString.add("아이디")
+                empty.add("아이디")
             if(password.isEmpty())
-                EmptyString.add("비밀번호")
+                empty.add("비밀번호")
             if(passwordCheck.isEmpty())
-                EmptyString.add("비밀번호 확인")
+                empty.add("비밀번호 확인")
 
             if(email.isEmpty() or name.isEmpty() or id.isEmpty() or password.isEmpty() or passwordCheck.isEmpty()){
-                Toast.makeText(context, "$EmptyString 을(를) 입력해주세요", Toast.LENGTH_LONG).show()
-                isGoToJoin = false
-                EmptyCheck = false
+                Toast.makeText(context, "${empty}을(를) 입력해주세요", Toast.LENGTH_LONG).show()
+                isPossibleSignup = false
+                isEmpty = false
             }
 
-            if (EmptyCheck and (password == passwordCheck) and !Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            if(id == "-1")
+                Toast.makeText(context, "${id}은(는) 사용할 수 없는 아이디 입니다.", Toast.LENGTH_LONG).show()
+
+            if (isEmpty and (password == passwordCheck) and !Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
                 Toast.makeText(context, "이메일 형식이 아닙니다", Toast.LENGTH_SHORT).show()
                 binding.editTvEmail.setText("")
-                isGoToJoin = false
+                isPossibleSignup = false
             }
 
-            if (EmptyCheck and (password != passwordCheck)) {
+            if (isEmpty and (password != passwordCheck)) {
                 Toast.makeText(context, "비밀번호가 일치하지 않습니다.", Toast.LENGTH_LONG).show()
-                isGoToJoin = false
+                isPossibleSignup = false
             }
 
             //아이디와 비밀번호로 user 생성
-            if (isGoToJoin) {
+            if (isPossibleSignup) {
                 auth.createUserWithEmailAndPassword(email, password)
                     .addOnCompleteListener { task ->
                         if (task.isSuccessful) {
-                            Toast.makeText(context, "${name}님 환영합니다.", Toast.LENGTH_LONG).show()
+                            Toast.makeText(context, "회원가입 완료. ${name}님 환영합니다.", Toast.LENGTH_LONG).show()
 
                             //firestore에 유저정보 저장
                             val data = hashMapOf(
@@ -92,15 +93,11 @@ class SignupFragment : BaseFragment<FragmentSignupBinding>(R.layout.fragment_sig
                                 "info" to ""
                             )
 
-                            MyApplication.prefs.setString("email", email)
-
-                            //db.collection("users").document(email).set(data)
-
-                            db.collection("users").document(MyApplication.prefs.getString("email","null"))
+                            db.collection("users").document(email)
                                 .update("privacy", FieldValue.arrayUnion(data)).addOnSuccessListener {
                                     navController.navigate(R.id.action_signupFragment_to_loginFragment)
                                 }.addOnFailureListener(){
-                                    Toast.makeText(context, "데이터 확인",Toast.LENGTH_LONG)
+                                    Toast.makeText(context, "데이터 확인 필요",Toast.LENGTH_LONG)
                                 }
 
                         } else {
