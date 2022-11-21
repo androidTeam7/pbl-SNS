@@ -5,7 +5,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:background="@drawable/radius13_solid">
 
         <ImageButton
@@ -23,8 +23,8 @@
 
         <ImageView
             android:id="@+id/img_post_dialog"
-            android:layout_width="410dp"
-            android:layout_height="410dp"
+            android:layout_width="0dp"
+            android:layout_height="360dp"
             android:layout_marginTop="15dp"
             android:background="@color/mainLightGray"
             android:scaleType="center"
@@ -35,7 +35,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="0dp"
-            android:layout_height="200dp"
+            android:layout_height="0dp"
             android:background="@drawable/radius13_solid"
             android:padding="15dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -43,38 +43,46 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/img_post_dialog">
 
-            <TextView
-                android:id="@+id/tv_id_post_dialog"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/nanumsquare_acb"
-                android:text="id"
-                android:textColor="@color/black"
-                android:textSize="14sp"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent">
 
-            <TextView
-                android:id="@+id/tv_content_post_dialog"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:fontFamily="@font/nanumsquare_acr"
-                android:maxLines="5"
-                android:text="content"
-                android:textColor="@color/black"
-                android:textSize="14sp"
-                app:layout_constraintStart_toEndOf="@+id/tv_id_post_dialog"
-                app:layout_constraintTop_toTopOf="@+id/tv_id_post_dialog" />
+                <TextView
+                    android:id="@+id/tv_id_post_dialog"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/nanumsquare_acb"
+                    android:text="id"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/btn_view_all_reply"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="댓글 모두 보기"
-                app:layout_constraintStart_toStartOf="@+id/tv_id_post_dialog"
-                app:layout_constraintTop_toBottomOf="@+id/tv_content_post_dialog" />
+                <TextView
+                    android:id="@+id/tv_content_post_dialog"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:fontFamily="@font/nanumsquare_acr"
+                    android:maxLines="5"
+                    android:text="content"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toEndOf="@+id/tv_id_post_dialog"
+                    app:layout_constraintTop_toTopOf="@+id/tv_id_post_dialog" />
+
+                <TextView
+                    android:id="@+id/btn_view_all_reply"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="댓글 모두 보기"
+                    app:layout_constraintStart_toStartOf="@+id/tv_id_post_dialog"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_content_post_dialog" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <EditText
                 android:id="@+id/edit_tv_reply"

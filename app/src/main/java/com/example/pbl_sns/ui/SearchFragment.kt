@@ -8,12 +8,11 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import androidx.databinding.ViewDataBinding
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pbl_sns.R
 import com.example.pbl_sns.base.BaseFragment
-import com.example.pbl_sns.databinding.FragmentSearchBinding
+import com.example.pbl_sns.ui.profile.ProfileFragment
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 

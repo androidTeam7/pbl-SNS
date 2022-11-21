@@ -5,7 +5,7 @@
     <data>
         <variable
             name="recipeAdapter"
-            type="com.example.pbl_sns.ui.ProfileAdapter" />
+            type="com.example.pbl_sns.ui.profile.ProfileAdapter" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

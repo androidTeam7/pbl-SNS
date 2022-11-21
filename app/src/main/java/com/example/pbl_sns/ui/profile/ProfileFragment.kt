@@ -1,9 +1,7 @@
-package com.example.pbl_sns.ui
+package com.example.pbl_sns.ui.profile
 
-import android.os.Bundle
 import android.util.Log
 import android.view.View
-import androidx.fragment.app.setFragmentResult
 import androidx.fragment.app.setFragmentResultListener
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
@@ -11,9 +9,10 @@ import com.example.pbl_sns.MyApplication.Companion.prefs
 import com.example.pbl_sns.R
 import com.example.pbl_sns.base.BaseFragment
 import com.example.pbl_sns.databinding.FragmentProfileBinding
+import com.example.pbl_sns.model.Friends
 import com.example.pbl_sns.model.Post
-import com.example.pbl_sns.model.Privacy
-import com.example.pbl_sns.model.User
+import com.example.pbl_sns.ui.LogoutDialog
+import com.example.pbl_sns.ui.MainActivity
 import com.example.pbl_sns.viewmodel.UserViewModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -22,9 +21,10 @@ import com.google.firebase.ktx.Firebase
 class ProfileFragment: BaseFragment<FragmentProfileBinding>(R.layout.fragment_profile) {
     private var result : Boolean = false
     lateinit var profileAdapter: ProfileAdapter
-    private var following:String = ""
-    private var follower:String = ""
+    private var following:ArrayList<String> = ArrayList()
+    private var follower:ArrayList<String> = ArrayList()
     private lateinit var auth: FirebaseAuth
+    private lateinit var id:String
 
     private val viewModel by lazy {
         ViewModelProvider(this)[UserViewModel::class.java]
@@ -44,6 +44,7 @@ class ProfileFragment: BaseFragment<FragmentProfileBinding>(R.layout.fragment_pr
 
         viewModel.getUserData()
         viewModel.userLiveData.observe(viewLifecycleOwner) {
+            id = it.id
             binding.tvIdProfile.text = it.id
             binding.tvNameProfile.text = it.name
 
@@ -61,6 +62,19 @@ class ProfileFragment: BaseFragment<FragmentProfileBinding>(R.layout.fragment_pr
             val itemList:ArrayList<Post> = it
             binding.tvPost.text = itemList.size.toString()
             profileAdapter.itemList = itemList
+        }
+
+        viewModel.getUserFollower()
+        viewModel.getUserFollowing()
+        viewModel.userLiveFollowerData.observe(viewLifecycleOwner){
+            val itemList:ArrayList<String> = it
+            follower = itemList
+            binding.tvFollower.text = follower.size.toString()
+        }
+        viewModel.userLiveFollowingData.observe(viewLifecycleOwner){
+            val itemList:ArrayList<String> = it
+            following = itemList
+            binding.tvFollowing.text = following.size.toString()
         }
     }
 
@@ -97,6 +111,22 @@ class ProfileFragment: BaseFragment<FragmentProfileBinding>(R.layout.fragment_pr
                 PostDailog(post).show(parentFragmentManager,"PostDialog")
             }
         })
+
+        binding.btnFollowing.setOnClickListener {
+            Log.d("clickk", "btnFollowing")
+            FollowingDialog(id, following).show(parentFragmentManager,"following")
+        }
+        binding.btnFollower.setOnClickListener {
+            Log.d("clickk", "btnFollower")
+            FollowerDialog(id, follower).show(parentFragmentManager,"follower")
+        }
+
+        setFragmentResultListener("changeFollower") { _, _ ->
+            viewModel.getUserFollower()
+        }
+        setFragmentResultListener("changeFollowing") { _, _ ->
+            viewModel.getUserFollowing()
+        }
     }
 
     private fun initPostArray() {

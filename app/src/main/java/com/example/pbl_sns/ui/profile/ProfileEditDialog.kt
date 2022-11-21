@@ -1,10 +1,13 @@
-package com.example.pbl_sns.ui
+package com.example.pbl_sns.ui.profile
 
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.util.Log
+import android.view.ViewGroup
+import android.view.WindowManager
 import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.setFragmentResult
-import androidx.fragment.app.setFragmentResultListener
 import androidx.lifecycle.ViewModelProvider
 import com.example.pbl_sns.MyApplication
 import com.example.pbl_sns.MyApplication.Companion.prefs
@@ -12,9 +15,7 @@ import com.example.pbl_sns.R
 import com.example.pbl_sns.base.BaseDialogFragment
 import com.example.pbl_sns.databinding.DialogProfileEditBinding
 import com.example.pbl_sns.model.Privacy
-import com.example.pbl_sns.model.User
 import com.example.pbl_sns.viewmodel.UserViewModel
-import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
@@ -89,6 +90,15 @@ class ProfileEditDialog:BaseDialogFragment<DialogProfileEditBinding>(R.layout.di
                 Toast.makeText(context, "${emptyIs}가 입력되지 않았습니다.", Toast.LENGTH_LONG)
             }
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        // dialog full Screen code
+        dialog?.window?.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
+        dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog?.window?.clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
     }
 
     private fun checkData():Boolean{

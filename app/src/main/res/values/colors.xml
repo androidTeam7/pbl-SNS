@@ -13,5 +13,6 @@
     <color name="mainLightGray">#F5F5F5</color>
     <color name="mainGray">#E6E6E6</color>
     <color name="mainDarkGray">#DADADA</color>
+    <color name="mainRed">#F7163C</color>
     <color name="transparent">#00E6E6E6</color>
 </resources>

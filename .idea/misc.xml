@@ -4,8 +4,11 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/xkqeh/AndroidStudioProjects/Android2_A/pblSNS/app/src/main/res/drawable-mdpi/bottom_line_blue.xml" value="0.1985" />
+        <entry key="..\:/Users/xkqeh/AndroidStudioProjects/Android2_A/pblSNS/app/src/main/res/drawable-mdpi/radius10_solid.xml" value="0.1985" />
         <entry key="..\:/Users/xkqeh/AndroidStudioProjects/Android2_A/pblSNS/app/src/main/res/drawable-mdpi/radius13.xml" value="0.1985" />
         <entry key="..\:/Users/xkqeh/AndroidStudioProjects/Android2_A/pblSNS/app/src/main/res/drawable-v24/input_border_round.xml" value="0.1955" />
+        <entry key="..\:/Users/xkqeh/AndroidStudioProjects/Android2_A/pblSNS/app/src/main/res/drawable-xxhdpi/dialog_bottomsheet_shape.xml" value="0.1985" />
+        <entry key="..\:/Users/xkqeh/AndroidStudioProjects/Android2_A/pblSNS/app/src/main/res/drawable/check_box_friend.xml" value="0.1985" />
         <entry key="..\:/Users/xkqeh/AndroidStudioProjects/Android2_A/pblSNS/app/src/main/res/drawable/dialog_profile_edit.xml" value="0.1985" />
         <entry key="..\:/Users/xkqeh/AndroidStudioProjects/Android2_A/pblSNS/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1955" />
         <entry key="..\:/Users/xkqeh/AndroidStudioProjects/Android2_A/pblSNS/app/src/main/res/drawable/menu_selector_color.xml" value="0.1955" />
@@ -17,10 +20,14 @@
         <entry key="..\:/Users/xkqeh/AndroidStudioProjects/Android2_A/pblSNS/app/src/main/res/font/nanumsquare_acb.xml" value="0.36203703703703705" />
         <entry key="..\:/Users/xkqeh/AndroidStudioProjects/Android2_A/pblSNS/app/src/main/res/layout/activity_login.xml" value="0.33177083333333335" />
         <entry key="..\:/Users/xkqeh/AndroidStudioProjects/Android2_A/pblSNS/app/src/main/res/layout/activity_main.xml" value="0.33177083333333335" />
+        <entry key="..\:/Users/xkqeh/AndroidStudioProjects/Android2_A/pblSNS/app/src/main/res/layout/activity_posting.xml" value="0.3359375" />
         <entry key="..\:/Users/xkqeh/AndroidStudioProjects/Android2_A/pblSNS/app/src/main/res/layout/activity_signup.xml" value="0.33177083333333335" />
         <entry key="..\:/Users/xkqeh/AndroidStudioProjects/Android2_A/pblSNS/app/src/main/res/layout/activity_splash.xml" value="0.33177083333333335" />
+        <entry key="..\:/Users/xkqeh/AndroidStudioProjects/Android2_A/pblSNS/app/src/main/res/layout/dialog_delete_friend.xml" value="0.33489583333333334" />
+        <entry key="..\:/Users/xkqeh/AndroidStudioProjects/Android2_A/pblSNS/app/src/main/res/layout/dialog_follower.xml" value="0.33" />
+        <entry key="..\:/Users/xkqeh/AndroidStudioProjects/Android2_A/pblSNS/app/src/main/res/layout/dialog_following.xml" value="0.33" />
         <entry key="..\:/Users/xkqeh/AndroidStudioProjects/Android2_A/pblSNS/app/src/main/res/layout/dialog_logout.xml" value="0.33" />
-        <entry key="..\:/Users/xkqeh/AndroidStudioProjects/Android2_A/pblSNS/app/src/main/res/layout/dialog_post.xml" value="0.33" />
+        <entry key="..\:/Users/xkqeh/AndroidStudioProjects/Android2_A/pblSNS/app/src/main/res/layout/dialog_post.xml" value="0.25" />
         <entry key="..\:/Users/xkqeh/AndroidStudioProjects/Android2_A/pblSNS/app/src/main/res/layout/dialog_profile_edit.xml" value="0.3734800231615518" />
         <entry key="..\:/Users/xkqeh/AndroidStudioProjects/Android2_A/pblSNS/app/src/main/res/layout/dilaog_logout.xml" value="0.33489583333333334" />
         <entry key="..\:/Users/xkqeh/AndroidStudioProjects/Android2_A/pblSNS/app/src/main/res/layout/fragment_home.xml" value="0.33177083333333335" />
@@ -28,6 +35,10 @@
         <entry key="..\:/Users/xkqeh/AndroidStudioProjects/Android2_A/pblSNS/app/src/main/res/layout/fragment_profile.xml" value="0.33" />
         <entry key="..\:/Users/xkqeh/AndroidStudioProjects/Android2_A/pblSNS/app/src/main/res/layout/fragment_search.xml" value="0.3307291666666667" />
         <entry key="..\:/Users/xkqeh/AndroidStudioProjects/Android2_A/pblSNS/app/src/main/res/layout/fragment_signup.xml" value="0.33177083333333335" />
+        <entry key="..\:/Users/xkqeh/AndroidStudioProjects/Android2_A/pblSNS/app/src/main/res/layout/item.xml" value="0.3359375" />
+        <entry key="..\:/Users/xkqeh/AndroidStudioProjects/Android2_A/pblSNS/app/src/main/res/layout/item_follower.xml" value="0.33489583333333334" />
+        <entry key="..\:/Users/xkqeh/AndroidStudioProjects/Android2_A/pblSNS/app/src/main/res/layout/item_following.xml" value="0.3359375" />
+        <entry key="..\:/Users/xkqeh/AndroidStudioProjects/Android2_A/pblSNS/app/src/main/res/layout/item_friend.xml" value="0.3265940902021773" />
         <entry key="..\:/Users/xkqeh/AndroidStudioProjects/Android2_A/pblSNS/app/src/main/res/layout/item_post.xml" value="1.1" />
         <entry key="..\:/Users/xkqeh/AndroidStudioProjects/Android2_A/pblSNS/app/src/main/res/layout/signup_item.xml" value="0.3307291666666667" />
         <entry key="..\:/Users/xkqeh/AndroidStudioProjects/Android2_A/pblSNS/app/src/main/res/menu/nav_menu.xml" value="0.33177083333333335" />
@@ -39,5 +50,12 @@
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
+  </component>
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.22083333333333333" />
+      </ProjectState>
+    </option>
   </component>
 </project>

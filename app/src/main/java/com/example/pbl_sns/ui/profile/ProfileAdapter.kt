@@ -1,7 +1,6 @@
-package com.example.pbl_sns.ui
+package com.example.pbl_sns.ui.profile
 
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,7 +14,6 @@ import com.google.firebase.ktx.Firebase
 class ProfileAdapter(itemList: List<Post>)
     : RecyclerView.Adapter<ProfileAdapter.ViewHolder>(){
     private val db = Firebase.firestore
-    private var ingredientDatas = mutableListOf<String>()
 
     var itemList: List<Post> = itemList
         set(value) {
@@ -32,7 +30,7 @@ class ProfileAdapter(itemList: List<Post>)
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int,
-    ): ProfileAdapter.ViewHolder {
+    ): ViewHolder {
         return ViewHolder(
             ItemPostBinding.inflate(
                 LayoutInflater.from(parent.context),
@@ -42,7 +40,7 @@ class ProfileAdapter(itemList: List<Post>)
         )
     }
 
-    override fun onBindViewHolder(holder: ProfileAdapter.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         if(itemList[position].image.isEmpty())
             holder.img.setImageResource(R.drawable.loading)
         else
