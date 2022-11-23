@@ -67,6 +67,7 @@ class PostingFragment :BaseFragment<FragmentPostingBinding>(R.layout.fragment_po
         //Open the album
         //var photoPickerIntent = Intent(Intent.ACTION_PICK)
         var photoPickerIntent = Intent(Intent.ACTION_PICK)
+        Log.d("DD","PPPPPPP")
         photoPickerIntent.type = "image/*"
         startActivityForResult(photoPickerIntent, PICK_IMAGE_FROM_ALBUM)
 
