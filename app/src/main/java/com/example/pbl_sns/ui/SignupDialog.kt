@@ -1,19 +1,21 @@
 package com.example.pbl_sns.ui
 
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.util.Patterns
+import android.view.ViewGroup
+import android.view.WindowManager
 import android.widget.Toast
-import com.example.pbl_sns.MyApplication.Companion.prefs
 import com.example.pbl_sns.R
-import com.example.pbl_sns.base.BaseFragment
-import com.example.pbl_sns.databinding.FragmentSignupBinding
+import com.example.pbl_sns.base.BaseDialogFragment
+import com.example.pbl_sns.databinding.DialogSignupBinding
 import com.example.pbl_sns.model.Privacy
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
-import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
-class SignupFragment : BaseFragment<FragmentSignupBinding>(R.layout.fragment_signup) {
+class SignupDialog : BaseDialogFragment<DialogSignupBinding>(R.layout.dialog_signup) {
     private lateinit var auth: FirebaseAuth
     private val db = Firebase.firestore
 
@@ -23,17 +25,11 @@ class SignupFragment : BaseFragment<FragmentSignupBinding>(R.layout.fragment_sig
         auth = Firebase.auth
     }
 
-    override fun initDataBinding() {
-        super.initDataBinding()
-
-        (activity as MainActivity).setBottomNavSetting("none")
-    }
-
     override fun initAfterBinding() {
         super.initAfterBinding()
 
         binding.btnBack.setOnClickListener {
-            navController.navigate(R.id.action_signupFragment_to_loginFragment)
+            dismiss()
         }
 
         binding.btnSignup.setOnClickListener {
@@ -104,7 +100,7 @@ class SignupFragment : BaseFragment<FragmentSignupBinding>(R.layout.fragment_sig
                                 db.collection("users").document(email)
                                     .update("privacy", privacyData).addOnSuccessListener {
                                         Toast.makeText(context, "회원가입 완료. ${name}님 환영합니다.", Toast.LENGTH_LONG).show()
-                                        navController.navigate(R.id.action_signupFragment_to_loginFragment)
+                                        dismiss()
                                     }.addOnFailureListener(){
                                         Toast.makeText(context, "데이터 확인 필요",Toast.LENGTH_LONG)
                                     }
@@ -118,5 +114,14 @@ class SignupFragment : BaseFragment<FragmentSignupBinding>(R.layout.fragment_sig
                     }
             }
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        // dialog full Screen code
+        dialog?.window?.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
+        dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog?.window?.clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
     }
 }

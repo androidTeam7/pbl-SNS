@@ -25,7 +25,20 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        setToolbar()
         setBottomNav()
+    }
+
+    private fun setToolbar(){
+        val toolbar = binding.toolbar
+        setSupportActionBar(toolbar)
+        val ab = supportActionBar!!
+        // Toolbar에 표시되는 제목의 표시 유무를 설정. false로 해야 custom한 툴바의 이름이 화면에 보인다.
+        ab.setDisplayShowTitleEnabled(false)
+        // 뒤로가기 버튼
+        ab.setDisplayHomeAsUpEnabled(false)
+        //왼쪽 버튼 아이콘 변경
+        supportActionBar!!.setHomeAsUpIndicator(R.drawable.back)
     }
 
     private fun setBottomNav() {
@@ -38,9 +51,15 @@ class MainActivity : AppCompatActivity() {
     fun setBottomNavSetting(tag: String){
         when (tag) {
             "none" -> {
+                binding.toolbar.visibility = View.GONE
                 binding.bottomNavigationView.visibility = View.GONE
             }
+            "all" ->{
+                binding.toolbar.visibility = View.VISIBLE
+                binding.bottomNavigationView.visibility = View.VISIBLE
+            }
             else -> {
+                binding.toolbar.visibility = View.GONE
                 binding.bottomNavigationView.visibility = View.VISIBLE
             }
         }

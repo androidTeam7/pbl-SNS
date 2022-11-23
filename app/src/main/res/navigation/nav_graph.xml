@@ -10,20 +10,8 @@
         android:label="LoginFragment"
         tools:layout="@layout/fragment_login">
         <action
-            android:id="@+id/action_loginFragment_to_signupFragment"
-            app:destination="@id/signupFragment" />
-        <action
             android:id="@+id/action_loginFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/signupFragment"
-        android:name="com.example.pbl_sns.ui.SignupFragment"
-        android:label="SignupFragment"
-        tools:layout="@layout/fragment_signup">
-        <action
-            android:id="@+id/action_signupFragment_to_loginFragment"
-            app:destination="@id/loginFragment" />
     </fragment>
     <fragment
         android:id="@+id/homeFragment"
@@ -51,7 +39,7 @@
     </fragment>
     <dialog
         android:id="@+id/logoutDialog"
-        android:name="com.example.pbl_sns.ui.LogoutDialog"
+        android:name="com.example.pbl_sns.ui.profile.LogoutDialog"
         android:label="LogoutDialog"
         tools:layout="@layout/dialog_logout"/>
     <fragment

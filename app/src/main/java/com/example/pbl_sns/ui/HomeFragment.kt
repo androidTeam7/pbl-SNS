@@ -13,6 +13,6 @@ class HomeFragment: BaseFragment<FragmentHomeBinding>(R.layout.fragment_home){
     override fun initDataBinding() {
         super.initDataBinding()
 
-        (activity as MainActivity).setBottomNavSetting("")
+        (activity as MainActivity).setBottomNavSetting("all")
     }
 }

@@ -47,7 +47,7 @@
         tools:layout="@layout/fragment_search"/>
     <dialog
         android:id="@+id/logoutDialog"
-        android:name="com.example.pbl_sns.ui.LogoutDialog"
+        android:name="com.example.pbl_sns.ui.profile.LogoutDialog"
         android:label="LogoutDialog"
         tools:layout="@layout/dialog_logout"/>
 </navigation>

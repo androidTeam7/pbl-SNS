@@ -4,14 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="320dp"
+        android:layout_width="310dp"
         android:layout_height="wrap_content"
         android:background="@drawable/radius13_solid">
 
         <TextView
             android:id="@+id/btn_view_all_reply"
-            android:layout_width="320dp"
-            android:layout_height="109dp"
+            android:layout_width="310dp"
+            android:layout_height="110dp"
             android:fontFamily="@font/nanumsquare_aceb"
             android:gravity="center"
             android:text="@string/isLogoutMsg"
@@ -35,9 +35,9 @@
         <Button
             android:id="@+id/btn_logout"
             android:layout_width="0dp"
-            android:layout_height="45dp"
+            android:layout_height="50dp"
             android:background="@color/transparent"
-            android:fontFamily="@font/nanumsquare_acb"
+            android:fontFamily="@font/nanumsquare_aceb"
             android:text="로그아웃"
             android:textColor="@color/snsBlue"
             android:textSize="16sp"
@@ -57,7 +57,7 @@
         <Button
             android:id="@+id/btn_no_logout"
             android:layout_width="0dp"
-            android:layout_height="45dp"
+            android:layout_height="50dp"
             android:background="@color/transparent"
             android:fontFamily="@font/nanumsquare_acr"
             android:text="취소"

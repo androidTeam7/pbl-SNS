@@ -10,7 +10,6 @@ import com.example.pbl_sns.R
 import com.example.pbl_sns.base.BaseFragment
 import com.example.pbl_sns.databinding.FragmentProfileBinding
 import com.example.pbl_sns.model.Post
-import com.example.pbl_sns.ui.LogoutDialog
 import com.example.pbl_sns.ui.MainActivity
 import com.example.pbl_sns.viewmodel.UserViewModel
 import com.google.firebase.auth.FirebaseAuth
@@ -28,6 +27,11 @@ class ProfileFragment: BaseFragment<FragmentProfileBinding>(R.layout.fragment_pr
 
     private val viewModel by lazy {
         ViewModelProvider(this)[UserViewModel::class.java]
+    }
+
+    override fun initStartView() {
+        super.initStartView()
+        (activity as MainActivity).setBottomNavSetting("")
     }
 
     override fun initDataBinding() {

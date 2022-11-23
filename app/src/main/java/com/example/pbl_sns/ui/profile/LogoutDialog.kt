@@ -1,8 +1,7 @@
-package com.example.pbl_sns.ui
+package com.example.pbl_sns.ui.profile
 
 import androidx.core.os.bundleOf
 import androidx.fragment.app.setFragmentResult
-import com.example.pbl_sns.MyApplication
 import com.example.pbl_sns.R
 import com.example.pbl_sns.base.BaseDialogFragment
 import com.example.pbl_sns.databinding.DialogLogoutBinding

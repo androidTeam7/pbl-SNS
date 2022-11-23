@@ -1,12 +1,8 @@
 package com.example.pbl_sns.ui
 
 import android.content.ContentValues
-import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
-import com.example.pbl_sns.MyApplication
 import com.example.pbl_sns.MyApplication.Companion.prefs
 import com.example.pbl_sns.R
 import com.example.pbl_sns.base.BaseFragment
@@ -28,7 +24,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
 
         //로그인 되어있는지 확인
         val currentUser = auth.currentUser
-        if(currentUser != null && prefs.getString("email","null") != "null") {
+        if(currentUser != null && prefs.getString("email","-1") != "-1") {
             navController.navigate(R.id.action_loginFragment_to_homeFragment)
         }
     }
@@ -46,11 +42,14 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
         binding.buttonLogin.setOnClickListener {     // 로그인 버튼 클릭했을 때
             val userEmail = binding.editTextId.text.toString()   // ID EditText의 문자열을 userEmail에 저장
             val password = binding.editTextPasswd.text.toString()   // Passwd EditText의 문자열을 password에 저장
-            doLogin(userEmail, password)   // userEmail과 password를 통해 로그인 시도하는 함수 호출
+            if(userEmail.isEmpty() || password.isEmpty())
+                Toast.makeText(context,"아이디 또는 비밀번호를 입력해주세요.",Toast.LENGTH_SHORT)
+            else
+                doLogin(userEmail, password)   // userEmail과 password를 통해 로그인 시도하는 함수 호출
         }
 
         binding.goSignUp.setOnClickListener {    // 가입하기 텍스트를 클릭했을 경우
-            navController.navigate(R.id.action_loginFragment_to_signupFragment)
+            SignupDialog().show(parentFragmentManager,"SignupDialog")
         }
     }
 
@@ -64,7 +63,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
                     navController.navigate(R.id.action_loginFragment_to_homeFragment)
                 } else {   // 로그인 실패했을 경우(Firebase의 Users에 계정이 존재하지 않을 경우)
                     Log.w("LoginAcitivy", "signInWIthEmail", it.exception)  // Log에 에러 입력
-                    Toast.makeText(context, "Login failed.", Toast.LENGTH_SHORT).show()  // Login failed 스낵바 띄우기
+                    Toast.makeText(context, "아이디 또는 비밀번호가 올바르지 않습니다.", Toast.LENGTH_SHORT).show()  // Login failed 스낵바 띄우기
                 }
             }
     }

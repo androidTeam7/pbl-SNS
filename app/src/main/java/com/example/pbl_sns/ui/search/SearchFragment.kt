@@ -13,6 +13,7 @@ import com.example.pbl_sns.R
 import com.example.pbl_sns.base.BaseFragment
 import com.example.pbl_sns.databinding.FragmentSearchBinding
 import com.example.pbl_sns.model.Privacy
+import com.example.pbl_sns.ui.MainActivity
 import com.example.pbl_sns.viewmodel.UserViewModel
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.ktx.firestore
@@ -26,6 +27,11 @@ class SearchFragment: BaseFragment<FragmentSearchBinding>(R.layout.fragment_sear
 
     private val viewModel by lazy {
         ViewModelProvider(this)[UserViewModel::class.java]
+    }
+
+    override fun initStartView() {
+        super.initStartView()
+        (activity as MainActivity).setBottomNavSetting("")
     }
 
     override fun initDataBinding() {
