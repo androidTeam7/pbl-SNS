@@ -4,7 +4,11 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import android.view.View
+import androidx.core.os.bundleOf
+import androidx.fragment.app.setFragmentResult
+import androidx.fragment.app.setFragmentResultListener
 import androidx.lifecycle.ViewModelProvider
+import com.example.pbl_sns.MyApplication.Companion.prefs
 import com.example.pbl_sns.R
 import com.example.pbl_sns.base.BaseFragment
 import com.example.pbl_sns.databinding.FragmentSearchBinding
@@ -17,7 +21,8 @@ import kotlinx.coroutines.*
 
 class SearchFragment: BaseFragment<FragmentSearchBinding>(R.layout.fragment_search){
     private lateinit var searchAdapter: SearchAdapter
-    private val myCoroutineScope = CoroutineScope(Dispatchers.Main)
+    private lateinit var userFollowingList:ArrayList<String>
+    private val userEmail = prefs.getString("email","-1")
 
     private val viewModel by lazy {
         ViewModelProvider(this)[UserViewModel::class.java]
@@ -29,11 +34,26 @@ class SearchFragment: BaseFragment<FragmentSearchBinding>(R.layout.fragment_sear
         searchAdapter = SearchAdapter(ArrayList())
         binding.searchRecyclerview.adapter = searchAdapter
         viewModel.getAllUsersData()
-        Log.d("allUserr", viewModel.allUsersLiveData.value.toString())
+
+        viewModel.getUserFollowing(userEmail)
+        viewModel.userLiveFollowingData.observe(viewLifecycleOwner){
+            userFollowingList = it
+        }
     }
 
     override fun initAfterBinding() {
         super.initAfterBinding()
+
+        setFragmentResultListener("addFollowingFPD") { _, bundle ->
+            val result = bundle.getString("friendEmail")
+            if(result != "-1") userFollowingList.add(result!!)
+            viewModel.setUserFollowing(userFollowingList)
+        }
+        setFragmentResultListener("deleteFollowingFPD") { _, bundle ->
+            val result = bundle.getString("friendEmail")
+            userFollowingList.remove(result)
+            viewModel.setUserFollowing(userFollowingList)
+        }
 
         // 검색 기능
         binding.editTvSearch.addTextChangedListener(object : TextWatcher {

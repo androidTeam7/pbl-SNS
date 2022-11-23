@@ -81,8 +81,10 @@ class UserViewModel :ViewModel(){
             Log.d("vm", _userLiveFollowingData.value.toString())
         }
     }
-    // 친구 프로필에서 필로잉 취소 눌렀을 때
-    fun setUserFollowing(){
+
+    fun setUserFollowing(result:ArrayList<String>){
+        _userLiveFollowingData.value = result
+        repo.setFollowingData(result)
     }
 
     // 유저 이메일 받아오기

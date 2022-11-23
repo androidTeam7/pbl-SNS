@@ -130,6 +130,18 @@ class UserRepository {
         }
     }
 
+    fun setFollowingData(result:ArrayList<String>){
+        if(user != "-1"){
+            db.collection("users").document(user)
+                .update("friends.following", result).addOnSuccessListener {
+                    Log.d("setFollowerCOMPLETE", result.toString())
+                }
+                .addOnFailureListener { exception ->
+                    Log.d(ContentValues.TAG, "get failed with ", exception)
+                }
+        }
+    }
+
     fun getUserEmail(id:String): LiveData<String>{
         val mutableData = MutableLiveData<String>()
 

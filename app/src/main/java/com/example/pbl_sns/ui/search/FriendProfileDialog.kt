@@ -53,7 +53,7 @@ class FriendProfileDialog(email: String) : BaseDialogFragment<FragmentProfileBin
 
         binding.tvIdProfile.visibility = View.GONE
         binding.btnSettingProfile.visibility = View.GONE
-        binding.btnEditProfile.visibility = View.GONE
+        binding.btnEditProfile.visibility = View.INVISIBLE
         profileAdapter = ProfileAdapter(ArrayList())
         initPostArray()
 
@@ -108,9 +108,9 @@ class FriendProfileDialog(email: String) : BaseDialogFragment<FragmentProfileBin
         binding.btnCloseFriendProfile.setOnClickListener {
             // 내 친구목록 업데이트
             if(isFollowing)
-                setFragmentResult("addFollowerFPD", bundleOf("friendEmail" to mEmail))
+                setFragmentResult("addFollowingFPD", bundleOf("friendEmail" to mEmail))
             else
-                setFragmentResult("deleteFollowerFPD", bundleOf("friendEmail" to mEmail))
+                setFragmentResult("deleteFollowingFPD", bundleOf("friendEmail" to mEmail))
             dismiss()
         }
         binding.btnFollowing.setOnClickListener {
