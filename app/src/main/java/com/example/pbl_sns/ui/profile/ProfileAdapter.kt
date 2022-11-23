@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.pbl_sns.R
 import com.example.pbl_sns.databinding.ItemPostBinding
 import com.example.pbl_sns.model.Post
+import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
@@ -50,6 +51,8 @@ class ProfileAdapter(itemList: List<Post>)
             holder.betweenSpace.visibility = View.GONE
         else
             holder.betweenSpace.visibility = View.VISIBLE
+
+
 
 
         // (1) 리스트 내 항목 클릭 시 onClick() 호출
