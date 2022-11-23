@@ -8,15 +8,48 @@
         android:layout_height="match_parent"
         android:background="@color/white">
 
+        <ImageButton
+            android:id="@+id/btn_close_friend_profile"
+            android:layout_width="45dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="15dp"
+            android:background="@color/transparent"
+            android:paddingTop="2dp"
+            android:paddingBottom="2dp"
+            android:scaleType="fitStart"
+            android:visibility="visible"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/back"
+            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
         <TextView
-            android:id="@+id/tv_id_profile"
+            android:id="@+id/tv_id_friend_profile"
             android:layout_width="wrap_content"
-            android:layout_height="25dp"
-            android:layout_marginStart="23dp"
-            android:layout_marginTop="21dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
             android:fontFamily="@font/nanumsquare_aceb"
+            android:gravity="center"
+            android:text="friend_id"
             android:textColor="@color/black"
             android:textSize="20sp"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="@+id/btn_close_friend_profile"
+            app:layout_constraintStart_toEndOf="@+id/btn_close_friend_profile"
+            app:layout_constraintTop_toTopOf="@+id/btn_close_friend_profile" />
+
+        <TextView
+            android:id="@+id/tv_id_profile"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="15dp"
+            android:fontFamily="@font/nanumsquare_aceb"
+            android:text="id"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:visibility="gone"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -27,6 +60,7 @@
             android:layout_marginEnd="15dp"
             android:background="@color/white"
             android:scaleType="fitXY"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/tv_id_profile"
             app:srcCompat="@drawable/setting" />
@@ -36,11 +70,11 @@
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_marginStart="24dp"
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="70dp"
             android:src="@drawable/user"
             app:civ_border_overlay="true"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_id_profile" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <Button
             android:id="@+id/btn_post"
@@ -147,16 +181,34 @@
 
         <Button
             android:id="@+id/btn_edit_profile"
-            android:layout_width="380dp"
-            android:layout_height="30dp"
+            android:layout_width="0dp"
+            android:layout_height="32dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="22dp"
-            android:layout_marginEnd="15dp"
+            android:layout_marginEnd="16dp"
             android:background="@drawable/radius8_solid"
             android:backgroundTint="@color/mainGray"
             android:fontFamily="@font/nanumsquare_acr"
             android:text="프로필 편집"
             android:textSize="14sp"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_info_profile" />
+
+        <Button
+            android:id="@+id/btn_follower_following"
+            android:layout_width="0dp"
+            android:layout_height="32dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="22dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/radius8_solid"
+            android:fontFamily="@font/nanumsquare_acr"
+            android:text="팔로잉"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_info_profile" />

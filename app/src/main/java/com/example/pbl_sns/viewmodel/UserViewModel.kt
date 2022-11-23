@@ -10,6 +10,11 @@ import com.example.pbl_sns.model.Privacy
 import com.example.pbl_sns.repository.UserRepository
 
 class UserViewModel :ViewModel(){
+    private val _allUsersLiveData:MutableLiveData<ArrayList<Privacy>>
+            = MutableLiveData()
+    val allUsersLiveData : LiveData<ArrayList<Privacy>>
+        get() = _allUsersLiveData
+
     private val _userLiveData: MutableLiveData<Privacy>
             = MutableLiveData()
     val userLiveData: LiveData<Privacy>
@@ -28,10 +33,23 @@ class UserViewModel :ViewModel(){
             = MutableLiveData()
     val userLiveFollowingData: LiveData<ArrayList<String>>
         get() = _userLiveFollowingData
+
+
+    private val _friendLiveEmailData : MutableLiveData<String>
+            = MutableLiveData()
+    val friendLiveEmailData: LiveData<String>
+        get() = _friendLiveEmailData
+
     private val repo = UserRepository()
 
-    fun getUserData() {
-        repo.getData().observeForever{
+    fun getAllUsersData(){
+        repo.getAllUsers().observeForever{
+            _allUsersLiveData.postValue(it)
+        }
+    }
+
+    fun getUserData(email:String) {
+        repo.getData(email).observeForever{
             _userLiveData.postValue(it)
             Log.d("vm", _userLiveData.value.toString())
         }
@@ -40,29 +58,37 @@ class UserViewModel :ViewModel(){
         _userLiveData.value = result
     }
 
-    fun getUserPost(){
-        repo.getPostData().observeForever{
+    fun getUserPost(email:String){
+        repo.getPostData(email).observeForever{
             _userLivePostData.postValue(it)
             Log.d("vm", _userLivePostData.value.toString())
         }
     }
 
-    fun getUserFollower(){
-        repo.getFollowerData().observeForever{
+    fun getUserFollower(email:String){
+        repo.getFollowerData(email).observeForever{
             _userLiveFollowerData.postValue(it)
             Log.d("vm", _userLiveFollowerData.value.toString())
         }
     }
-    fun setUserFollower(result:ArrayList<String>){
+    fun setUserFollower(email: String, result:ArrayList<String>){
         _userLiveFollowerData.value = result
+        repo.setFollowerData(email, result)
     }
-    fun getUserFollowing(){
-        repo.getFollowingData().observeForever{
+    fun getUserFollowing(email:String){
+        repo.getFollowingData(email).observeForever{
             _userLiveFollowingData.postValue(it)
             Log.d("vm", _userLiveFollowingData.value.toString())
         }
     }
-    fun setUserFollowing(result:ArrayList<String>){
-        _userLiveFollowingData.value = result
+    // 친구 프로필에서 필로잉 취소 눌렀을 때
+    fun setUserFollowing(){
+    }
+
+    // 유저 이메일 받아오기
+    fun getUserEmail(id:String){
+        repo.getUserEmail(id).observeForever{
+            _friendLiveEmailData.postValue(it)
+        }
     }
 }

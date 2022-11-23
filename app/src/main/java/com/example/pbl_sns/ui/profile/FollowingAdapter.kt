@@ -17,11 +17,12 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import kotlin.coroutines.coroutineContext
 
-class FollowingAdapter(itemList: ArrayList<String>)
+class FollowingAdapter(user:Boolean, itemList: ArrayList<String>)
     : RecyclerView.Adapter<FollowingAdapter.ViewHolder>(){
     private val db = Firebase.firestore
     var friendsData = mutableListOf<String>()
     lateinit var context:Context
+    private val isUser:Boolean = user
 
     var itemList: ArrayList<String> = itemList
         set(value) {
@@ -53,21 +54,26 @@ class FollowingAdapter(itemList: ArrayList<String>)
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.id.text = itemList[position]
 
-        friendsData = itemList
+        if(isUser){
+            friendsData = itemList
 
-        // 팔로우 팔로잉
-        holder.btn.setOnCheckedChangeListener { _, isChecked ->
-            if (isChecked) {
-                friendsData.add(holder.id.text.toString())
-                holder.btn.text = "팔로잉"
-                holder.btn.setTextColor(ContextCompat.getColor(context, R.color.black))
-            } else {
-                friendsData.remove(holder.id.text.toString())
-                holder.btn.text = "팔로우"
-                holder.btn.setTextColor(ContextCompat.getColor(context, R.color.white))
+            // 팔로우 팔로잉
+            holder.btn.setOnCheckedChangeListener { _, isChecked ->
+                if (isChecked) {
+                    friendsData.add(holder.id.text.toString())
+                    holder.btn.text = "팔로잉"
+                    holder.btn.setTextColor(ContextCompat.getColor(context, R.color.black))
+                } else {
+                    friendsData.remove(holder.id.text.toString())
+                    holder.btn.text = "팔로우"
+                    holder.btn.setTextColor(ContextCompat.getColor(context, R.color.white))
+                }
+                db.collection("users").document(MyApplication.prefs.getString("email", "-1"))
+                    .update("friends.following", friendsData)
             }
-            db.collection("users").document(MyApplication.prefs.getString("email", "-1"))
-                .update("friends.following", friendsData)
+        }
+        else{
+            holder.btn.visibility = View.GONE
         }
     }
 

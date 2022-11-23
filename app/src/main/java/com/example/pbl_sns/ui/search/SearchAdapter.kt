@@ -1,31 +1,32 @@
-package com.example.pbl_sns.ui.profile
+package com.example.pbl_sns.ui.search
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pbl_sns.MyApplication.Companion.prefs
-import com.example.pbl_sns.databinding.ItemFollowerBinding
+import com.example.pbl_sns.databinding.ItemSearchBinding
+import com.example.pbl_sns.model.Privacy
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
-class FollowerAdapter (user:Boolean, itemList: ArrayList<String>)
-    : RecyclerView.Adapter<FollowerAdapter.ViewHolder>(){
+class SearchAdapter  (itemList: ArrayList<Privacy>)
+    : RecyclerView.Adapter<SearchAdapter.ViewHolder>(){
     private val db = Firebase.firestore
     private var friendsData = mutableListOf<String>()
-    private val isUser:Boolean = user
 
-    var itemList: ArrayList<String> = itemList
+    var itemList: ArrayList<Privacy> = itemList
         set(value) {
             field = value
             notifyDataSetChanged()
         }
 
-    inner class ViewHolder(itemViewBinding: ItemFollowerBinding)
+    inner class ViewHolder(itemViewBinding: ItemSearchBinding)
         : RecyclerView.ViewHolder(itemViewBinding.root){
-        val img = itemViewBinding.imgFriendProfile
-        val id = itemViewBinding.tvIdFriend
-        val btn = itemViewBinding.btnCheckbox
+        val layout = itemViewBinding.constraintLayout
+        val img = itemViewBinding.imgSearchProfile
+        val id = itemViewBinding.tvIdSearch
+        val name = itemViewBinding.tvNameSearch
     }
 
     override fun onCreateViewHolder(
@@ -33,7 +34,7 @@ class FollowerAdapter (user:Boolean, itemList: ArrayList<String>)
         viewType: Int,
     ): ViewHolder {
         return ViewHolder(
-            ItemFollowerBinding.inflate(
+            ItemSearchBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
                 false
@@ -42,21 +43,17 @@ class FollowerAdapter (user:Boolean, itemList: ArrayList<String>)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.id.text = itemList[position]
+        holder.id.text = itemList[position].id
+        holder.name.text = itemList[position].name
 
-        if(isUser)
-            friendsData = itemList
-        else{
-            holder.btn.visibility = View.GONE
-        }
         // (1) 리스트 내 항목 클릭 시 onClick() 호출
-        holder.btn.setOnClickListener {
-            itemClickListener?.onClick(it, friendsData as ArrayList<String>, position)
+        holder.layout.setOnClickListener {
+            itemClickListener?.onClick(position)
         }
     }
     // (2) 리스너 인터페이스
     interface OnItemClickListener {
-        fun onClick(v: View, list:ArrayList<String>, position: Int)
+        fun onClick(position: Int)
     }
     // (3) 외부에서 클릭 시 이벤트 설정
     fun setItemClickListener(onItemClickListener: OnItemClickListener) {

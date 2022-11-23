@@ -4,16 +4,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
         <variable
-            name="followerAdapter"
-            type="com.example.pbl_sns.ui.profile.FollowerAdapter" />
+            name="searchAdapter"
+            type="com.example.pbl_sns.ui.search.SearchAdapter" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/img_friend_profile"
+            android:id="@+id/img_search_profile"
             android:layout_width="55dp"
             android:layout_height="55dp"
             android:layout_marginStart="15dp"
@@ -24,32 +25,27 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/tv_id_friend"
+            android:id="@+id/tv_id_search"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
+            android:layout_marginTop="5dp"
             android:fontFamily="@font/nanumsquare_acr"
             android:text="user_id"
             android:textColor="#000000"
             android:textSize="16sp"
-            app:layout_constraintBottom_toBottomOf="@+id/img_friend_profile"
-            app:layout_constraintStart_toEndOf="@+id/img_friend_profile"
-            app:layout_constraintTop_toTopOf="@+id/img_friend_profile" />
+            app:layout_constraintStart_toEndOf="@+id/img_search_profile"
+            app:layout_constraintTop_toTopOf="@+id/img_search_profile" />
 
-        <Button
-            android:id="@+id/btn_checkbox"
-            android:layout_width="55dp"
-            android:layout_height="30dp"
-            android:layout_marginEnd="15dp"
-            android:background="@drawable/radius8_solid"
-            android:backgroundTint="@color/mainLightGray"
-            android:fontFamily="@font/nanumsquare_acr"
-            android:gravity="center"
-            android:text="삭제"
-            android:textColor="#000000"
-            android:textSize="14sp"
-            app:layout_constraintBottom_toBottomOf="@+id/img_friend_profile"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/img_friend_profile" />
+        <TextView
+            android:id="@+id/tv_name_search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="user_name"
+            android:textColor="@color/mainDarkGray2"
+            app:layout_constraintStart_toStartOf="@+id/tv_id_search"
+            app:layout_constraintTop_toBottomOf="@+id/tv_id_search" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

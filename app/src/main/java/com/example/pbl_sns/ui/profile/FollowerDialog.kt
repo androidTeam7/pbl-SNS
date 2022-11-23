@@ -1,11 +1,9 @@
 package com.example.pbl_sns.ui.profile
 
 import android.graphics.Color
-import android.graphics.Point
 import android.graphics.drawable.ColorDrawable
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
@@ -14,19 +12,22 @@ import androidx.fragment.app.setFragmentResult
 import androidx.fragment.app.setFragmentResultListener
 import androidx.lifecycle.ViewModelProvider
 import com.example.pbl_sns.MyApplication
+import com.example.pbl_sns.MyApplication.Companion.prefs
 import com.example.pbl_sns.R
 import com.example.pbl_sns.base.BaseDialogFragment
 import com.example.pbl_sns.databinding.DialogFollowerBinding
-import com.example.pbl_sns.model.Friends
 import com.example.pbl_sns.viewmodel.UserViewModel
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
-class FollowerDialog(id:String, followerList:ArrayList<String>) :BaseDialogFragment<DialogFollowerBinding>(R.layout.dialog_follower){
+class FollowerDialog(email:String, id:String, followerList:ArrayList<String>) :BaseDialogFragment<DialogFollowerBinding>(R.layout.dialog_follower){
     private val db = Firebase.firestore
     private lateinit var followerAdapter: FollowerAdapter
     private val list:ArrayList<String> = followerList
+    private val mEmail = email
     private val mId = id
+    //private val userEmail = prefs.getString("email","-1")
+    private val userId = prefs.getString("id","-1")
 
     private val viewModel by lazy {
         ViewModelProvider(requireParentFragment())[UserViewModel::class.java]
@@ -36,7 +37,11 @@ class FollowerDialog(id:String, followerList:ArrayList<String>) :BaseDialogFragm
         super.initDataBinding()
 
         binding.tvIdFollowing.text = mId
-        followerAdapter = FollowerAdapter(ArrayList())
+
+        followerAdapter = if(mId == userId)
+            FollowerAdapter(true, ArrayList())
+        else
+            FollowerAdapter(false, ArrayList())
         binding.postRecyclerviewFollower.adapter = followerAdapter
         followerAdapter.itemList = list
 
@@ -62,14 +67,17 @@ class FollowerDialog(id:String, followerList:ArrayList<String>) :BaseDialogFragm
                 val searchItemList:ArrayList<String> = ArrayList()
                 val searchString = binding.editTvSearchFollower.text
 
-                for (item in viewModel.userLiveFollowerData.value!!) {
-                    if (item.contains(searchString)) {
-                        searchItemList.add(item)
+                if(viewModel.userLiveFollowingData.value != null){
+                    for (item in viewModel.userLiveFollowerData.value!!) {
+                        if (item.contains(searchString)) {
+                            searchItemList.add(item)
+                        }
                     }
+                    followerAdapter.itemList = searchItemList
                 }
-                followerAdapter.itemList = searchItemList
+
                 if (binding.editTvSearchFollower.text.isEmpty()) {
-                    viewModel.getUserFollowing()
+                    viewModel.getUserFollowing(mEmail)
                 }
             }
         })
@@ -79,7 +87,7 @@ class FollowerDialog(id:String, followerList:ArrayList<String>) :BaseDialogFragm
             override fun onClick(v: View, list:ArrayList<String>,position: Int) {
                 val friend = followerAdapter.itemList[position]
                 val friendList = list
-                FriendDeleteDialog(friend,friendList).show(parentFragmentManager,"FriendDeleteDialog")
+                FollowerDeleteDialog(friend,friendList).show(parentFragmentManager,"FollowerDeleteDialog")
             }
         })
 
@@ -88,7 +96,7 @@ class FollowerDialog(id:String, followerList:ArrayList<String>) :BaseDialogFragm
             val result = bundle.get("followerList") as ArrayList<String>
             db.collection("users").document(MyApplication.prefs.getString("email", "-1"))
                 .update("friends.follower", result).addOnSuccessListener {
-                    viewModel.setUserFollower(result)
+                    viewModel.setUserFollower(mEmail, result)
                     setFragmentResult("changeFollower", bundleOf("followerList" to result))
                 }
         }
@@ -107,6 +115,6 @@ class FollowerDialog(id:String, followerList:ArrayList<String>) :BaseDialogFragm
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         dialog?.window?.clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
 
-        viewModel.getUserFollower()
+        viewModel.getUserFollower(mEmail)
     }
 }

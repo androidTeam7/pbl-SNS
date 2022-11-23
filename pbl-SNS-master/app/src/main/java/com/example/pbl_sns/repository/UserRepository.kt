@@ -38,7 +38,7 @@ class UserRepository {
     fun getPostData(): LiveData<ArrayList<Post>>{
         val db = Firebase.firestore
         val mutableData = MutableLiveData<ArrayList<Post>>()
-        val user = prefs.getString("email","null")
+        val user = prefs.getString("email","-1")
 
         if(user != "-1"){
             db.collection("users").document(user).get()

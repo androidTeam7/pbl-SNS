@@ -28,6 +28,7 @@ class ProfileEditDialog:BaseDialogFragment<DialogProfileEditBinding>(R.layout.di
     private lateinit var editItName:String
     private var isEdit:Boolean = false
     private var emptyIs:String = ""
+    private val userId = prefs.getString("email","-1")
 
     private val viewModel by lazy {
         ViewModelProvider(requireParentFragment())[UserViewModel::class.java]
@@ -36,7 +37,7 @@ class ProfileEditDialog:BaseDialogFragment<DialogProfileEditBinding>(R.layout.di
     override fun initDataBinding() {
         super.initDataBinding()
 
-        viewModel.getUserData()
+        viewModel.getUserData(userId)
         viewModel.userLiveData.observe(viewLifecycleOwner) {
             binding.editTvIdProfile.setText(it.id)
             editItImage = it.image
@@ -72,11 +73,11 @@ class ProfileEditDialog:BaseDialogFragment<DialogProfileEditBinding>(R.layout.di
                 Log.d("dataa", data.toString())
 
                 // id 수정
-                db.collection("users").document(MyApplication.prefs.getString("email", "null"))
+                db.collection("users").document(userId)
                     .update("id", data["id"])
 
                 // private 필드 수정
-                db.collection("users").document(MyApplication.prefs.getString("email", "null"))
+                db.collection("users").document(userId)
                     .update("privacy", data)
 
                 prefs.removeAll()
