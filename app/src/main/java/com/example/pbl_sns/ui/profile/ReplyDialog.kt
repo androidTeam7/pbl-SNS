@@ -5,6 +5,7 @@ import com.example.pbl_sns.base.BaseDialogFragment
 import com.example.pbl_sns.databinding.DialogReplyBinding
 import com.example.pbl_sns.model.Reply
 
+
 class ReplyDialog(reply: Reply): BaseDialogFragment<DialogReplyBinding>(R.layout.item_reply) {
     private val mReply: Reply = reply
 

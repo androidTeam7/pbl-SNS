@@ -17,6 +17,7 @@ class ReplyAdapter(itemList: List<Reply>)
             notifyDataSetChanged()
         }
 
+
     inner class ViewHolder(itemViewBinding: ItemReplyBinding)
         :RecyclerView.ViewHolder(itemViewBinding.root){
             val user_id = itemViewBinding.userId
@@ -28,6 +29,7 @@ class ReplyAdapter(itemList: List<Reply>)
         viewType: Int
     ): ViewHolder {
         return ViewHolder(
+
             ItemReplyBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
