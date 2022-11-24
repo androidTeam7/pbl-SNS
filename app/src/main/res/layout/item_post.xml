@@ -22,6 +22,7 @@
             android:scaleType="center"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="SpeakableTextPresentCheck"
             tools:srcCompat="@drawable/loading" />
 
         <View
