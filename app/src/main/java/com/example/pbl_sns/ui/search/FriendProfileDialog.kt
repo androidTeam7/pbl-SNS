@@ -101,7 +101,7 @@ class FriendProfileDialog(email: String) : BaseDialogFragment<FragmentProfileBin
         profileAdapter.setItemClickListener(object: ProfileAdapter.OnItemClickListener {
             override fun onClick(v: View, position: Int) {
                 val post = profileAdapter.itemList[position]
-                PostDailog(post).show(parentFragmentManager,"PostDialog")
+                PostDialog(post).show(parentFragmentManager,"PostDialog")
             }
         })
 
