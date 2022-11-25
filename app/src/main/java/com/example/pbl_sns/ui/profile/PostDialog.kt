@@ -16,7 +16,7 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
 
-class PostDailog(email:String, post:Post): BaseDialogFragment<DialogPostBinding>(R.layout.dialog_post) {
+class PostDialog(email:String, post:Post): BaseDialogFragment<DialogPostBinding>(R.layout.dialog_post) {
     private val mPost:Post = post
     private val userEmail = prefs.getString("email","-1")
 

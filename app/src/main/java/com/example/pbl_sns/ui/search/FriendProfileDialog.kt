@@ -2,8 +2,6 @@ package com.example.pbl_sns.ui.search
 
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
-import android.graphics.drawable.GradientDrawable
-import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
@@ -20,13 +18,8 @@ import com.example.pbl_sns.model.Post
 import com.example.pbl_sns.ui.MainActivity
 import com.example.pbl_sns.ui.profile.*
 import com.example.pbl_sns.viewmodel.UserViewModel
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 class FriendProfileDialog(email: String) : BaseDialogFragment<FragmentProfileBinding>(R.layout.fragment_profile) {
     private val db = Firebase.firestore
@@ -101,7 +94,7 @@ class FriendProfileDialog(email: String) : BaseDialogFragment<FragmentProfileBin
         profileAdapter.setItemClickListener(object: ProfileAdapter.OnItemClickListener {
             override fun onClick(v: View, position: Int) {
                 val post = profileAdapter.itemList[position]
-                PostDailog(mEmail, post).show(parentFragmentManager,"PostDialog")
+                PostDialog(mEmail, post).show(parentFragmentManager,"PostDialog")
             }
         })
 
