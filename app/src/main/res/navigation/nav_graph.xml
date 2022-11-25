@@ -37,6 +37,11 @@
             android:id="@+id/action_searchFragment_to_friendProfileFragment"
             app:destination="@id/friendProfileFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/postingFragment"
+        android:name="com.example.pbl_sns.ui.PostingFragment"
+        android:label="PostingFragment"
+        tools:layout="@layout/fragment_posting"/>
     <dialog
         android:id="@+id/logoutDialog"
         android:name="com.example.pbl_sns.ui.profile.LogoutDialog"

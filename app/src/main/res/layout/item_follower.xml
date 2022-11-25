@@ -50,6 +50,7 @@
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="@+id/img_friend_profile"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/img_friend_profile" />
+            app:layout_constraintTop_toTopOf="@+id/img_friend_profile"
+            tools:ignore="TouchTargetSizeCheck" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
