@@ -1,6 +1,6 @@
 package com.example.pbl_sns.model
 
 data class Reply(
-    val email:String = "",
+    val id:String = "",
     val reply:String = ""
 )

@@ -113,7 +113,8 @@
                 android:textSize="14sp"
                 app:layout_constraintBottom_toBottomOf="@+id/edit_tv_reply"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/edit_tv_reply" />
+                app:layout_constraintTop_toTopOf="@+id/edit_tv_reply"
+                tools:ignore="TouchTargetSizeCheck,TouchTargetSizeCheck,TouchTargetSizeCheck,TouchTargetSizeCheck,TouchTargetSizeCheck,TouchTargetSizeCheck,TouchTargetSizeCheck" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
