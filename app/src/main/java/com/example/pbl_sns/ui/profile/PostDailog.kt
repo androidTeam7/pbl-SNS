@@ -10,7 +10,7 @@ import com.example.pbl_sns.base.BaseDialogFragment
 import com.example.pbl_sns.databinding.DialogPostBinding
 import com.example.pbl_sns.model.Post
 
-class PostDailog(post:Post): BaseDialogFragment<DialogPostBinding>(R.layout.dialog_post) {
+class PostDailog(email:String, post:Post): BaseDialogFragment<DialogPostBinding>(R.layout.dialog_post) {
     private val mPost:Post = post
 
     override fun initDataBinding() {

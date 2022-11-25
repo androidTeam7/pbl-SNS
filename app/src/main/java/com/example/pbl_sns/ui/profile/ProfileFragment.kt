@@ -120,7 +120,7 @@ class ProfileFragment: BaseFragment<FragmentProfileBinding>(R.layout.fragment_pr
         profileAdapter.setItemClickListener(object: ProfileAdapter.OnItemClickListener {
             override fun onClick(v: View, position: Int) {
                 val post = profileAdapter.itemList[position]
-                PostDailog(post).show(parentFragmentManager,"PostDialog")
+                PostDailog(userEmail, post).show(parentFragmentManager,"PostDialog")
             }
         })
 
