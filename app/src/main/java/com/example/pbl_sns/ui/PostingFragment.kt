@@ -13,12 +13,16 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil.inflate
 import androidx.databinding.DataBindingUtil.setContentView
 import androidx.lifecycle.liveData
+import com.example.pbl_sns.MyApplication.Companion.prefs
 import com.example.pbl_sns.R
 import com.example.pbl_sns.base.BaseFragment
 import com.example.pbl_sns.databinding.FragmentPostingBinding
 import com.example.pbl_sns.repository.ContentDTO
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.UploadTask
 import java.text.SimpleDateFormat
@@ -67,7 +71,6 @@ class PostingFragment :BaseFragment<FragmentPostingBinding>(R.layout.fragment_po
         //Open the album
         //var photoPickerIntent = Intent(Intent.ACTION_PICK)
         var photoPickerIntent = Intent(Intent.ACTION_PICK)
-        Log.d("DD","PPPPPPP")
         photoPickerIntent.type = "image/*"
         startActivityForResult(photoPickerIntent, PICK_IMAGE_FROM_ALBUM)
 
@@ -141,7 +144,15 @@ class PostingFragment :BaseFragment<FragmentPostingBinding>(R.layout.fragment_po
 
             //파이어스토어로 올림
             Log.d("dd","firestore전")
-            firestore?.collection("UID")?.document(uid)?.collection("images")?.document(imageFileName)?.set(contentDTO)
+            //firestore?.collection("UID")?.document(uid)?.collection("images")?.document(imageFileName)?.set(contentDTO)
+
+            val post = hashMapOf(
+                "content" to binding.postingEditExplain.text.toString(),
+                "image" to uri.toString(),
+                "time" to System.currentTimeMillis()
+            )
+            Firebase.firestore.collection("users")?.document(prefs.getString("email","-1"))
+                .update("postArray",FieldValue.arrayUnion(post))
 
 
             //프로필 사진 올리는 경로
