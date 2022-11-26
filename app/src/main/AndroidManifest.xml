@@ -3,6 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.pbl_sns" >
 
+    <meta-data
+        android:name="com.google.firebase.messaging.follow_notification_channel_id"
+        android:value="helloworld-follow"/>
+
     <application
         android:name=".MyApplication"
         android:allowBackup="true"
@@ -27,6 +31,14 @@
             android:name=".ui.MainActivity"
             android:exported="true" >
         </activity>
+
+        <service
+            android:name=".service.MyFirebaseMessagingService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+            </intent-filter>
+        </service>
     </application>
 
 </manifest>

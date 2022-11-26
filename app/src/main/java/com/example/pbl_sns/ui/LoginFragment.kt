@@ -1,8 +1,12 @@
 package com.example.pbl_sns.ui
 
 import android.content.ContentValues
+import android.content.pm.PackageManager
 import android.util.Log
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AlertDialog
+import androidx.core.content.ContextCompat.checkSelfPermission
 import com.example.pbl_sns.MyApplication.Companion.prefs
 import com.example.pbl_sns.R
 import com.example.pbl_sns.base.BaseFragment
@@ -79,4 +83,5 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
                 Log.d(ContentValues.TAG, "get failed with ", exception)
             }
     }
+
 }
