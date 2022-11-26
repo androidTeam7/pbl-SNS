@@ -14,18 +14,22 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
+import com.example.pbl_sns.MyApplication.Companion.prefs
 import com.example.pbl_sns.R
 import com.example.pbl_sns.databinding.ActivityMainBinding
 import com.example.pbl_sns.service.MyFirebaseMessagingService
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationBarView
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.messaging.FirebaseMessaging
 
 class MainActivity : AppCompatActivity() {
     // private var bottomNavigationView: BottomNavigationView? = null
     private lateinit var binding:ActivityMainBinding
+    private val db = Firebase.firestore
+    private val userEmail = prefs.getString("email", "-1")
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,10 +42,7 @@ class MainActivity : AppCompatActivity() {
         setToolbar()
         setBottomNav()
 
-        FirebaseMessaging.getInstance().token.addOnCompleteListener{
-            if(it.isSuccessful)
-                Log.d(MyFirebaseMessagingService.TAG, "FCM token: ${it.result}")
-        }
+        setToken()
     }
 
     private fun setToolbar(){
@@ -92,4 +93,17 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun setToken(){
+        // 디바이스의 토큰 값 가져오기
+        FirebaseMessaging.getInstance().token.addOnCompleteListener{
+            if(it.isSuccessful){
+                val tokenData = it.result
+                Log.d(MyFirebaseMessagingService.TAG, "FCM token: ${it.result}")
+                val token = mutableMapOf<String,Any>()
+                token["token"] = tokenData!!
+                db.collection("users").document(userEmail).set(tokenData)
+            }
+
+        }
+    }
 }
