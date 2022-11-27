@@ -1,4 +1,4 @@
-package com.example.pbl_sns.ui
+package com.example.pbl_sns.ui.alarm
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -6,12 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pbl_sns.R
 import com.example.pbl_sns.databinding.ItemAlarmBinding
-import com.example.pbl_sns.databinding.ItemFollowerBinding
-import com.example.pbl_sns.model.Post
 import com.example.pbl_sns.repository.AlarmDTO
-import com.example.pbl_sns.ui.profile.FollowerAdapter
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 

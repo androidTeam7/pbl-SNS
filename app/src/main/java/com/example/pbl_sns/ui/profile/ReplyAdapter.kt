@@ -3,6 +3,7 @@ package com.example.pbl_sns.ui.profile
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.pbl_sns.R
 import com.example.pbl_sns.databinding.ItemReplyBinding
 import com.example.pbl_sns.model.Reply
 import com.google.firebase.firestore.ktx.firestore
@@ -41,11 +42,13 @@ class ReplyAdapter(itemList: List<Reply>)
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int)
     {
+        if(itemList[position].profile.isEmpty())
+            holder.profileImg.setImageResource(R.drawable.user)
         if(itemList[position].id.isEmpty())
             holder.tvUserId.text = "none"
         else{
-            holder.tvUserId.text = itemList[position].id.toString()
-            holder.tvReply.text = itemList[position].reply.toString()
+            holder.tvUserId.text = itemList[position].id
+            holder.tvReply.text = itemList[position].reply
         }
 
     }

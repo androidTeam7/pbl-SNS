@@ -36,21 +36,23 @@ class PostDialog(email:String, post:Post): BaseDialogFragment<DialogPostBinding>
             dismiss()
         }
 
-        /*
-        binding.btnReply.setOnClickListener{
-            val reply = binding.editTvReply?.text.toString()
-            if(reply != ""){
-                Firebase.firestore.collection("users").document(userEmail).get()
-                    .addOnSuccessListener { documentSnapshot ->
-                        val data = documentSnapshot.toObject<User>()
-                        val email = data!!.id
 
-                    }
-                    .addOnFailureListener { exception ->
-                        Log.d(ContentValues.TAG, "get failed with ", exception)
-                    }
+        binding.btnReply.setOnClickListener{
+            if(userEmail != "-1"){
+                val reply = binding.editTvReply?.text.toString()
+                if(reply != ""){
+                    Firebase.firestore.collection("users").document(userEmail).get()
+                        .addOnSuccessListener { documentSnapshot ->
+                            val data = documentSnapshot.toObject<User>()
+                            val post = data!!.postArray
+                            Log.d("postArray", post.toString())
+                        }
+                        .addOnFailureListener { exception ->
+                            Log.d(ContentValues.TAG, "get failed with ", exception)
+                        }
+                }
             }
-        }*/
+        }
     }
 
     override fun onResume() {

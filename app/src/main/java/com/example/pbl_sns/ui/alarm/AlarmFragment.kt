@@ -1,13 +1,12 @@
-package com.example.pbl_sns.ui
+package com.example.pbl_sns.ui.alarm
 
 import android.util.Log
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.pbl_sns.MyApplication.Companion.prefs
 import com.example.pbl_sns.R
 import com.example.pbl_sns.base.BaseFragment
 import com.example.pbl_sns.databinding.FragmentAlarmBinding
+import com.example.pbl_sns.ui.MainActivity
 import com.example.pbl_sns.viewmodel.UserViewModel
 
 class AlarmFragment : BaseFragment<FragmentAlarmBinding>(R.layout.fragment_alarm) {
