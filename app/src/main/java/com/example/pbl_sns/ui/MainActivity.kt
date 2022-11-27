@@ -17,10 +17,12 @@ import androidx.navigation.ui.setupWithNavController
 import com.example.pbl_sns.MyApplication.Companion.prefs
 import com.example.pbl_sns.R
 import com.example.pbl_sns.databinding.ActivityMainBinding
+import com.example.pbl_sns.service.FcmPush
 import com.example.pbl_sns.service.MyFirebaseMessagingService
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationBarView
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.messaging.FirebaseMessaging
@@ -43,6 +45,10 @@ class MainActivity : AppCompatActivity() {
         setBottomNav()
 
         setToken()
+    }
+
+    override fun onStop(){
+        super.onStop()
     }
 
     private fun setToolbar(){
@@ -99,9 +105,7 @@ class MainActivity : AppCompatActivity() {
             if(it.isSuccessful){
                 val tokenData = it.result
                 Log.d(MyFirebaseMessagingService.TAG, "FCM token: ${it.result}")
-                val token = mutableMapOf<String,Any>()
-                token["token"] = tokenData!!
-                db.collection("users").document(userEmail).set(tokenData)
+                db.collection("users").document(userEmail) .update("token", tokenData)
             }
 
         }

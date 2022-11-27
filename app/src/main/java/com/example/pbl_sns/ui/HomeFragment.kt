@@ -35,13 +35,7 @@ class HomeFragment: BaseFragment<FragmentHomeBinding>(R.layout.fragment_home){
 
         (activity as MainActivity).setBottomNavSetting("all")
     }
-
-    @RequiresApi(Build.VERSION_CODES.O)
     override fun initAfterBinding() {
         super.initAfterBinding()
-
-
     }
-
-
 }

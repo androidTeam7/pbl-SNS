@@ -17,4 +17,6 @@
     <!-- dialog logout -->
     <string name="isLogoutMsg">Helloworld에서\n로그아웃하시겠어요?</string>
 
+    <!-- alarm content -->
+    <string name="followAlarm">님이 회원님을 팔로우했습니다.</string>
 </resources>

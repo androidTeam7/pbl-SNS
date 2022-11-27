@@ -6,6 +6,7 @@
     <meta-data
         android:name="com.google.firebase.messaging.follow_notification_channel_id"
         android:value="helloworld-follow"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
         android:name=".MyApplication"

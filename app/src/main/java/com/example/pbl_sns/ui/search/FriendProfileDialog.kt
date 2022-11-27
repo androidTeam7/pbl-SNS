@@ -16,6 +16,7 @@ import com.example.pbl_sns.base.BaseDialogFragment
 import com.example.pbl_sns.databinding.FragmentProfileBinding
 import com.example.pbl_sns.model.Post
 import com.example.pbl_sns.repository.AlarmDTO
+import com.example.pbl_sns.service.FcmPush
 import com.example.pbl_sns.ui.MainActivity
 import com.example.pbl_sns.ui.profile.*
 import com.example.pbl_sns.viewmodel.UserViewModel
@@ -200,5 +201,8 @@ class FriendProfileDialog(email: String) : BaseDialogFragment<FragmentProfileBin
         alarmDTO.kind = 0
         alarmDTO.timestamp = System.currentTimeMillis()
         FirebaseFirestore.getInstance().collection("alarms").document().set(alarmDTO)
+
+        var message = userEmail + "님이 " + mEmail + "님을 팔로우하였습니다."
+        FcmPush.instance.sendMessage(destinationUid, "helloworld", message)
     }
 }

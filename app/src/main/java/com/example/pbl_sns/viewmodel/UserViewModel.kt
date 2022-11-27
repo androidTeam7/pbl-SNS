@@ -93,4 +93,5 @@ class UserViewModel :ViewModel(){
             _friendLiveEmailData.postValue(it)
         }
     }
+
 }
