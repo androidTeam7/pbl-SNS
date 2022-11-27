@@ -1,6 +1,8 @@
 package com.example.pbl_sns.ui.home
 
+import android.os.Build
 import android.util.Log
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModelProvider
 import com.example.pbl_sns.MyApplication.Companion.prefs
@@ -29,7 +31,6 @@ class HomeFragment: BaseFragment<FragmentHomeBinding>(R.layout.fragment_home){
         homeAdapter = HomeAdapter(ArrayList())
         binding.homeRecyclerviewHome.adapter = homeAdapter
 
-        Log.d("내 이메일", prefs.getString("email","-1"))
         viewModel.getUserFollowing(userEmail)
         viewModel.getAllPost()
         viewModel.userLiveFollowingData.observe(viewLifecycleOwner){
@@ -37,7 +38,13 @@ class HomeFragment: BaseFragment<FragmentHomeBinding>(R.layout.fragment_home){
         }
         viewModel.allLivePostData.observe(viewLifecycleOwner) {
             homeAdapter.itemList = it
-            Log.d("으음?",it.toString())
         }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    override fun initAfterBinding() {
+        super.initAfterBinding()
+
+
     }
 }
