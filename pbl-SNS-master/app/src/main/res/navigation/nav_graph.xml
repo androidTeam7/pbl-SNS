@@ -27,7 +27,7 @@
     </fragment>
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.example.pbl_sns.ui.HomeFragment"
+        android:name="com.example.pbl_sns.ui.home.HomeFragment"
         android:label="HomeFragment"
         tools:layout="@layout/fragment_home"/>
     <fragment

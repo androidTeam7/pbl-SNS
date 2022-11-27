@@ -58,8 +58,6 @@ class ProfileAdapter(itemList: List<Post>)
             holder.betweenSpace.visibility = View.VISIBLE
 
 
-
-
         // (1) 리스트 내 항목 클릭 시 onClick() 호출
         holder.img.setOnClickListener {
             itemClickListener?.onClick(it, position)
