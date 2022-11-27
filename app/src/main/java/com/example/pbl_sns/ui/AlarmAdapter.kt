@@ -47,11 +47,11 @@ class AlarmAdapter (itemList: ArrayList<AlarmDTO>)
         if(itemList[position].profile.isEmpty())
             holder.profileImg.setImageResource(R.drawable.user)
 
-        holder.id.text = itemList[position].destinationUid
+        holder.id.text = itemList[position].userId
 
         when(itemList[position].kind){
             0 -> {
-                holder.content.text = (R.string.followAlarm.toString())
+                holder.content.text = itemList[position].message
             }
 
         }
