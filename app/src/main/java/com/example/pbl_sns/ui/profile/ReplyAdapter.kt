@@ -20,8 +20,8 @@ class ReplyAdapter(itemList: List<Reply>)
 
     inner class ViewHolder(itemViewBinding: ItemReplyBinding)
         :RecyclerView.ViewHolder(itemViewBinding.root){
-            val user_id = itemViewBinding.userId
-            val tv_reply = itemViewBinding.tvReply
+            val userId = itemViewBinding.userId
+            val tvReply = itemViewBinding.tvReply
         }
 
     override fun onCreateViewHolder(
@@ -41,9 +41,12 @@ class ReplyAdapter(itemList: List<Reply>)
     override fun onBindViewHolder(holder: ViewHolder, position: Int)
     {
         if(itemList[position].id.isEmpty())
-            holder.user_id.setText("none")
-        else
-            holder.user_id.setText(itemList[position].id.toString())
+            holder.userId.text = "none"
+        else{
+            holder.userId.text = itemList[position].id.toString()
+            holder.tvReply.text = itemList[position].reply.toString()
+        }
+
     }
 
     override fun getItemCount(): Int = itemList.size

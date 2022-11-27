@@ -15,9 +15,12 @@ import com.example.pbl_sns.R
 import com.example.pbl_sns.base.BaseDialogFragment
 import com.example.pbl_sns.databinding.FragmentProfileBinding
 import com.example.pbl_sns.model.Post
+import com.example.pbl_sns.repository.AlarmDTO
 import com.example.pbl_sns.ui.MainActivity
 import com.example.pbl_sns.ui.profile.*
 import com.example.pbl_sns.viewmodel.UserViewModel
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
@@ -27,7 +30,7 @@ class FriendProfileDialog(email: String) : BaseDialogFragment<FragmentProfileBin
     private var following:ArrayList<String> = ArrayList()
     private var follower:ArrayList<String> = ArrayList()
     private lateinit var id:String
-    private val mEmail = email
+    private val mEmail = email  // 친구 이메일
     private val userEmail = prefs.getString("email","-1")
     var isFollowing:Boolean = false
 
@@ -127,6 +130,7 @@ class FriendProfileDialog(email: String) : BaseDialogFragment<FragmentProfileBin
                 binding.btnFollowerFollowing.setTextColor(Color.BLACK)
                 isFollowing = true
                 viewModel.setUserFollower(mEmail, follower)
+                followAlarm(mEmail)
             }
             binding.btnFollowerFollowing.backgroundTintList
 
@@ -186,5 +190,15 @@ class FriendProfileDialog(email: String) : BaseDialogFragment<FragmentProfileBin
         dialog?.window?.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         dialog?.window?.clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
+    }
+
+    private fun followAlarm(destinationUid: String){
+        var alarmDTO = AlarmDTO()
+        alarmDTO.destinationUid = destinationUid
+        alarmDTO.userId = userEmail
+        alarmDTO.uid = FirebaseAuth.getInstance().currentUser?.uid.toString()
+        alarmDTO.kind = 0
+        alarmDTO.timestamp = System.currentTimeMillis()
+        FirebaseFirestore.getInstance().collection("alarms").document().set(alarmDTO)
     }
 }
