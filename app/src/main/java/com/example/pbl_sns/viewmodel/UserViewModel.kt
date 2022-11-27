@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import com.example.pbl_sns.model.Friends
 import com.example.pbl_sns.model.Post
 import com.example.pbl_sns.model.Privacy
+import com.example.pbl_sns.repository.AlarmDTO
 import com.example.pbl_sns.repository.UserRepository
 
 class UserViewModel :ViewModel(){
@@ -39,6 +40,10 @@ class UserViewModel :ViewModel(){
     val userLiveFollowingData: LiveData<ArrayList<String>>
         get() = _userLiveFollowingData
 
+    private val _userLiveAlarmData: MutableLiveData<ArrayList<AlarmDTO>>
+            = MutableLiveData()
+    val userLiveAlarmData: LiveData<ArrayList<AlarmDTO>>
+        get() = _userLiveAlarmData
 
     private val _friendLiveEmailData : MutableLiveData<String>
             = MutableLiveData()
@@ -105,4 +110,9 @@ class UserViewModel :ViewModel(){
         }
     }
 
+    fun getUserAlarmData(id: String){
+        repo.getUserAlarmData(id).observeForever{
+            _userLiveAlarmData.postValue(it)
+        }
+    }
 }

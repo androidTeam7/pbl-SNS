@@ -1,5 +1,6 @@
 package com.example.pbl_sns.repository
 data class AlarmDTO(
+    var profile:String="",
     var destinationUid: String? = null,
     var userId: String? = null,
     var uid : String? = null,

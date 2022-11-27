@@ -11,7 +11,9 @@ import com.example.pbl_sns.model.Friends
 import com.example.pbl_sns.model.Post
 import com.example.pbl_sns.model.Privacy
 import com.example.pbl_sns.model.User
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.DocumentSnapshot
+import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
@@ -237,6 +239,23 @@ class UserRepository {
                 }
         }
 
+        return mutableData
+    }
+
+    fun getUserAlarmData(id: String): LiveData<ArrayList<AlarmDTO>>{
+        var mutableData = MutableLiveData<ArrayList<AlarmDTO>>()
+
+        if(id != "-1"){
+            db.collection("alarms").whereEqualTo("destinationUid", id)
+                .addSnapshotListener { querySnapshot, error ->
+                    mutableData.value?.clear()
+                    if(querySnapshot == null) return@addSnapshotListener
+
+                    for(snapshot in querySnapshot.documents){
+                        mutableData.value?.add(snapshot.toObject(AlarmDTO::class.java)!!)
+                    }
+                }
+        }
         return mutableData
     }
 
