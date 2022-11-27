@@ -1,5 +1,6 @@
 package com.example.pbl_sns.ui
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -18,15 +19,15 @@ class AlarmFragment : BaseFragment<FragmentAlarmBinding>(R.layout.fragment_alarm
 
     override fun initDataBinding() {
         super.initDataBinding()
-        (activity as MainActivity).setBottomNavSetting("all")
+        (activity as MainActivity).setBottomNavSetting("")
         alarmAdapter = AlarmAdapter(ArrayList())
         binding.alarmfragmentRecyclerview.adapter = alarmAdapter
 
         viewModel.getUserAlarmData(userEmail)
         viewModel.userLiveAlarmData.observe(viewLifecycleOwner){
             alarmAdapter.itemList = it
+            Log.d("알람",it.toString())
         }
-        binding.alarmfragmentRecyclerview.layoutManager = LinearLayoutManager(context)
     }
     override fun initAfterBinding() {
         super.initAfterBinding()

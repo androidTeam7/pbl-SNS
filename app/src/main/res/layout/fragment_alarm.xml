@@ -10,6 +10,8 @@ xmlns:tools="http://schemas.android.com/tools">
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/alarmfragment_recyclerview"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/item_alarm"/>
     </LinearLayout>
 </layout>

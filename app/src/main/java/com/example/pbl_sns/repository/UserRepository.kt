@@ -243,18 +243,34 @@ class UserRepository {
     }
 
     fun getUserAlarmData(id: String): LiveData<ArrayList<AlarmDTO>>{
-        var mutableData = MutableLiveData<ArrayList<AlarmDTO>>()
+        val mutableData = MutableLiveData<ArrayList<AlarmDTO>>()
 
         if(id != "-1"){
             db.collection("alarms").whereEqualTo("destinationUid", id)
                 .addSnapshotListener { querySnapshot, error ->
-                    mutableData.value?.clear()
-                    if(querySnapshot == null) return@addSnapshotListener
+                    Log.d("알람 query",querySnapshot.toString())
 
+                    if(querySnapshot == null) return@addSnapshotListener
+                    else Log.d("알람 query.docu",querySnapshot!!.documents.toString())
+                    val tempAlarmArray = ArrayList<AlarmDTO>()
                     for(snapshot in querySnapshot.documents){
-                        mutableData.value?.add(snapshot.toObject(AlarmDTO::class.java)!!)
+                        Log.d("알람 snap",snapshot.data.toString())
+                        val tempAlarm:AlarmDTO = AlarmDTO()
+                        tempAlarm.uid = snapshot.data?.get("uid").toString()
+                        tempAlarm.kind = (snapshot.data?.get("kind") as Long).toInt()
+                        tempAlarm.userId = snapshot.data?.get("userId").toString()
+                        tempAlarm.message = snapshot.data?.get("message").toString()
+                        tempAlarm.destinationUid = snapshot.data?.get("destinationUid").toString()
+                        tempAlarm.profile = snapshot.data?.get("profile").toString()
+                        tempAlarm.timestamp = snapshot.data?.get("timestamp") as Long
+                        Log.d("알람 snap.uid",snapshot.data?.get("uid").toString())
+                        tempAlarmArray.add(tempAlarm)
                     }
+                    mutableData.value = tempAlarmArray
                 }
+            Log.d("알람","if문")
+        } else{
+            Log.d("알람","else문")
         }
         return mutableData
     }
