@@ -15,6 +15,11 @@ class UserViewModel :ViewModel(){
     val allUsersLiveData : LiveData<ArrayList<Privacy>>
         get() = _allUsersLiveData
 
+    private val _allLivePostData: MutableLiveData<ArrayList<Post>>
+            = MutableLiveData()
+    val allLivePostData: LiveData<ArrayList<Post>>
+        get() = _allLivePostData
+
     private val _userLiveData: MutableLiveData<Privacy>
             = MutableLiveData()
     val userLiveData: LiveData<Privacy>
@@ -45,6 +50,12 @@ class UserViewModel :ViewModel(){
     fun getAllUsersData(){
         repo.getAllUsers().observeForever{
             _allUsersLiveData.postValue(it)
+        }
+    }
+
+    fun getAllPost(){
+        repo.getAllPost().observeForever{
+            _allLivePostData.postValue(it)
         }
     }
 

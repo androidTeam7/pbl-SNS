@@ -6,6 +6,7 @@ import android.graphics.drawable.ColorDrawable
 import android.util.Log
 import android.view.ViewGroup
 import android.view.WindowManager
+import com.bumptech.glide.Glide
 import com.example.pbl_sns.MyApplication.Companion.prefs
 import com.example.pbl_sns.R
 import com.example.pbl_sns.base.BaseDialogFragment
@@ -25,6 +26,8 @@ class PostDialog(email:String, post:Post): BaseDialogFragment<DialogPostBinding>
 
         binding.tvIdPostDialog.text = prefs.getString("id","-1")
         binding.tvContentPostDialog.text = mPost.content
+        Glide.with(requireContext()).load(mPost.image).into(binding.imgPostDialog)
+        binding.tvTime.text = mPost.date
     }
     override fun initAfterBinding() {
         super.initAfterBinding()
@@ -33,6 +36,7 @@ class PostDialog(email:String, post:Post): BaseDialogFragment<DialogPostBinding>
             dismiss()
         }
 
+        /*
         binding.btnReply.setOnClickListener{
             val reply = binding.editTvReply?.text.toString()
             if(reply != ""){
@@ -46,7 +50,7 @@ class PostDialog(email:String, post:Post): BaseDialogFragment<DialogPostBinding>
                         Log.d(ContentValues.TAG, "get failed with ", exception)
                     }
             }
-        }
+        }*/
     }
 
     override fun onResume() {

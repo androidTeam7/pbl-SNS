@@ -33,15 +33,16 @@
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/close" />
 
-        <ImageView
-            android:id="@+id/imageView"
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/img_profile_edit"
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:layout_marginTop="80dp"
+            android:scaleType="centerCrop"
             app:layout_constraintEnd_toEndOf="@+id/textView2"
             app:layout_constraintStart_toStartOf="@+id/textView2"
             app:layout_constraintTop_toBottomOf="@+id/textView2"
-            app:srcCompat="@drawable/user" />
+            android:src="@drawable/user" />
 
         <TextView
             android:id="@+id/btn_edit_profile_photo"
@@ -53,9 +54,9 @@
             android:text="프로필 사진 변경"
             android:textColor="@color/snsBlue"
             android:textSize="14sp"
-            app:layout_constraintEnd_toEndOf="@+id/imageView"
-            app:layout_constraintStart_toStartOf="@+id/imageView"
-            app:layout_constraintTop_toBottomOf="@+id/imageView" />
+            app:layout_constraintEnd_toEndOf="@+id/img_profile_edit"
+            app:layout_constraintStart_toStartOf="@+id/img_profile_edit"
+            app:layout_constraintTop_toBottomOf="@+id/img_profile_edit" />
 
         <TextView
             android:id="@+id/textView"

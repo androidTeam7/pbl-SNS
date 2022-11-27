@@ -1,20 +1,34 @@
 package com.example.pbl_sns.ui.profile
 
+import android.app.Activity
+import android.content.Intent
+import android.net.Uri
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.setFragmentResultListener
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
+import com.bumptech.glide.Glide
 import com.example.pbl_sns.MyApplication.Companion.prefs
 import com.example.pbl_sns.R
 import com.example.pbl_sns.base.BaseFragment
 import com.example.pbl_sns.databinding.FragmentProfileBinding
 import com.example.pbl_sns.model.Post
+import com.example.pbl_sns.repository.ContentDTO
 import com.example.pbl_sns.ui.MainActivity
 import com.example.pbl_sns.viewmodel.UserViewModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.FieldValue
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.UploadTask
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
 class ProfileFragment: BaseFragment<FragmentProfileBinding>(R.layout.fragment_profile) {
     private var result : Boolean = false
@@ -25,6 +39,11 @@ class ProfileFragment: BaseFragment<FragmentProfileBinding>(R.layout.fragment_pr
     private lateinit var id:String
     private val userEmail = prefs.getString("email","-1")
 
+    private var PICK_IMAGE_FROM_ALBUM = 0 // request code
+    private lateinit var storage: FirebaseStorage
+    private lateinit var photoUri : Uri
+    private lateinit var uid : String
+    private lateinit var firestore : FirebaseFirestore
     private val viewModel by lazy {
         ViewModelProvider(this)[UserViewModel::class.java]
     }
@@ -66,6 +85,13 @@ class ProfileFragment: BaseFragment<FragmentProfileBinding>(R.layout.fragment_pr
             }
             else{
                 binding.tvInfoProfile.visibility = View.GONE
+            }
+
+            if(prefs.getString("profile","-1") == "-1"){
+                binding.imgProfile.setImageResource(R.drawable.user)
+            }
+            else{
+                Glide.with(requireContext()).load(prefs.getString("profile","-1")).into(binding.imgProfile)
             }
         }
 
@@ -125,11 +151,9 @@ class ProfileFragment: BaseFragment<FragmentProfileBinding>(R.layout.fragment_pr
         })
 
         binding.btnFollowing.setOnClickListener {
-            Log.d("clickk", "btnFollowing")
             FollowingDialog(userEmail, id, following).show(parentFragmentManager,"following")
         }
         binding.btnFollower.setOnClickListener {
-            Log.d("clickk", "btnFollower")
             FollowerDialog(userEmail, id, follower).show(parentFragmentManager,"follower")
         }
 
