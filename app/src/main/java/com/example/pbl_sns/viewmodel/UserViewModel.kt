@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import com.example.pbl_sns.model.Friends
 import com.example.pbl_sns.model.Post
 import com.example.pbl_sns.model.Privacy
+import com.example.pbl_sns.model.Reply
 import com.example.pbl_sns.repository.AlarmDTO
 import com.example.pbl_sns.repository.UserRepository
 
@@ -50,10 +51,17 @@ class UserViewModel :ViewModel(){
     val friendLiveEmailData: LiveData<String>
         get() = _friendLiveEmailData
 
+
+    private val _postLiveReplyData: MutableLiveData<ArrayList<Reply>>
+            = MutableLiveData()
+    val postLiveReplyData: LiveData<ArrayList<Reply>>
+        get() = _postLiveReplyData
+
     private val _userLikePostData : MutableLiveData<HashMap<String,ArrayList<String>>>
             = MutableLiveData()
     val userLikePostData: LiveData<HashMap<String,ArrayList<String>>>
         get() = _userLikePostData
+
 
     private val repo = UserRepository()
 
@@ -121,9 +129,16 @@ class UserViewModel :ViewModel(){
         }
     }
 
-    fun getUserLikePost(email:String){
-        repo.getLikePost(email).observeForever{
+
+    fun getPostReplyData(email: String, time: String) {
+        repo.getAllReply(email, time).observeForever {
+            _postLiveReplyData.postValue(it)
+        }
+    }
+    fun getUserLikePost(email: String) {
+        repo.getLikePost(email).observeForever {
             _userLikePostData.postValue(it)
+
         }
     }
 }
