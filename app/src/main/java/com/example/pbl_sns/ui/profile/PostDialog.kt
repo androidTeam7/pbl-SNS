@@ -22,6 +22,7 @@ import com.google.firebase.ktx.Firebase
 class PostDialog(email:String, post:Post): BaseDialogFragment<DialogPostBinding>(R.layout.dialog_post) {
     private val mPost:Post = post
     private val userEmail = prefs.getString("email","-1")
+    
 
     override fun initDataBinding() {
         super.initDataBinding()
@@ -46,29 +47,7 @@ class PostDialog(email:String, post:Post): BaseDialogFragment<DialogPostBinding>
 
         // 게시 버튼을 눌렀을 때
         binding.btnReply.setOnClickListener{
-            var reply = ContentDTO.Comment()
-            val uid = FirebaseAuth.getInstance().currentUser?.uid
-            reply.uid = uid
-            reply.userId = userEmail
-            reply.comment = binding.editTvReply?.text.toString()
-            reply.timestamp = System.currentTimeMillis()
 
-            if(userEmail != "-1"){
-                val reply = binding.editTvReply?.text.toString()
-                if(reply != ""){
-                    if (uid != null) {
-                        Firebase.firestore.collection("uid").document(uid).get()
-                            .addOnSuccessListener { documentSnapshot ->
-                                val data = documentSnapshot.toObject<User>()
-                                val post = data!!.postArray
-                                Log.d("postArray", post.toString())
-                            }
-                            .addOnFailureListener { exception ->
-                                Log.d(ContentValues.TAG, "get failed with ", exception)
-                            }
-                    }
-                }
-            }
         }
     }
 

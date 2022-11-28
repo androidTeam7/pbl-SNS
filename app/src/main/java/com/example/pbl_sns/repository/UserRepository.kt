@@ -7,10 +7,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.pbl_sns.MyApplication
 import com.example.pbl_sns.MyApplication.Companion.prefs
-import com.example.pbl_sns.model.Friends
-import com.example.pbl_sns.model.Post
-import com.example.pbl_sns.model.Privacy
-import com.example.pbl_sns.model.User
+import com.example.pbl_sns.model.*
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
@@ -236,6 +233,23 @@ class UserRepository {
             Log.d("알람","if문")
         } else{
             Log.d("알람","else문")
+        }
+        return mutableData
+    }
+
+    fun getAllReply(email:String, time: String): MutableLiveData<ArrayList<Reply>> {
+        val mutableData = MutableLiveData<ArrayList<Reply>>()
+
+        if(email != "-1"){
+            db.collection("users").document(email).collection("postArray")
+                .document(time).get().addOnSuccessListener { documentSnapshot ->
+                    val data = documentSnapshot.toObject<PostDetail>()
+                    Log.d("userRepo PostDetail:", data.toString())
+                    mutableData.value = data!!.reply
+                }
+                .addOnFailureListener { exception ->
+                    Log.d(ContentValues.TAG, "get failed with ", exception)
+                }
         }
         return mutableData
     }
