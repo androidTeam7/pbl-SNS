@@ -60,6 +60,7 @@ class SearchAdapter  (itemList: ArrayList<Privacy>)
         this.itemClickListener = onItemClickListener
     }
 
+
     // (4) setItemClickListener로 설정한 함수 실행
     private var itemClickListener : OnItemClickListener? = null
 

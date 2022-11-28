@@ -6,9 +6,11 @@
         <entry key="..\:/Users/xkqeh/AndroidStudioProjects/Android2_A/pblSNS/app/src/main/res/drawable-mdpi/bottom_line_blue.xml" value="0.1985" />
         <entry key="..\:/Users/xkqeh/AndroidStudioProjects/Android2_A/pblSNS/app/src/main/res/drawable-mdpi/radius10_solid.xml" value="0.1985" />
         <entry key="..\:/Users/xkqeh/AndroidStudioProjects/Android2_A/pblSNS/app/src/main/res/drawable-mdpi/radius13.xml" value="0.1985" />
+        <entry key="..\:/Users/xkqeh/AndroidStudioProjects/Android2_A/pblSNS/app/src/main/res/drawable-mdpi/radius13_solid.xml" value="0.185" />
         <entry key="..\:/Users/xkqeh/AndroidStudioProjects/Android2_A/pblSNS/app/src/main/res/drawable-v24/input_border_round.xml" value="0.1955" />
         <entry key="..\:/Users/xkqeh/AndroidStudioProjects/Android2_A/pblSNS/app/src/main/res/drawable-xxhdpi/dialog_bottomsheet_shape.xml" value="0.1985" />
         <entry key="..\:/Users/xkqeh/AndroidStudioProjects/Android2_A/pblSNS/app/src/main/res/drawable/check_box_friend.xml" value="0.1985" />
+        <entry key="..\:/Users/xkqeh/AndroidStudioProjects/Android2_A/pblSNS/app/src/main/res/drawable/check_box_like.xml" value="0.161" />
         <entry key="..\:/Users/xkqeh/AndroidStudioProjects/Android2_A/pblSNS/app/src/main/res/drawable/dialog_profile_edit.xml" value="0.1985" />
         <entry key="..\:/Users/xkqeh/AndroidStudioProjects/Android2_A/pblSNS/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1955" />
         <entry key="..\:/Users/xkqeh/AndroidStudioProjects/Android2_A/pblSNS/app/src/main/res/drawable/menu_selector_color.xml" value="0.1955" />
@@ -47,7 +49,7 @@
         <entry key="..\:/Users/xkqeh/AndroidStudioProjects/Android2_A/pblSNS/app/src/main/res/layout/item_follower.xml" value="0.33489583333333334" />
         <entry key="..\:/Users/xkqeh/AndroidStudioProjects/Android2_A/pblSNS/app/src/main/res/layout/item_following.xml" value="0.3359375" />
         <entry key="..\:/Users/xkqeh/AndroidStudioProjects/Android2_A/pblSNS/app/src/main/res/layout/item_friend.xml" value="0.3265940902021773" />
-        <entry key="..\:/Users/xkqeh/AndroidStudioProjects/Android2_A/pblSNS/app/src/main/res/layout/item_home.xml" value="0.33" />
+        <entry key="..\:/Users/xkqeh/AndroidStudioProjects/Android2_A/pblSNS/app/src/main/res/layout/item_home.xml" value="0.5" />
         <entry key="..\:/Users/xkqeh/AndroidStudioProjects/Android2_A/pblSNS/app/src/main/res/layout/item_post.xml" value="1.1" />
         <entry key="..\:/Users/xkqeh/AndroidStudioProjects/Android2_A/pblSNS/app/src/main/res/layout/item_search.xml" value="0.33489583333333334" />
         <entry key="..\:/Users/xkqeh/AndroidStudioProjects/Android2_A/pblSNS/app/src/main/res/layout/signup_item.xml" value="0.3307291666666667" />

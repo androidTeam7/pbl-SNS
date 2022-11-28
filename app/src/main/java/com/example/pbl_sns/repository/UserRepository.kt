@@ -74,6 +74,7 @@ class UserRepository {
                         val mTempPost: ArrayList<Post> = data!!.postArray
                         for (i in 0 until mTempPost.size) {
                             val tempPost: Post = Post()
+                            tempPost.email = mTempPost[i].email
                             tempPost.profile = tempProfile["image"].toString()
                             tempPost.id = tempProfile["id"].toString()
                             tempPost.content = mTempPost[i].content
@@ -239,4 +240,19 @@ class UserRepository {
         return mutableData
     }
 
+    fun getLikePost(email:String): LiveData<HashMap<String,ArrayList<String>>>{
+        val mutableData = MutableLiveData<HashMap<String,ArrayList<String>>>()
+        db.collection("users").document(email).collection("postArray")
+            .whereNotEqualTo("like",null).get()
+                .addOnSuccessListener {
+                    val documents:MutableList<DocumentSnapshot> = it.documents
+                    val tempLikeArray:HashMap<String,ArrayList<String>> = HashMap()
+                    for (document in documents) {
+                        val tempArray:ArrayList<String> = document.data?.get("like") as ArrayList<String>
+                        tempLikeArray[document.id] = tempArray
+                    }
+                    mutableData.value = tempLikeArray
+                }
+        return mutableData
+    }
 }

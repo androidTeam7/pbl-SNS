@@ -79,14 +79,15 @@
                 app:layout_constraintTop_toTopOf="parent">
 
 
-                <ImageView
+                <CheckBox
                     android:id="@+id/like_imageview"
                     android:layout_width="35dp"
                     android:layout_height="35dp"
-                    android:src="@drawable/heart_white"
+                    android:background="@drawable/check_box_like"
+                    android:button="@null"
+                    android:checked="false"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    />
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <ImageView
                     android:id="@+id/comment_imageview"

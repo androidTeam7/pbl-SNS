@@ -50,6 +50,11 @@ class UserViewModel :ViewModel(){
     val friendLiveEmailData: LiveData<String>
         get() = _friendLiveEmailData
 
+    private val _userLikePostData : MutableLiveData<HashMap<String,ArrayList<String>>>
+            = MutableLiveData()
+    val userLikePostData: LiveData<HashMap<String,ArrayList<String>>>
+        get() = _userLikePostData
+
     private val repo = UserRepository()
 
     fun getAllUsersData(){
@@ -113,6 +118,12 @@ class UserViewModel :ViewModel(){
     fun getUserAlarmData(id: String){
         repo.getUserAlarmData(id).observeForever{
             _userLiveAlarmData.postValue(it)
+        }
+    }
+
+    fun getUserLikePost(email:String){
+        repo.getLikePost(email).observeForever{
+            _userLikePostData.postValue(it)
         }
     }
 }

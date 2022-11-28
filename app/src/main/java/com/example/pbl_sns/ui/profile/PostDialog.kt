@@ -13,6 +13,8 @@ import com.example.pbl_sns.base.BaseDialogFragment
 import com.example.pbl_sns.databinding.DialogPostBinding
 import com.example.pbl_sns.model.Post
 import com.example.pbl_sns.model.User
+import com.example.pbl_sns.repository.ContentDTO
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
@@ -37,20 +39,34 @@ class PostDialog(email:String, post:Post): BaseDialogFragment<DialogPostBinding>
             dismiss()
         }
 
+        // 댓글 모두 보기를 눌렀을 때
+        binding.btnViewAllReply.setOnClickListener{
 
+        }
+
+        // 게시 버튼을 눌렀을 때
         binding.btnReply.setOnClickListener{
+            var reply = ContentDTO.Comment()
+            val uid = FirebaseAuth.getInstance().currentUser?.uid
+            reply.uid = uid
+            reply.userId = userEmail
+            reply.comment = binding.editTvReply?.text.toString()
+            reply.timestamp = System.currentTimeMillis()
+
             if(userEmail != "-1"){
                 val reply = binding.editTvReply?.text.toString()
                 if(reply != ""){
-                    Firebase.firestore.collection("users").document(userEmail).get()
-                        .addOnSuccessListener { documentSnapshot ->
-                            val data = documentSnapshot.toObject<User>()
-                            val post = data!!.postArray
-                            Log.d("postArray", post.toString())
-                        }
-                        .addOnFailureListener { exception ->
-                            Log.d(ContentValues.TAG, "get failed with ", exception)
-                        }
+                    if (uid != null) {
+                        Firebase.firestore.collection("uid").document(uid).get()
+                            .addOnSuccessListener { documentSnapshot ->
+                                val data = documentSnapshot.toObject<User>()
+                                val post = data!!.postArray
+                                Log.d("postArray", post.toString())
+                            }
+                            .addOnFailureListener { exception ->
+                                Log.d(ContentValues.TAG, "get failed with ", exception)
+                            }
+                    }
                 }
             }
         }
@@ -59,6 +75,6 @@ class PostDialog(email:String, post:Post): BaseDialogFragment<DialogPostBinding>
     override fun onResume() {
         super.onResume()
 
-        context?.dialogFragmentResize(this@PostDialog, 0.9f, 0.7f)
+        context?.dialogFragmentResize(this@PostDialog, 0.9f, 0.8f)
     }
 }

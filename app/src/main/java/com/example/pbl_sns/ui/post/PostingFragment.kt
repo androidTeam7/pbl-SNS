@@ -11,6 +11,7 @@ import com.example.pbl_sns.MyApplication.Companion.prefs
 import com.example.pbl_sns.R
 import com.example.pbl_sns.base.BaseFragment
 import com.example.pbl_sns.databinding.FragmentPostingBinding
+import com.example.pbl_sns.model.PostDetail
 import com.example.pbl_sns.ui.MainActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FieldValue
@@ -79,17 +80,21 @@ class PostingFragment :BaseFragment<FragmentPostingBinding>(R.layout.fragment_po
             storageRef?.putFile(photoUri!!)?.continueWithTask(){
                 return@continueWithTask  storageRef.downloadUrl
             }?.addOnSuccessListener { uri ->
-
+                val current = System.currentTimeMillis()
                 val post = hashMapOf(
+                    "email" to prefs.getString("email", "-1"),
                     "id" to prefs.getString("id","-1"),
                     "content" to binding.postingEditExplain.text.toString(),
                     "image" to uri.toString(),
                     "date" to today(),
-                    "time" to System.currentTimeMillis()
+                    "time" to current
                 )
                 Firebase.firestore.collection("users")?.document(prefs.getString("email","-1"))
                     .update("postArray",FieldValue.arrayUnion(post)).addOnSuccessListener {
-                        Toast.makeText(context,"업로드 성공", Toast.LENGTH_LONG).show()
+                        Firebase.firestore.collection("users").document(prefs.getString("email","-1")).collection("postArray")
+                            .document(current.toString()).set(PostDetail()).addOnSuccessListener {
+                                Toast.makeText(context,"업로드 성공", Toast.LENGTH_LONG).show()
+                            }
                     }
             }
         }else{
