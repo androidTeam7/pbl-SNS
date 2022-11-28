@@ -73,8 +73,6 @@ class HomeAdapter (itemList: ArrayList<Post>)
 
         holder.time.text = itemList[position].date
 
-        holder.like.text = "Like${likePostData[itemList[position].time.toString()]!!.size}"
-
         var tempData = mutableListOf<String>()
 
         if(likePostData[itemList[position].time.toString()] != null){
@@ -83,15 +81,20 @@ class HomeAdapter (itemList: ArrayList<Post>)
             }
             Log.d("temppp0",tempData.toString())
         }
+
+        holder.like.text = "Like${tempData!!.size}"
+
         Log.d("temppp1",tempData.toString())
         holder.likecount.isChecked = likePostData[itemList[position].time.toString()]?.contains(userEmail) == true
 
         holder.likecount.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
                 tempData.add(userEmail)
+                holder.like.text = "Like${tempData!!.size}"
                 Log.d("temppp2",tempData.toString())
             } else {
                 tempData.remove(userEmail)
+                holder.like.text = "Like${tempData!!.size}"
             }
 
             db.collection("users").document(userEmail).collection("postArray").document(itemList[position].time.toString())

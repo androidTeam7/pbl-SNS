@@ -9,6 +9,6 @@ data class Post(
     var date:String = "",
     var time:Long=0,
     var replyCount:Int=0,
-    var likeCount: Int? = null,
+    var likeCount: Int = 0,
     var likes: MutableMap<String, Boolean> = HashMap()
 )

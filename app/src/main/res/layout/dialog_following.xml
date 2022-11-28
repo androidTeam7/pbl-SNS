@@ -39,7 +39,6 @@
                 android:layout_marginStart="20dp"
                 android:fontFamily="@font/nanumsquare_aceb"
                 android:gravity="center"
-                android:text="id"
                 android:textColor="#000000"
                 android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="@+id/btn_close_following_dialog"

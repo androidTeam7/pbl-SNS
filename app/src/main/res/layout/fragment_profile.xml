@@ -31,7 +31,6 @@
             android:layout_marginStart="20dp"
             android:fontFamily="@font/nanumsquare_aceb"
             android:gravity="center"
-            android:text="friend_id"
             android:textColor="@color/black"
             android:textSize="20sp"
             android:visibility="visible"

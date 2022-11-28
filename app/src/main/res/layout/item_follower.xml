@@ -29,7 +29,6 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:fontFamily="@font/nanumsquare_acr"
-            android:text="user_id"
             android:textColor="#000000"
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="@+id/img_friend_profile"
