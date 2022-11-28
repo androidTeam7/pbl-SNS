@@ -237,6 +237,7 @@ class UserRepository {
         return mutableData
     }
 
+
     fun getAllReply(email:String, time: String): MutableLiveData<ArrayList<Reply>> {
         val mutableData = MutableLiveData<ArrayList<Reply>>()
 
@@ -254,4 +255,20 @@ class UserRepository {
         return mutableData
     }
 
+
+    fun getLikePost(email:String): LiveData<HashMap<String,ArrayList<String>>>{
+        val mutableData = MutableLiveData<HashMap<String,ArrayList<String>>>()
+        db.collection("users").document(email).collection("postArray")
+            .whereNotEqualTo("like",null).get()
+                .addOnSuccessListener {
+                    val documents:MutableList<DocumentSnapshot> = it.documents
+                    val tempLikeArray:HashMap<String,ArrayList<String>> = HashMap()
+                    for (document in documents) {
+                        val tempArray:ArrayList<String> = document.data?.get("like") as ArrayList<String>
+                        tempLikeArray[document.id] = tempArray
+                    }
+                    mutableData.value = tempLikeArray
+                }
+        return mutableData
+    }
 }

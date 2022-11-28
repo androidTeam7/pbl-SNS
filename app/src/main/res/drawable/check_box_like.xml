@@ -1,22 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <!-- Checked -->
-    <item android:state_checked="true">
-        <shape>
-            <solid android:color="@color/mainLightGray" />
-            <corners android:radius="8dp" />
-        </shape>
-    </item>
     <!-- Unchecked -->
-    <item android:state_checked="false">
-        <layer-list>
-            <!-- 배경 -->
-            <item>
-                <shape>
-                    <solid android:color="@color/snsBlue" />
-                    <corners android:radius="8dp" />
-                </shape>
-            </item>
-        </layer-list>
-    </item>
+    <item android:state_checked="false"
+        android:drawable="@drawable/heart_white" />
+    <!-- Checked -->
+    <item android:state_checked="true"
+        android:drawable="@drawable/heart_red" />
 </selector>

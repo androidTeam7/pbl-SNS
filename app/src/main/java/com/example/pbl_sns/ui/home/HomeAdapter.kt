@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.pbl_sns.MyApplication.Companion.prefs
 import com.example.pbl_sns.R
 import com.example.pbl_sns.databinding.ItemHomeBinding
 import com.example.pbl_sns.model.Post
@@ -17,7 +18,9 @@ class HomeAdapter (itemList: ArrayList<Post>)
     : RecyclerView.Adapter<HomeAdapter.ViewHolder>(){
     private val db = Firebase.firestore
     var firestore : FirebaseFirestore? = null
+    val userEmail = prefs.getString("email","-1")
     lateinit var context:Context
+    var likePostData:HashMap<String,ArrayList<String>> = HashMap<String,ArrayList<String>>()
 
     var itemList: ArrayList<Post> = itemList
         set(value) {
@@ -67,17 +70,32 @@ class HomeAdapter (itemList: ArrayList<Post>)
         Glide.with(context).load(itemList[position].image).into(holder.img)
         holder.id.text = itemList[position].id
         holder.content.text = itemList[position].content
-        Log.d("잘됐나요",itemList.toString())
 
         holder.time.text = itemList[position].date
 
-        //likes
-        holder.like.text = "Likes " + itemList[position].likeCount
+        holder.like.text = "Like${likePostData[itemList[position].time.toString()]!!.size}"
 
-        //This code is when the button is clicked
-        holder.likecount.setOnClickListener {
-            //likeEvent(position)
-            Log.d("Like test", "1")
+        var tempData = mutableListOf<String>()
+
+        if(likePostData[itemList[position].time.toString()] != null){
+            for(i in 0 until likePostData[itemList[position].time.toString()]!!.size){
+                tempData.add(likePostData[itemList[position].time.toString()]!![i])
+            }
+            Log.d("temppp0",tempData.toString())
+        }
+        Log.d("temppp1",tempData.toString())
+        holder.likecount.isChecked = likePostData[itemList[position].time.toString()]?.contains(userEmail) == true
+
+        holder.likecount.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                tempData.add(userEmail)
+                Log.d("temppp2",tempData.toString())
+            } else {
+                tempData.remove(userEmail)
+            }
+
+            db.collection("users").document(userEmail).collection("postArray").document(itemList[position].time.toString())
+                .update("like", tempData)
         }
 
         // (1) 리스트 내 항목 클릭 시 onClick() 호출
