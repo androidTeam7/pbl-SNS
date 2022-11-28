@@ -42,6 +42,8 @@ class HomeAdapter (itemList: ArrayList<Post>)
         val time = itemViewBinding.tvTime
         val like = itemViewBinding.tvLikecounter
         val likecount = itemViewBinding.likeImageview
+        val btnReply = itemViewBinding.btnReply
+        val editTvReply = itemViewBinding.editTvReply
     }
 
     override fun onCreateViewHolder(
@@ -92,16 +94,21 @@ class HomeAdapter (itemList: ArrayList<Post>)
 //            holder.likecount.setImageResource(R.drawable.heart_white)
 //        }
 
-
         // (1) 리스트 내 항목 클릭 시 onClick() 호출
         holder.btnAllReply.setOnClickListener {
-            itemClickListener?.onClick(position)
+            val status = "btnAllReply"
+            itemClickListener?.onClick(position, status, "")
+        }
+        holder.btnReply.setOnClickListener{
+            val status="btnReply"
+            itemClickListener?.onClick(position, status, holder.editTvReply.text.toString())
         }
     }
     // (2) 리스너 인터페이스
     interface OnItemClickListener {
-        fun onClick(position: Int)
+        fun onClick(position: Int,status:String, reply: String)
     }
+
     // (3) 외부에서 클릭 시 이벤트 설정
     fun setItemClickListener(onItemClickListener: OnItemClickListener) {
         this.itemClickListener = onItemClickListener
