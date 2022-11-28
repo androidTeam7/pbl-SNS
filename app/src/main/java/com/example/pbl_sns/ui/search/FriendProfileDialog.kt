@@ -2,6 +2,7 @@ package com.example.pbl_sns.ui.search
 
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
@@ -29,11 +30,19 @@ class FriendProfileDialog(email: String) : BaseDialogFragment<FragmentProfileBin
     private val db = Firebase.firestore
     lateinit var profileAdapter: ProfileAdapter
     private var following:ArrayList<String> = ArrayList()
-    private var follower:ArrayList<String> = ArrayList()
     private lateinit var id:String
     private val mEmail = email  // 친구 이메일
     private val userEmail = prefs.getString("email","-1")
-    var isFollowing:Boolean = false
+    private var follower:ArrayList<String>
+    private var isFollowing:Boolean
+    private var firstStatus:Boolean
+    private var secondStatus:Boolean
+    init {
+        isFollowing = false
+        firstStatus = false
+        secondStatus = false
+        follower = ArrayList()
+    }
 
     private val viewModel by lazy {
         ViewModelProvider(requireParentFragment())[UserViewModel::class.java]
@@ -81,6 +90,7 @@ class FriendProfileDialog(email: String) : BaseDialogFragment<FragmentProfileBin
         viewModel.userLiveFollowerData.observe(viewLifecycleOwner){
             val itemList:ArrayList<String> = it
             follower = itemList
+            Log.d("followingCheck","$itemList")
             binding.tvFollower.text = follower.size.toString()
             isFollowingFunc()
         }
@@ -103,11 +113,15 @@ class FriendProfileDialog(email: String) : BaseDialogFragment<FragmentProfileBin
         })
 
         binding.btnCloseFriendProfile.setOnClickListener {
+            secondStatus = isFollowing
             // 내 친구목록 업데이트
-            if(isFollowing)
-                setFragmentResult("addFollowingFPD", bundleOf("friendEmail" to mEmail))
-            else
-                setFragmentResult("deleteFollowingFPD", bundleOf("friendEmail" to mEmail))
+            if(firstStatus != secondStatus){
+                if(isFollowing)
+                    setFragmentResult("addFollowingFPD", bundleOf("friendEmail" to mEmail))
+                else
+                    setFragmentResult("deleteFollowingFPD", bundleOf("friendEmail" to mEmail))
+            }
+
             dismiss()
         }
         binding.btnFollowing.setOnClickListener {
@@ -158,12 +172,18 @@ class FriendProfileDialog(email: String) : BaseDialogFragment<FragmentProfileBin
 
     private fun isFollowingFunc(){
         // 내가 팔로잉 한 상태라면 회색버튼, 아니라면 파란 버튼
+        isFollowing = false
+        Log.d("followingCheck1","$follower")
         for(f in follower){
             if(f == userEmail) {
+                Log.d("followingCheck2","true${f}")
                 isFollowing = true
+                firstStatus = true
                 break
             }
         }
+
+        Log.d("followingCheck2.1","$isFollowing")
 
         if(isFollowing){
             binding.btnFollowerFollowing.background = ContextCompat.getDrawable(requireContext(), R.drawable.radius10_solid)

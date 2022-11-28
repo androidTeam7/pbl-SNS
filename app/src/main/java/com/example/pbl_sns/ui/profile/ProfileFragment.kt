@@ -130,7 +130,7 @@ class ProfileFragment: BaseFragment<FragmentProfileBinding>(R.layout.fragment_pr
         setFragmentResultListener("requestLogout") { _, bundle ->
             val isLogout:Boolean = bundle.get("resultLogout") as Boolean
             if(isLogout){
-                auth.signOut()
+                FirebaseAuth.getInstance().signOut()
                 prefs.removeAll()
                 navController.navigate(R.id.action_profileFragment_to_loginFragment)
             }

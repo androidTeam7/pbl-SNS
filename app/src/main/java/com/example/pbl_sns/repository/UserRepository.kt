@@ -62,14 +62,11 @@ class UserRepository {
         followingData.add(user)
 
         var tempPostArray: ArrayList<Post> = ArrayList()
-        Log.d("다큐먼트2", followingData.toString())
         val comparator : Comparator<Post> = compareBy { -it.time }
         if (followingData != null) {
-            Log.d("다큐먼트3", "")
             for (i in 0 until followingData.size) {
                 db.collection("users").document(followingData[i]).get()
                     .addOnSuccessListener {
-                        Log.d("다큐먼트1", it.data.toString())
                         // 프로필 사진 구하는 로직
                         val tempProfile = it.data?.get("privacy") as HashMap<String, String>
                         // 포스트 정보 구하는 로직
@@ -84,12 +81,10 @@ class UserRepository {
                             tempPost.time = mTempPost[i].time
                             tempPost.date = mTempPost[i].date
                             tempPostArray.add(tempPost)
-                            Log.d("잘됐나${i}", tempPost.content.toString())
                         }
                         mutableData.value = tempPostArray
                     }.addOnSuccessListener {
                         mutableData.value?.sortWith(comparator)
-                        Log.d("잘됐나아아아아아${i}", mutableData.value.toString())
                     }
                     .addOnFailureListener { exception ->
                         Log.w(TAG, "Error getting documents: ", exception)
@@ -99,39 +94,6 @@ class UserRepository {
         }
         return mutableData
     }
-            /*
-        db.collection("users")
-            .whereNotEqualTo("postArray", null).get()
-            .addOnSuccessListener { querySnapshot ->
-                val documents:MutableList<DocumentSnapshot> = querySnapshot.documents
-                val tempPostArray:ArrayList<Post> = ArrayList()
-                Log.d("getAll 1", documents.toString())
-                for (document in documents) {
-                    // 프로필 사진 구하는 로직
-                    val tempProfile = document.data?.get("privacy") as HashMap<String,String>
-                    val tempPost:Post = Post()
-                    tempPost.profile = tempProfile["image"].toString()
-
-                    // 포스트 정보 구하는 로직
-                    val mTempPost:ArrayList<HashMap<String,String>> = document.data?.get("postArray") as ArrayList<HashMap<String, String>>
-                    for(i in 0 until mTempPost.size){
-                        tempPost.profile = tempProfile["image"].toString()
-                        tempPost.id = tempProfile["id"].toString()
-                        tempPost.content = mTempPost[i]["content"].toString()
-                        tempPost.image = mTempPost[i]["image"].toString()
-                        tempPost.time = mTempPost[i]["time"].toString()
-                        tempPostArray.add(tempPost)
-                    }
-                    mutableData.value = tempPostArray
-                    Log.d("잘됐나",mutableData.value.toString())
-                }
-            }
-            .addOnFailureListener { exception ->
-                Log.w(TAG, "Error getting documents: ", exception)
-            }
-        return mutableData
-            */
-
 
     //DB에서 유저정보 가져오기
     fun getData(email:String): LiveData<Privacy> {
@@ -155,13 +117,15 @@ class UserRepository {
 
     fun getPostData(email:String): LiveData<ArrayList<Post>>{
         val mutableData = MutableLiveData<ArrayList<Post>>()
-
+        val comparator : Comparator<Post> = compareBy { -it.time }
         if(email != "-1"){
             db.collection("users").document(email).get()
                 .addOnSuccessListener { documentSnapshot ->
                     val data = documentSnapshot.toObject<User>()
                     Log.d("userRepoo", data.toString())
                     mutableData.value = data!!.postArray
+                }.addOnSuccessListener {
+                    mutableData.value?.sortWith(comparator)
                 }
                 .addOnFailureListener { exception ->
                     Log.d(ContentValues.TAG, "get failed with ", exception)
