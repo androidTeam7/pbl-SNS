@@ -73,7 +73,7 @@ class HomeAdapter (itemList: ArrayList<Post>)
 
         holder.time.text = itemList[position].date
 
-        holder.like.text = "Like${likePostData[itemList[position].time.toString()]!!.size}"
+        holder.like.text = "Like ${likePostData[itemList[position].time.toString()]!!.size}"
 
         var tempData = mutableListOf<String>()
 
