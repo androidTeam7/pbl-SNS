@@ -7,9 +7,10 @@
             name="homeAdapter"
             type="com.example.pbl_sns.ui.home.HomeAdapter" />
     </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:background="@drawable/radius13_solid">
 
 
@@ -77,10 +78,40 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
+
+                <ImageView
+                    android:id="@+id/like_imageview"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:src="@drawable/heart_white"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    />
+
+                <ImageView
+                    android:id="@+id/comment_imageview"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_marginStart="42dp"
+                    android:src="@drawable/chat"
+                    app:layout_constraintStart_toStartOf="@+id/like_imageview"
+                    app:layout_constraintTop_toTopOf="@+id/like_imageview" />
+
+                <TextView
+                    android:id="@+id/tv_likecounter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="38dp"
+                    android:text="Like 0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
                 <TextView
                     android:id="@+id/tv_id_post"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="70dp"
                     android:fontFamily="@font/nanumsquare_acb"
                     android:text="id"
                     android:textColor="@color/black"

@@ -5,7 +5,7 @@
     <data>
         <variable
             name="alarmAdapter"
-            type="com.example.pbl_sns.ui.AlarmAdapter" />
+            type="com.example.pbl_sns.ui.alarm.AlarmAdapter" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

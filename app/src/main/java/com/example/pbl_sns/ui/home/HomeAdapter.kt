@@ -11,13 +11,18 @@ import com.example.pbl_sns.databinding.ItemHomeBinding
 import com.example.pbl_sns.databinding.ItemSearchBinding
 import com.example.pbl_sns.model.Post
 import com.example.pbl_sns.model.Privacy
+import com.example.pbl_sns.repository.ContentDTO
 import com.example.pbl_sns.ui.search.SearchAdapter
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
 
 class HomeAdapter (itemList: ArrayList<Post>)
     : RecyclerView.Adapter<HomeAdapter.ViewHolder>(){
     private val db = Firebase.firestore
+    var firestore : FirebaseFirestore? = null
     lateinit var context:Context
 
     var itemList: ArrayList<Post> = itemList
@@ -35,6 +40,8 @@ class HomeAdapter (itemList: ArrayList<Post>)
         val content = itemViewBinding.tvContentPost
         val btnAllReply = itemViewBinding.btnViewAllReply
         val time = itemViewBinding.tvTime
+        val like = itemViewBinding.tvLikecounter
+        val likecount = itemViewBinding.likeImageview
     }
 
     override fun onCreateViewHolder(
@@ -67,6 +74,24 @@ class HomeAdapter (itemList: ArrayList<Post>)
         Log.d("잘됐나요",itemList.toString())
 
         holder.time.text = itemList[position].date
+
+        //likes
+        holder.like.text = "Likes " + itemList[position].likeCount
+
+        //This code is when the button is clicked
+        holder.likecount.setOnClickListener {
+            //likeEvent(position)
+            Log.d("Like test", "1")
+        }
+        //This code is when the page is loaded
+//        if(itemList[position].likes.containsKey(currentUserUid)){
+//            //This is like status
+//            holder.likecount.setImageResource(R.drawable.heart_black)
+//        }else{
+//            //This is unlike status
+//            holder.likecount.setImageResource(R.drawable.heart_white)
+//        }
+
 
         // (1) 리스트 내 항목 클릭 시 onClick() 호출
         holder.btnAllReply.setOnClickListener {

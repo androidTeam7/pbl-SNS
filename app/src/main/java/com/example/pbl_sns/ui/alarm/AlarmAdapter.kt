@@ -1,4 +1,4 @@
-package com.example.pbl_sns.ui
+package com.example.pbl_sns.ui.alarm
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -6,12 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pbl_sns.R
 import com.example.pbl_sns.databinding.ItemAlarmBinding
-import com.example.pbl_sns.databinding.ItemFollowerBinding
-import com.example.pbl_sns.model.Post
 import com.example.pbl_sns.repository.AlarmDTO
-import com.example.pbl_sns.ui.profile.FollowerAdapter
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
@@ -47,11 +42,11 @@ class AlarmAdapter (itemList: ArrayList<AlarmDTO>)
         if(itemList[position].profile.isEmpty())
             holder.profileImg.setImageResource(R.drawable.user)
 
-        holder.id.text = itemList[position].destinationUid
+        holder.id.text = itemList[position].userId
 
         when(itemList[position].kind){
             0 -> {
-                holder.content.text = (R.string.followAlarm.toString())
+                holder.content.text = itemList[position].message
             }
 
         }

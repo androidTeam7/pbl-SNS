@@ -220,9 +220,7 @@ class FriendProfileDialog(email: String) : BaseDialogFragment<FragmentProfileBin
         alarmDTO.uid = FirebaseAuth.getInstance().currentUser?.uid.toString()
         alarmDTO.kind = 0
         alarmDTO.timestamp = System.currentTimeMillis()
+        alarmDTO.message = "님이 회원님을 팔로우하였습니다."
         FirebaseFirestore.getInstance().collection("alarms").document().set(alarmDTO)
-
-        var message = userEmail + "님이 " + mEmail + "님을 팔로우하였습니다."
-        FcmPush.instance.sendMessage(destinationUid, "helloworld", message)
     }
 }

@@ -62,6 +62,6 @@
         tools:layout="@layout/fragment_profile"/>
     <fragment
         android:id="@+id/alarmFragment"
-        android:name="com.example.pbl_sns.ui.AlarmFragment"
+        android:name="com.example.pbl_sns.ui.alarm.AlarmFragment"
         android:label="AlarmFragment" />
 </navigation>
