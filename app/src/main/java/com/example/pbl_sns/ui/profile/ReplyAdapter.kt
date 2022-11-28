@@ -42,6 +42,9 @@ class ReplyAdapter(itemList: List<Reply>)
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int)
     {
+        if(itemList.size == 0){
+
+        }
         if(itemList[position].profile.isEmpty())
             holder.profileImg.setImageResource(R.drawable.user)
         if(itemList[position].id.isEmpty())

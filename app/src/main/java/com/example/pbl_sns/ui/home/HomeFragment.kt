@@ -16,7 +16,9 @@ import com.example.pbl_sns.model.Reply
 import com.example.pbl_sns.model.User
 import com.example.pbl_sns.repository.UserRepository
 import com.example.pbl_sns.ui.MainActivity
+import com.example.pbl_sns.ui.profile.LogoutDialog
 import com.example.pbl_sns.ui.profile.ProfileAdapter
+import com.example.pbl_sns.ui.profile.ReplyDialog
 import com.example.pbl_sns.ui.search.SearchAdapter
 import com.example.pbl_sns.viewmodel.UserViewModel
 import com.google.firebase.firestore.FieldValue
@@ -29,11 +31,11 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 class HomeFragment: BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
-    private val db = Firebase.firestore
     lateinit var homeAdapter: HomeAdapter
     private val userEmail = prefs.getString("email", "-1")
     private val userId = prefs.getString("id", "-1")
     private val userRepo = UserRepository()
+    private val db = Firebase.firestore
     private val viewModel by lazy {
         ViewModelProvider(this)[UserViewModel::class.java]
     }
@@ -68,19 +70,17 @@ class HomeFragment: BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
             override fun onClick(position: Int, status: String, post:Post, editReply: String) {
                 val id = homeAdapter.itemList[position].email
                 if (status == "btnReply") {
-                    addReply(id, position, post, editReply)
+                    addReply(id, post, editReply)
                 } else if (status == "btnAllReply") {
-
+                    ReplyDialog(id, post).show(parentFragmentManager,"ReplyDialog")
                 }
             }
         })
     }
 
-    fun addReply(email: String, position: Int, post:Post, editReply: String) {
+    fun addReply(email: String, post:Post, editReply: String) {
 
         if (userEmail != "-1") {
-            val postArray = userRepo.getPostData(email)
-            val time = postArray.value?.get(position)?.time
             val reply = hashMapOf(
                 "profile" to "",
                 "id" to userId,

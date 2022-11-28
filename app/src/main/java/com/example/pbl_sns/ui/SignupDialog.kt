@@ -9,6 +9,8 @@ import android.widget.Toast
 import com.example.pbl_sns.R
 import com.example.pbl_sns.base.BaseDialogFragment
 import com.example.pbl_sns.databinding.DialogSignupBinding
+import com.example.pbl_sns.model.Friends
+import com.example.pbl_sns.model.Post
 import com.example.pbl_sns.model.Privacy
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -86,7 +88,9 @@ class SignupDialog : BaseDialogFragment<DialogSignupBinding>(R.layout.dialog_sig
                             val data = hashMapOf(
                                 "email" to email,
                                 "id" to id,
-                                "privacy" to Privacy()
+                                "postArray" to ArrayList<Post>(),
+                                "privacy" to Privacy(),
+                                "friends" to Friends()
                             )
 
                             val privacyData = hashMapOf(
@@ -94,6 +98,11 @@ class SignupDialog : BaseDialogFragment<DialogSignupBinding>(R.layout.dialog_sig
                                 "name" to name,
                                 "id" to id,
                                 "info" to ""
+                            )
+
+                            val friendsData = hashMapOf(
+                                "follower" to ArrayList<String>(),
+                                "following" to ArrayList<String>()
                             )
 
                             db.collection("users").document(email).set(data).addOnSuccessListener {

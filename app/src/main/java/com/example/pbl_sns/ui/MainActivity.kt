@@ -3,29 +3,18 @@ package com.example.pbl_sns.ui
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
-import android.content.Intent
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
-import android.view.MenuItem
 import android.view.View
-import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.example.pbl_sns.MyApplication.Companion.prefs
 import com.example.pbl_sns.R
 import com.example.pbl_sns.databinding.ActivityMainBinding
-import com.example.pbl_sns.service.FcmPush
-import com.example.pbl_sns.service.MyFirebaseMessagingService
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.navigation.NavigationBarView
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import com.google.firebase.messaging.FirebaseMessaging
 
 class MainActivity : AppCompatActivity() {
     // private var bottomNavigationView: BottomNavigationView? = null
@@ -33,7 +22,6 @@ class MainActivity : AppCompatActivity() {
     private val db = Firebase.firestore
     private val userEmail = prefs.getString("email", "-1")
 
-    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.AppTheme)
 
@@ -43,12 +31,6 @@ class MainActivity : AppCompatActivity() {
 
         setToolbar()
         setBottomNav()
-
-        setToken()
-    }
-
-    override fun onStop(){
-        super.onStop()
     }
 
     private fun setToolbar(){
@@ -96,18 +78,6 @@ class MainActivity : AppCompatActivity() {
             channel.description = "This is helloworld-messaging channel"
             val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
             notificationManager.createNotificationChannel(channel)
-        }
-    }
-
-    private fun setToken(){
-        // 디바이스의 토큰 값 가져오기
-        FirebaseMessaging.getInstance().token.addOnCompleteListener{
-            if(it.isSuccessful){
-                val tokenData = it.result
-                Log.d(MyFirebaseMessagingService.TAG, "FCM token: ${it.result}")
-                db.collection("users").document(userEmail) .update("token", tokenData)
-            }
-
         }
     }
 }

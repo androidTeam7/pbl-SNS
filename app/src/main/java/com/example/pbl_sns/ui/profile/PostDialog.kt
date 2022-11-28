@@ -6,6 +6,7 @@ import android.graphics.drawable.ColorDrawable
 import android.util.Log
 import android.view.ViewGroup
 import android.view.WindowManager
+import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.example.pbl_sns.MyApplication.Companion.prefs
 import com.example.pbl_sns.R
@@ -15,6 +16,7 @@ import com.example.pbl_sns.model.Post
 import com.example.pbl_sns.model.User
 import com.example.pbl_sns.repository.ContentDTO
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
@@ -22,6 +24,8 @@ import com.google.firebase.ktx.Firebase
 class PostDialog(email:String, post:Post): BaseDialogFragment<DialogPostBinding>(R.layout.dialog_post) {
     private val mPost:Post = post
     private val userEmail = prefs.getString("email","-1")
+    private val userId = prefs.getString("id", "-1")
+    private val db = Firebase.firestore
 
     override fun initDataBinding() {
         super.initDataBinding()
@@ -41,34 +45,30 @@ class PostDialog(email:String, post:Post): BaseDialogFragment<DialogPostBinding>
 
         // 댓글 모두 보기를 눌렀을 때
         binding.btnViewAllReply.setOnClickListener{
-
+            ReplyDialog(mPost.email, mPost).show(parentFragmentManager,"ReplyDialog")
         }
 
         // 게시 버튼을 눌렀을 때
         binding.btnReply.setOnClickListener{
-            var reply = ContentDTO.Comment()
-            val uid = FirebaseAuth.getInstance().currentUser?.uid
-            reply.uid = uid
-            reply.userId = userEmail
-            reply.comment = binding.editTvReply?.text.toString()
-            reply.timestamp = System.currentTimeMillis()
+            addReply(mPost.email, mPost, binding.editTvReply.text.toString())
+        }
+    }
+    fun addReply(email: String, post:Post, editReply: String) {
 
-            if(userEmail != "-1"){
-                val reply = binding.editTvReply?.text.toString()
-                if(reply != ""){
-                    if (uid != null) {
-                        Firebase.firestore.collection("uid").document(uid).get()
-                            .addOnSuccessListener { documentSnapshot ->
-                                val data = documentSnapshot.toObject<User>()
-                                val post = data!!.postArray
-                                Log.d("postArray", post.toString())
-                            }
-                            .addOnFailureListener { exception ->
-                                Log.d(ContentValues.TAG, "get failed with ", exception)
-                            }
-                    }
+        if (userEmail != "-1") {
+            val reply = hashMapOf(
+                "profile" to "",
+                "id" to userId,
+                "reply" to editReply,
+                "timestamp" to System.currentTimeMillis()
+            )
+
+            db.collection("users").document(email).collection("postArray").document(post.time.toString())
+                .update("reply", FieldValue.arrayUnion(reply))
+                .addOnSuccessListener {
+                    Toast.makeText(context, "댓글 업로드 성공", Toast.LENGTH_LONG).show()
                 }
-            }
+
         }
     }
 
