@@ -1,7 +1,8 @@
 package com.example.pbl_sns.model
 
 data class Reply(
-    val profile: String= "",
-    val id:String = "",
-    val reply:String = ""
+    var profile: String= "",
+    var id:String = "",
+    var reply:String = "",
+    var timestamp: Long = 0
 )

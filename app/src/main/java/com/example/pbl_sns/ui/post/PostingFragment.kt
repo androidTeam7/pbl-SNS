@@ -81,6 +81,7 @@ class PostingFragment :BaseFragment<FragmentPostingBinding>(R.layout.fragment_po
             }?.addOnSuccessListener { uri ->
 
                 val post = hashMapOf(
+                    "email" to prefs.getString("email", "-1"),
                     "id" to prefs.getString("id","-1"),
                     "content" to binding.postingEditExplain.text.toString(),
                     "image" to uri.toString(),

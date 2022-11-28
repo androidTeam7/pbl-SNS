@@ -74,6 +74,7 @@ class UserRepository {
                         val mTempPost: ArrayList<Post> = data!!.postArray
                         for (i in 0 until mTempPost.size) {
                             val tempPost: Post = Post()
+                            tempPost.email = mTempPost[i].email
                             tempPost.profile = tempProfile["image"].toString()
                             tempPost.id = tempProfile["id"].toString()
                             tempPost.content = mTempPost[i].content

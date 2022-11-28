@@ -1,7 +1,9 @@
 package com.example.pbl_sns.ui.home
 
+import android.content.ContentValues
 import android.os.Build
 import android.util.Log
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModelProvider
@@ -9,16 +11,27 @@ import com.example.pbl_sns.MyApplication.Companion.prefs
 import com.example.pbl_sns.R
 import com.example.pbl_sns.base.BaseFragment
 import com.example.pbl_sns.databinding.FragmentHomeBinding
+import com.example.pbl_sns.model.Post
+import com.example.pbl_sns.model.Reply
+import com.example.pbl_sns.model.User
+import com.example.pbl_sns.repository.UserRepository
 import com.example.pbl_sns.ui.MainActivity
 import com.example.pbl_sns.ui.profile.ProfileAdapter
+import com.example.pbl_sns.ui.search.SearchAdapter
 import com.example.pbl_sns.viewmodel.UserViewModel
+import com.google.firebase.firestore.FieldValue
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.toObject
+import com.google.firebase.ktx.Firebase
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
-class HomeFragment: BaseFragment<FragmentHomeBinding>(R.layout.fragment_home){
+class HomeFragment: BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
     lateinit var homeAdapter: HomeAdapter
-    private val userEmail= prefs.getString("email","-1")
+    private val userEmail = prefs.getString("email", "-1")
+    private val userId = prefs.getString("id", "-1")
+    private val userRepo = UserRepository()
     private val viewModel by lazy {
         ViewModelProvider(this)[UserViewModel::class.java]
     }
@@ -33,7 +46,7 @@ class HomeFragment: BaseFragment<FragmentHomeBinding>(R.layout.fragment_home){
 
         viewModel.getUserFollowing(userEmail)
         viewModel.getAllPost()
-        viewModel.userLiveFollowingData.observe(viewLifecycleOwner){
+        viewModel.userLiveFollowingData.observe(viewLifecycleOwner) {
             viewModel.getAllPost()
         }
         viewModel.allLivePostData.observe(viewLifecycleOwner) {
@@ -46,5 +59,41 @@ class HomeFragment: BaseFragment<FragmentHomeBinding>(R.layout.fragment_home){
         super.initAfterBinding()
 
 
+        // adapter에서 눌렸을때 친구 프로필 뜸
+        homeAdapter.setItemClickListener(object : HomeAdapter.OnItemClickListener {
+            override fun onClick(position: Int, status: String, editReply: String) {
+                val id = homeAdapter.itemList[position].email
+                if (status == "btnReply") {
+                    addReply(id, position, editReply)
+                } else if (status == "btnAllReply") {
+
+                }
+            }
+        })
+
+
+    }
+
+    fun addReply(email: String, position: Int, editReply: String) {
+
+        if (userEmail != "-1") {
+            val postArray = userRepo.getPostData(email)
+            val time = postArray.value?.get(position)?.time
+            val reply = hashMapOf(
+                "id" to userId,
+                "reply" to editReply,
+                "timestamp" to System.currentTimeMillis()
+            )
+
+            FirebaseFirestore.getInstance().collection("users").document(email)
+                .collection("postArray").add(time.toString()).addOnSuccessListener {
+                    FirebaseFirestore.getInstance().collection("users").document(email)
+                        .collection("postArray").document(time.toString()).update("reply", FieldValue.arrayUnion(reply))
+                        .addOnSuccessListener {
+                            Toast.makeText(context, "댓글 업로드 성공", Toast.LENGTH_LONG).show()
+                        }
+                }
+
+        }
     }
 }
