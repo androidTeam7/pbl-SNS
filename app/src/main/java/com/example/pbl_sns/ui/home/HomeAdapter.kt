@@ -8,16 +8,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.pbl_sns.R
 import com.example.pbl_sns.databinding.ItemHomeBinding
-import com.example.pbl_sns.databinding.ItemSearchBinding
 import com.example.pbl_sns.model.Post
-import com.example.pbl_sns.model.Privacy
-import com.example.pbl_sns.repository.ContentDTO
-import com.example.pbl_sns.ui.search.SearchAdapter
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.Query
 
 class HomeAdapter (itemList: ArrayList<Post>)
     : RecyclerView.Adapter<HomeAdapter.ViewHolder>(){
@@ -85,28 +79,20 @@ class HomeAdapter (itemList: ArrayList<Post>)
             //likeEvent(position)
             Log.d("Like test", "1")
         }
-        //This code is when the page is loaded
-//        if(itemList[position].likes.containsKey(currentUserUid)){
-//            //This is like status
-//            holder.likecount.setImageResource(R.drawable.heart_black)
-//        }else{
-//            //This is unlike status
-//            holder.likecount.setImageResource(R.drawable.heart_white)
-//        }
 
         // (1) 리스트 내 항목 클릭 시 onClick() 호출
         holder.btnAllReply.setOnClickListener {
             val status = "btnAllReply"
-            itemClickListener?.onClick(position, status, "")
+            itemClickListener?.onClick(position, status, itemList[position], "")
         }
         holder.btnReply.setOnClickListener{
             val status="btnReply"
-            itemClickListener?.onClick(position, status, holder.editTvReply.text.toString())
+            itemClickListener?.onClick(position, status, itemList[position], holder.editTvReply.text.toString())
         }
     }
     // (2) 리스너 인터페이스
     interface OnItemClickListener {
-        fun onClick(position: Int,status:String, reply: String)
+        fun onClick(position: Int, status: String, post: Post, reply: String)
     }
 
     // (3) 외부에서 클릭 시 이벤트 설정
