@@ -54,6 +54,10 @@ class HomeFragment: BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
         viewModel.allLivePostData.observe(viewLifecycleOwner) {
             homeAdapter.itemList = it
         }
+        viewModel.getUserLikePost(userEmail)
+        viewModel.userLikePostData.observe(viewLifecycleOwner){
+            homeAdapter.likePostData = it
+        }
     }
 
     override fun initAfterBinding() {

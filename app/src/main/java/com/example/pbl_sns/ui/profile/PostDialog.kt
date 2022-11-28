@@ -75,6 +75,6 @@ class PostDialog(email:String, post:Post): BaseDialogFragment<DialogPostBinding>
     override fun onResume() {
         super.onResume()
 
-        context?.dialogFragmentResize(this@PostDialog, 0.9f, 0.7f)
+        context?.dialogFragmentResize(this@PostDialog, 0.9f, 0.8f)
     }
 }
