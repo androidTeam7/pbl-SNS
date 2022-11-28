@@ -60,7 +60,7 @@
                     />
 
                 <ImageView
-                    android:id="@+id/comment_imageview"
+                    android:id="@+id/btn_view_all_reply"
                     android:layout_width="35dp"
                     android:layout_height="35dp"
                     android:layout_marginStart="42dp"
@@ -103,14 +103,6 @@
                     app:layout_constraintStart_toEndOf="@+id/tv_id_post_dialog"
                     app:layout_constraintTop_toTopOf="@+id/tv_id_post_dialog" />
 
-                <TextView
-                    android:id="@+id/btn_view_all_reply"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:text="댓글 모두 보기"
-                    app:layout_constraintStart_toStartOf="@+id/tv_id_post_dialog"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_content_post_dialog" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <EditText

@@ -31,11 +31,11 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 class HomeFragment: BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
-    private val db = Firebase.firestore
     lateinit var homeAdapter: HomeAdapter
     private val userEmail = prefs.getString("email", "-1")
     private val userId = prefs.getString("id", "-1")
     private val userRepo = UserRepository()
+    private val db = Firebase.firestore
     private val viewModel by lazy {
         ViewModelProvider(this)[UserViewModel::class.java]
     }
