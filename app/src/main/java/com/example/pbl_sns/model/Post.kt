@@ -7,5 +7,7 @@ data class Post(
     var image:String = "",
     var date:String = "",
     var time:Long=0,
-    val replyArray:ArrayList<Reply> = ArrayList()
+    val replyArray:ArrayList<Reply> = ArrayList(),
+    var likeCount: Int? = null,
+    var likes: MutableMap<String, Boolean> = HashMap()
 )

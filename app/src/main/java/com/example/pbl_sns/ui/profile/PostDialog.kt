@@ -27,7 +27,8 @@ class PostDialog(email:String, post:Post): BaseDialogFragment<DialogPostBinding>
         binding.tvIdPostDialog.text = prefs.getString("id","-1")
         binding.tvContentPostDialog.text = mPost.content
         Glide.with(requireContext()).load(mPost.image).into(binding.imgPostDialog)
-        binding.tvTime.text = mPost.date
+        binding.tvLikecounter.text = mPost.content
+        binding.tvTime.text = mPost.likeCount.toString()
     }
     override fun initAfterBinding() {
         super.initAfterBinding()
