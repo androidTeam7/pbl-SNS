@@ -130,14 +130,16 @@ class UserViewModel :ViewModel(){
     }
 
 
-    fun getPostReplyData(email: String, time: String){
-        repo.getAllReply(email, time).observeForever{
+    fun getPostReplyData(email: String, time: String) {
+        repo.getAllReply(email, time).observeForever {
             _postLiveReplyData.postValue(it)
 
-    fun getUserLikePost(email:String){
-        repo.getLikePost(email).observeForever{
-            _userLikePostData.postValue(it)
+            fun getUserLikePost(email: String) {
+                repo.getLikePost(email).observeForever {
+                    _userLikePostData.postValue(it)
 
+                }
+            }
         }
     }
-}
+    }
