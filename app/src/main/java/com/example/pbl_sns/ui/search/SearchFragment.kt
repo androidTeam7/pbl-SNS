@@ -22,7 +22,7 @@ import kotlinx.coroutines.*
 
 class SearchFragment: BaseFragment<FragmentSearchBinding>(R.layout.fragment_search){
     private lateinit var searchAdapter: SearchAdapter
-    private lateinit var userFollowingList:ArrayList<String>
+    private var userFollowingList:ArrayList<String> = ArrayList()
     private val userEmail = prefs.getString("email","-1")
 
     private val viewModel by lazy {
@@ -51,13 +51,23 @@ class SearchFragment: BaseFragment<FragmentSearchBinding>(R.layout.fragment_sear
         super.initAfterBinding()
 
         setFragmentResultListener("addFollowingFPD") { _, bundle ->
+            Log.d("followingCheck5","true")
             val result = bundle.getString("friendEmail")
+            Log.d("followingCheck7-1",userFollowingList.toString())
+            viewModel.getUserFollowing(userEmail)
             if(result != "-1") userFollowingList.add(result!!)
+            Log.d("followingCheck6",bundle.getString("friendEmail").toString())
+            Log.d("followingCheck7-2",userFollowingList.toString())
             viewModel.setUserFollowing(userFollowingList)
         }
         setFragmentResultListener("deleteFollowingFPD") { _, bundle ->
+            Log.d("followingCheck5","false")
             val result = bundle.getString("friendEmail")
+            Log.d("followingCheck7-1",userFollowingList.toString())
+            viewModel.getUserFollowing(userEmail)
             userFollowingList.remove(result)
+            Log.d("followingCheck6",bundle.getString("friendEmail").toString())
+            Log.d("followingCheck7-2",userFollowingList.toString())
             viewModel.setUserFollowing(userFollowingList)
         }
 

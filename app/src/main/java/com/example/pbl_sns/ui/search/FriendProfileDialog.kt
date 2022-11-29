@@ -37,11 +37,13 @@ class FriendProfileDialog(email: String) : BaseDialogFragment<FragmentProfileBin
     private var isFollowing:Boolean
     private var firstStatus:Boolean
     private var secondStatus:Boolean
+    private var statusInit:Boolean
     init {
         isFollowing = false
         firstStatus = false
         secondStatus = false
         follower = ArrayList()
+        statusInit = false
     }
 
     private val viewModel by lazy {
@@ -115,11 +117,17 @@ class FriendProfileDialog(email: String) : BaseDialogFragment<FragmentProfileBin
         binding.btnCloseFriendProfile.setOnClickListener {
             secondStatus = isFollowing
             // 내 친구목록 업데이트
-            if(firstStatus != secondStatus){
-                if(isFollowing)
+            Log.d("followingCheck3 처음 상태와 마지막 상태: ","$firstStatus"+" / "+"$secondStatus")
+            if(firstStatus.toString() != secondStatus.toString()){
+                if(isFollowing){
+                    Log.d("followingCheck4","true")
                     setFragmentResult("addFollowingFPD", bundleOf("friendEmail" to mEmail))
-                else
+                }
+                else{
+                    Log.d("followingCheck4","false")
                     setFragmentResult("deleteFollowingFPD", bundleOf("friendEmail" to mEmail))
+                }
+
             }
 
             dismiss()
@@ -173,17 +181,20 @@ class FriendProfileDialog(email: String) : BaseDialogFragment<FragmentProfileBin
     private fun isFollowingFunc(){
         // 내가 팔로잉 한 상태라면 회색버튼, 아니라면 파란 버튼
         isFollowing = false
-        Log.d("followingCheck1","$follower")
+        Log.d("followingCheck0 이 유저는: ","$mEmail")
+        Log.d("followingCheck1 현재 팔로워는:","$follower")
         for(f in follower){
             if(f == userEmail) {
-                Log.d("followingCheck2","true${f}")
+                Log.d("followingCheck2 내가 팔로잉하고 있는중? ","true")
                 isFollowing = true
-                firstStatus = true
+                if(statusInit){
+                    firstStatus = true
+                    statusInit=true
+                }
                 break
             }
         }
-
-        Log.d("followingCheck2.1","$isFollowing")
+        Log.d("followingCheck2.1 현재 isFollowing은","$isFollowing")
 
         if(isFollowing){
             binding.btnFollowerFollowing.background = ContextCompat.getDrawable(requireContext(), R.drawable.radius10_solid)

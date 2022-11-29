@@ -62,6 +62,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
         Firebase.auth.signInWithEmailAndPassword(userEmail, password)   // userEmail과 password로 로그인 시도
             .addOnCompleteListener {
                 if(it.isSuccessful) {  // 로그인 성공했을 경우(Firebase의 Users에 계정이 존재할 경우)
+                    prefs.removeAll()
                     prefs.setString("email", userEmail)
                     setUserId(userEmail)
                     navController.navigate(R.id.action_loginFragment_to_homeFragment)

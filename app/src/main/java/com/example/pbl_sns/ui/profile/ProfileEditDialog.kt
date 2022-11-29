@@ -116,14 +116,46 @@ class ProfileEditDialog:BaseDialogFragment<DialogProfileEditBinding>(R.layout.di
             if(checkData()){
                 val storageRef = storage?.reference?.child("UID")?.child(uid)?.child("profile")
                 //storage에 파일 업로드
-                storageRef?.putFile(photoUri!!)
+                if(photoUri != null) { // 사진 선택 안한 경우
+                    storageRef?.putFile(photoUri!!)
+//Promise method --> 구글 권장 방식
+                    storageRef?.putFile(photoUri!!)?.continueWithTask() {
+                        return@continueWithTask storageRef.downloadUrl
+                    }?.addOnSuccessListener { uri ->
+                        editItImage = uri.toString()
 
-                //Promise method --> 구글 권장 방식
-                storageRef?.putFile(photoUri!!)?.continueWithTask(){
-                    return@continueWithTask  storageRef.downloadUrl
-                }?.addOnSuccessListener { uri ->
-                    editItImage = uri.toString()
+                        val data = hashMapOf(
+                            "id" to editItId,
+                            "image" to editItImage,
+                            "info" to editItInfo,
+                            "name" to editItName,
+                        )
+                        var dataToPrivacy: Privacy = Privacy()
+                        dataToPrivacy.id = data["id"].toString()
+                        dataToPrivacy.image = data["image"].toString()
+                        dataToPrivacy.info = data["info"].toString()
+                        dataToPrivacy.name = data["name"].toString()
+                        Log.d("dataa", data.toString())
 
+                        // id 수정
+                        db.collection("users").document(userId)
+                            .update("id", data["id"])
+
+                        // private 필드 수정
+                        db.collection("users").document(userId)
+                            .update("privacy", data)
+
+                        val email = prefs.getString("email", "-1")
+                        prefs.removeAll()
+                        prefs.setString("id", data["id"]!!)
+                        prefs.setString("email", email)
+                        prefs.setString("profile", editItImage)
+
+                        viewModel.setUserData(dataToPrivacy)
+                        setFragmentResult("editPrivacy", bundleOf("resultPrivacy" to isEdit))
+                        dismiss()
+                    }
+                } else{
                     val data =  hashMapOf(
                         "id" to editItId,
                         "image" to editItImage,
