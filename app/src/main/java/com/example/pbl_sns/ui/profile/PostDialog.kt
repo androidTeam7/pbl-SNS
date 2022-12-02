@@ -14,9 +14,11 @@ import com.example.pbl_sns.base.BaseDialogFragment
 import com.example.pbl_sns.databinding.DialogPostBinding
 import com.example.pbl_sns.model.Post
 import com.example.pbl_sns.model.User
+import com.example.pbl_sns.repository.AlarmDTO
 import com.example.pbl_sns.repository.ContentDTO
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FieldValue
+import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
@@ -67,9 +69,21 @@ class PostDialog(email:String, post:Post): BaseDialogFragment<DialogPostBinding>
                 .update("reply", FieldValue.arrayUnion(reply))
                 .addOnSuccessListener {
                     Toast.makeText(context, "댓글 업로드 성공", Toast.LENGTH_LONG).show()
+                    replyAlarm(email, editReply);
                 }
 
         }
+    }
+
+    private fun replyAlarm(destinationUid: String, reply: String){
+        var alarmDTO = AlarmDTO()
+        alarmDTO.destinationUid = destinationUid
+        alarmDTO.userId = userEmail
+        alarmDTO.uid = FirebaseAuth.getInstance().currentUser?.uid.toString()
+        alarmDTO.kind = 1
+        alarmDTO.timestamp = System.currentTimeMillis()
+        alarmDTO.message = "님이 회원님의 게시물에 댓글을 달았습니다: $reply"
+        FirebaseFirestore.getInstance().collection("alarms").document().set(alarmDTO)
     }
 
     override fun onResume() {
