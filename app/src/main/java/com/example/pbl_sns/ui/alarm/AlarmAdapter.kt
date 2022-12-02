@@ -43,13 +43,7 @@ class AlarmAdapter (itemList: ArrayList<AlarmDTO>)
             holder.profileImg.setImageResource(R.drawable.user)
 
         holder.id.text = itemList[position].userId
-
-        when(itemList[position].kind){
-            0 -> {
-                holder.content.text = itemList[position].message
-            }
-
-        }
+        holder.content.text = itemList[position].message
     }
     override fun getItemCount(): Int {
         return itemList.size

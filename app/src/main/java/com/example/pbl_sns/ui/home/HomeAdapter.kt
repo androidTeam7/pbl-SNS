@@ -10,6 +10,8 @@ import com.example.pbl_sns.MyApplication.Companion.prefs
 import com.example.pbl_sns.R
 import com.example.pbl_sns.databinding.ItemHomeBinding
 import com.example.pbl_sns.model.Post
+import com.example.pbl_sns.repository.AlarmDTO
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.firestore.FirebaseFirestore
@@ -92,6 +94,7 @@ class HomeAdapter (itemList: ArrayList<Post>)
                 tempData.add(userEmail)
                 holder.like.text = "Like${tempData!!.size}"
                 Log.d("temppp2",tempData.toString())
+                likeAlarm(itemList[position].email);
             } else {
                 tempData.remove(userEmail)
                 holder.like.text = "Like${tempData!!.size}"
@@ -125,4 +128,15 @@ class HomeAdapter (itemList: ArrayList<Post>)
     private var itemClickListener : OnItemClickListener? = null
 
     override fun getItemCount(): Int = itemList.size
+
+    private fun likeAlarm(destinationUid: String){
+        var alarmDTO = AlarmDTO()
+        alarmDTO.destinationUid = destinationUid
+        alarmDTO.userId = userEmail
+        alarmDTO.uid = FirebaseAuth.getInstance().currentUser?.uid.toString()
+        alarmDTO.kind = 2
+        alarmDTO.timestamp = System.currentTimeMillis()
+        alarmDTO.message = "님이 회원님의 게시물에 좋아요를 눌렀습니다."
+        FirebaseFirestore.getInstance().collection("alarms").document().set(alarmDTO)
+    }
 }
