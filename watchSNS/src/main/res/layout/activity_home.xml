@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.wear.widget.BoxInsetLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:padding="@dimen/box_inset_layout_padding"
+    android:textAlignment="center"
+    tools:context=".HomeActivity"
+    tools:deviceIds="wear">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="@dimen/inner_frame_layout_padding"
+        app:boxedEdges="all">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white">
+
+            <ImageView
+                android:id="@+id/img_profile"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/user" />
+
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="80dp"
+                android:layout_height="25dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/logo"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/btn_follower"
+                android:layout_width="40dp"
+                android:layout_height="55dp"
+                android:layout_marginStart="5dp"
+                android:background="@color/transparent"
+                android:fontFamily="@font/nanumsquare_acb"
+                android:paddingTop="20dp"
+                android:text="팔로워"
+                android:textColor="#000000"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="@+id/img_profile"
+                app:layout_constraintStart_toEndOf="@+id/img_profile"
+                app:layout_constraintTop_toTopOf="@+id/img_profile"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <TextView
+                android:id="@+id/tv_follower"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/nanumsquare_acb"
+                android:text="0"
+                android:textColor="#000000"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="@+id/btn_follower"
+                app:layout_constraintStart_toStartOf="@+id/btn_follower"
+                app:layout_constraintTop_toTopOf="@+id/btn_follower" />
+
+            <Button
+                android:id="@+id/btn_following"
+                android:layout_width="40dp"
+                android:layout_height="55dp"
+                android:layout_marginStart="3dp"
+                android:background="@color/transparent"
+                android:fontFamily="@font/nanumsquare_acb"
+                android:paddingTop="20dp"
+                android:text="팔로잉"
+                android:textColor="#000000"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="@+id/btn_follower"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/btn_follower"
+                app:layout_constraintTop_toTopOf="@+id/btn_follower" />
+
+            <TextView
+                android:id="@+id/tv_following"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/nanumsquare_acb"
+                android:text="0"
+                android:textColor="#000000"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="@+id/btn_following"
+                app:layout_constraintStart_toStartOf="@+id/btn_following"
+                app:layout_constraintTop_toTopOf="@+id/btn_following" />
+
+            <Button
+                android:id="@+id/btn_alarm_show"
+                android:layout_width="0dp"
+                android:layout_height="25dp"
+                android:background="@drawable/radius8_solid"
+                android:drawableLeft="@drawable/baseline_favorite_border_24"
+                android:paddingLeft="40dp"
+                android:paddingRight="30dp"
+                android:text="알림 보기"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="10sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </FrameLayout>
+</androidx.wear.widget.BoxInsetLayout>

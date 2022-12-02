@@ -8,21 +8,12 @@
     tools:context=".MainActivity"
     tools:deviceIds="wear">
 
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/main_frame"
-        android:name="androidx.navigation.fragment.NavHostFragment"
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:defaultNavHost="true"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
+        android:padding="@dimen/inner_frame_layout_padding"
+        app:boxedEdges="all">
 
-        app:layout_constraintTop_toTopOf="parent"
-        app:navGraph="@navigation/nav_graph" />
 
-    <com.google.android.material.navigation.NavigationView
-        android:id="@+id/nav"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+    </FrameLayout>
 </androidx.wear.widget.BoxInsetLayout>

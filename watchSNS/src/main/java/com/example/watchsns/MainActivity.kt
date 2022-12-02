@@ -25,13 +25,8 @@ class MainActivity : AppCompatActivity() {
 
         auth = Firebase.auth
 
-        setNav()
+
     }
-    private fun setNav() {
-        val navHostFragment = supportFragmentManager.findFragmentById(R.id.main_frame) as NavHostFragment
-        val navController = navHostFragment.navController
-        findViewById<NavigationView>(R.id.nav)
-            .setupWithNavController(navController)
-    }
+
 
 }
