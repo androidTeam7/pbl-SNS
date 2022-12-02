@@ -98,22 +98,6 @@
                 app:layout_constraintStart_toStartOf="@+id/btn_following"
                 app:layout_constraintTop_toTopOf="@+id/btn_following" />
 
-            <Button
-                android:id="@+id/btn_alarm_show"
-                android:layout_width="0dp"
-                android:layout_height="25dp"
-                android:background="@drawable/radius8_solid"
-                android:drawableLeft="@drawable/baseline_favorite_border_24"
-                android:paddingLeft="40dp"
-                android:paddingRight="30dp"
-                android:text="알림 보기"
-                android:textAlignment="center"
-                android:textColor="@color/white"
-                android:textSize="10sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
-
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
