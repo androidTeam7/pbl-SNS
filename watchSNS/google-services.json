@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "525287339139",
+    "firebase_url": "https://pbl-sns-default-rtdb.firebaseio.com",
+    "project_id": "pbl-sns",
+    "storage_bucket": "pbl-sns.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:525287339139:android:b8985131f90236b43bd7b6",
+        "android_client_info": {
+          "package_name": "com.example.pbl_sns"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "525287339139-tq2bbul7vm7pgtekd1ogopktrsnge765.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA62VrGFsmywZKn1B5N_XeO8ago-XQicIY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "525287339139-tq2bbul7vm7pgtekd1ogopktrsnge765.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:525287339139:android:f64695ba8b8ac6a23bd7b6",
+        "android_client_info": {
+          "package_name": "com.example.watchsns"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "525287339139-tq2bbul7vm7pgtekd1ogopktrsnge765.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA62VrGFsmywZKn1B5N_XeO8ago-XQicIY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "525287339139-tq2bbul7vm7pgtekd1ogopktrsnge765.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

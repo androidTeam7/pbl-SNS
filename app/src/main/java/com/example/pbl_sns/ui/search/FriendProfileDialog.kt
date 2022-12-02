@@ -38,6 +38,7 @@ class FriendProfileDialog(email: String) : BaseDialogFragment<FragmentProfileBin
     private var firstStatus:Boolean
     private var secondStatus:Boolean
     private var statusInit:Boolean
+    private var testcount=0
     init {
         isFollowing = false
         firstStatus = false
@@ -54,7 +55,7 @@ class FriendProfileDialog(email: String) : BaseDialogFragment<FragmentProfileBin
         super.initDataBinding()
 
         (activity as MainActivity).setBottomNavSetting("")
-
+        testcount++
         binding.btnCloseFriendProfile.visibility = View.VISIBLE
         binding.tvIdFriendProfile.visibility = View.VISIBLE
         binding.btnFollowerFollowing.visibility = View.VISIBLE

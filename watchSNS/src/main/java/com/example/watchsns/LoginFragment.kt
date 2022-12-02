@@ -1,17 +1,10 @@
-package com.example.pbl_sns.ui
+package com.example.watchsns
 
 import android.content.ContentValues
-import android.content.pm.PackageManager
 import android.util.Log
 import android.widget.Toast
-import androidx.activity.result.contract.ActivityResultContracts
-import androidx.appcompat.app.AlertDialog
-import androidx.core.content.ContextCompat.checkSelfPermission
-import com.example.pbl_sns.MyApplication.Companion.prefs
-import com.example.pbl_sns.R
-import com.example.pbl_sns.base.BaseFragment
-import com.example.pbl_sns.databinding.FragmentLoginBinding
-import com.example.pbl_sns.model.User
+import com.example.watchsns.MyApplication.Companion.prefs
+import com.example.watchsns.databinding.FragmentLoginBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
@@ -36,24 +29,19 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
     override fun initDataBinding() {
         super.initDataBinding()
 
-        (activity as MainActivity).setBottomNavSetting("none")
         prefs.removeAll()
     }
 
     override fun initAfterBinding() {
         super.initAfterBinding()
 
-        binding.buttonLogin.setOnClickListener {     // 로그인 버튼 클릭했을 때
-            val userEmail = binding.editTextId.text.toString()   // ID EditText의 문자열을 userEmail에 저장
-            val password = binding.editTextPasswd.text.toString()   // Passwd EditText의 문자열을 password에 저장
+        binding.btnLogin.setOnClickListener {     // 로그인 버튼 클릭했을 때
+            val userEmail = binding.editTvName.text.toString()   // ID EditText의 문자열을 userEmail에 저장
+            val password = binding.editTvPassword.text.toString()   // Passwd EditText의 문자열을 password에 저장
             if(userEmail.isEmpty() || password.isEmpty())
                 Toast.makeText(context,"아이디 또는 비밀번호를 입력해주세요.",Toast.LENGTH_SHORT)
             else
                 doLogin(userEmail, password)   // userEmail과 password를 통해 로그인 시도하는 함수 호출
-        }
-
-        binding.goSignUp.setOnClickListener {    // 가입하기 텍스트를 클릭했을 경우
-            SignupDialog().show(parentFragmentManager,"SignupDialog")
         }
     }
 

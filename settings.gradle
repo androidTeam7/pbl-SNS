@@ -15,3 +15,4 @@ dependencyResolutionManagement {
 }
 rootProject.name = "pbl-SNS"
 include ':app'
+include ':watchSNS'

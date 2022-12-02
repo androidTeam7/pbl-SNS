@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.wear.widget.BoxInsetLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="@dimen/box_inset_layout_padding"
+        tools:context=".MainActivity"
+        tools:deviceIds="wear">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white">
+
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="130dp"
+                android:layout_height="35dp"
+                android:layout_marginTop="30dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/logo"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <EditText
+                android:id="@+id/edit_tv_name"
+                android:layout_width="150dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/radius7"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:text="Id"
+                app:layout_constraintEnd_toEndOf="@+id/imageView2"
+                app:layout_constraintStart_toStartOf="@+id/imageView2"
+                app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+
+            <EditText
+                android:id="@+id/edit_tv_password"
+                android:layout_width="150dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/radius7"
+                android:ems="10"
+                android:hint="Password"
+                android:inputType="textPassword"
+                android:textColorHint="#FFFFFF"
+                app:layout_constraintEnd_toEndOf="@+id/edit_tv_name"
+                app:layout_constraintStart_toStartOf="@+id/edit_tv_name"
+                app:layout_constraintTop_toBottomOf="@+id/edit_tv_name" />
+
+            <Button
+                android:id="@+id/btn_login"
+                android:layout_width="150dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/radius7_solid"
+                android:backgroundTint="@color/snsBlue"
+                android:text="로그인"
+                app:layout_constraintEnd_toEndOf="@+id/edit_tv_password"
+                app:layout_constraintStart_toStartOf="@+id/edit_tv_password"
+                app:layout_constraintTop_toBottomOf="@+id/edit_tv_password" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.wear.widget.BoxInsetLayout>
+
+</layout>

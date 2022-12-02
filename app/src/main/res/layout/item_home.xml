@@ -65,6 +65,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:background="@drawable/radius13_solid"
+            android:minHeight="150dp"
             android:padding="15dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -111,12 +112,13 @@
                     android:id="@+id/tv_id_post"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="70dp"
+                    android:layout_marginTop="10dp"
                     android:fontFamily="@font/nanumsquare_acb"
+                    android:text="aaaaaaaaaaaaaaaaa"
                     android:textColor="@color/black"
                     android:textSize="14sp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toBottomOf="@+id/like_imageview" />
 
                 <TextView
                     android:id="@+id/tv_content_post"
@@ -125,6 +127,7 @@
                     android:layout_marginStart="10dp"
                     android:fontFamily="@font/nanumsquare_acr"
                     android:maxLines="2"
+                    android:text="1111111111111111111111"
                     android:textColor="@color/black"
                     android:textSize="14sp"
                     app:layout_constraintStart_toEndOf="@+id/tv_id_post"
